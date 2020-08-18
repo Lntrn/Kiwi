@@ -27,7 +27,7 @@ module.exports = {
                 .setDescription(`*Thank you for contributing to improving Kiwi!* ${Data.space(1)}${Data.emojis.kiwi}`
                                 + `\n\n**Suggestion:**`
                                 + `\n${args.join(" ")}`
-                                + `\n\n\n:white_check_mark: **Sucessfully Submitted!**`)
+                                + `\n\n\n:white_check_mark: **Sucessfully Submitted to [Support Server](${Data.supportLink})!**`)
                 .addField("\u200b", "\u200b")
                 .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
                 .setFooter(Data.footer.footer, Data.footer.image);
