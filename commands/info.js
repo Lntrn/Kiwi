@@ -33,7 +33,7 @@ module.exports = {
             const embed = new Discord.MessageEmbed()
             .setColor("#DD2E44")
             .setTitle(":exclamation: **━━━━━ ERROR ━━━━━** :exclamation:")
-            .setDescription("You must be the bot owner, @Sap#5703, to use this command!")
+            .setDescription(`You must be the bot owner, ${Data.ownerMention}, to use this command!`)
             .setFooter(Data.footer.footer, Data.footer.image);
 
             msg.channel.send(embed);
