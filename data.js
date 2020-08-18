@@ -1,7 +1,7 @@
 // file containing ubiquitous data for Kiwi
 module.exports = {
     emojis: {
-        kiwi: "<:Kiwi:744901376869662790>",
+        kiwi: "<:Kiwi:745331041157513346>",
         str: "<:strength:744863432456667200>",
         int: "<:intellect:744863431210827856>",
         agil: "<:agility:744863430984597524>",
@@ -32,7 +32,7 @@ module.exports = {
         death: "<:death:744971321229836318>"
     },
     emojiIds : {
-        kiwi: "744901376869662790",
+        kiwi: "745331041157513346",
         str: "744863432456667200",
         int: "744863431210827856",
         agil: "744863430984597524",
