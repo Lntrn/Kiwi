@@ -21,13 +21,13 @@ module.exports = {
             const embed = new Discord.MessageEmbed()
                 .setColor("#C4DE61")
                 .setTitle(`${Data.emojis.kiwi}${Data.space(1)} **━━━━━━━━ KIWI PET STATS ━━━━━━━━** ${Data.space(1)}${Data.emojis.kiwi}`)
-                .setDescription(`Your Stats:
-                                ${Data.emojis.str}: **${str}**/255 ${Data.space(2)}${Data.emojis.int}: **${int}**/250 ${Data.space(2)}${Data.emojis.agil}: **${agil}**/260 ${Data.space(2)}${Data.emojis.will}: **${will}**/260 ${Data.space(2)}${Data.emojis.power}: **${power}**/250
-                                \nUse the reactions below to change pages:
-                                \n> **Base Stats ${Data.emojis.dmg}:** ${Data.space(8)} ${Data.emojis.dmg}, ${Data.emojis.res}, ${Data.emojis.pierce}, and ${Data.emojis.acc} stats
-                                > **Rating Stats ${Data.emojis.crit}:** ${Data.space(3)} ${Data.emojis.crit}, ${Data.emojis.block}, ${Data.emojis.pip}, and ${Data.emojis.pcon} stats
-                                > **Heal Stats ${Data.emojis.heart}:** ${Data.space(8)} ${Data.emojis.inc}, ${Data.emojis.out}, and ${Data.emojis.health} stats
-                                > **Misc Stats ${Data.emojis.luck}:** ${Data.space(7)} ${Data.emojis.stunres}, ${Data.emojis.luck}, and ${Data.emojis.mana} stats`)
+                .setDescription(`Your Stats:`
+                                + `\n!kstats 255 315 260 260 250${Data.emojis.str}: **${str}**/255 ${Data.space(2)}${Data.emojis.int}: **${int}**/250 ${Data.space(2)}${Data.emojis.agil}: **${agil}**/260 ${Data.space(2)}${Data.emojis.will}: **${will}**/260 ${Data.space(2)}${Data.emojis.power}: **${power}**/250`
+                                + `\n\nUse the reactions below to change pages:`
+                                + `\n\n> **Base Stats ${Data.emojis.dmg}:** ${Data.space(8)} ${Data.emojis.dmg}, ${Data.emojis.res}, ${Data.emojis.pierce}, and ${Data.emojis.acc} stats`
+                                + `\n> **Rating Stats ${Data.emojis.crit}:** ${Data.space(3)} ${Data.emojis.crit}, ${Data.emojis.block}, ${Data.emojis.pip}, and ${Data.emojis.pcon} stats`
+                                + `\n> **Heal Stats ${Data.emojis.heart}:** ${Data.space(8)} ${Data.emojis.inc}, ${Data.emojis.out}, and ${Data.emojis.health} stats`
+                                + `\n> **Misc Stats ${Data.emojis.luck}:** ${Data.space(7)} ${Data.emojis.stunres}, ${Data.emojis.luck}, and ${Data.emojis.mana} stats`)
                 .addField("\u200b", "\u200b")
                 .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
                 .setFooter(Data.footer.footer, Data.footer.image);
