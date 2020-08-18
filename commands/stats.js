@@ -22,7 +22,7 @@ module.exports = {
                 .setColor("#C4DE61")
                 .setTitle(`${Data.emojis.kiwi}${Data.space(1)} **━━━━━━━━ KIWI PET STATS ━━━━━━━━** ${Data.space(1)}${Data.emojis.kiwi}`)
                 .setDescription(`Your Stats:`
-                                + `\n!kstats 255 315 260 260 250${Data.emojis.str}: **${str}**/255 ${Data.space(2)}${Data.emojis.int}: **${int}**/250 ${Data.space(2)}${Data.emojis.agil}: **${agil}**/260 ${Data.space(2)}${Data.emojis.will}: **${will}**/260 ${Data.space(2)}${Data.emojis.power}: **${power}**/250`
+                                + `\n${Data.emojis.str}: **${str}**/255 ${Data.space(2)}${Data.emojis.int}: **${int}**/250 ${Data.space(2)}${Data.emojis.agil}: **${agil}**/260 ${Data.space(2)}${Data.emojis.will}: **${will}**/260 ${Data.space(2)}${Data.emojis.power}: **${power}**/250`
                                 + `\n\nUse the reactions below to change pages:`
                                 + `\n\n> **Base Stats ${Data.emojis.dmg}:** ${Data.space(8)} ${Data.emojis.dmg}, ${Data.emojis.res}, ${Data.emojis.pierce}, and ${Data.emojis.acc} stats`
                                 + `\n> **Rating Stats ${Data.emojis.crit}:** ${Data.space(3)} ${Data.emojis.crit}, ${Data.emojis.block}, ${Data.emojis.pip}, and ${Data.emojis.pcon} stats`
