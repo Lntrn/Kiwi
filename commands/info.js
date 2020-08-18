@@ -34,6 +34,7 @@ module.exports = {
             .setColor("#DD2E44")
             .setTitle(":exclamation: **━━━━━ ERROR ━━━━━** :exclamation:")
             .setDescription(`You must be the bot owner, ${Data.ownerMention}, to use this command!`)
+            .addField("\u200b", "\u200b")
             .setFooter(Data.footer.footer, Data.footer.image);
 
             msg.channel.send(embed);
