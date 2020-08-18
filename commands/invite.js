@@ -8,11 +8,11 @@ module.exports = {
     description: "submit a suggestion for Kiwi",
     execute(msg) {
         const invite = new Discord.MessageEmbed()
-            .setColor("#C4DE61")
-            .setTitle(`${Data.emojis.kiwi}${Data.space(1)} **━━━━━━ INVITE KIWI ━━━━━━** ${Data.space(1)}${Data.emojis.kiwi}`)
-            .setDescription(`*Like what ya see?*
-                            Here's a link to invite Kiwi to **your server**!
-                            \n[**Invite Me!**](${Data.inviteLink})`)
+            .setColor("#CCD6DD")
+            .setTitle(`:envelope:${Data.space(1)} **━━━━━━ INVITE KIWI ━━━━━━** ${Data.space(1)}:envelope:`)
+            .setDescription(`*Like what ya see?*`
+                            + `\nHere's a link to invite Kiwi to **your server**!`
+                            + `\n\n[**Invite Me!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
             .addField("\u200b", "\u200b")
             .setFooter(Data.footer.footer, Data.footer.image);
         

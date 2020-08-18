@@ -24,11 +24,12 @@ module.exports = {
         const response = new Discord.MessageEmbed()
                 .setColor("#FFD983")
                 .setTitle(`:bulb:${Data.space(1)} **━━━━━━━━ SUGGESTION ━━━━━━━━** ${Data.space(1)}:bulb:`)
-                .setDescription(`*Thank you for contributing to improving Kiwi!* ${Data.space(1)}${Data.emojis.kiwi}
-                                \n**Suggestion:**
-                                ${args.join(" ")}
-                                \n\n:white_check_mark: **Sucessfully Submitted!**`)
+                .setDescription(`*Thank you for contributing to improving Kiwi!* ${Data.space(1)}${Data.emojis.kiwi}`
+                                + `\n\n**Suggestion:**`
+                                + `\n${args.join(" ")}`
+                                + `\n\n\n:white_check_mark: **Sucessfully Submitted!**`)
                 .addField("\u200b", "\u200b")
+                .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
                 .setFooter(Data.footer.footer, Data.footer.image);
 
         msg.channel.send(response);

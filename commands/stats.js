@@ -29,6 +29,7 @@ module.exports = {
                                 > **Heal Stats ${Data.emojis.heart}:** ${Data.space(8)} ${Data.emojis.inc}, ${Data.emojis.out}, and ${Data.emojis.health} stats
                                 > **Misc Stats ${Data.emojis.luck}:** ${Data.space(7)} ${Data.emojis.stunres}, ${Data.emojis.luck}, and ${Data.emojis.mana} stats`)
                 .addField("\u200b", "\u200b")
+                .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
                 .setFooter(Data.footer.footer, Data.footer.image);
 
             msg.channel.send(embed).then(
@@ -91,6 +92,7 @@ module.exports = {
                                 \n${Data.prefix}stats ${Data.emojis.str} ${Data.emojis.int} ${Data.emojis.agil} ${Data.emojis.will} ${Data.emojis.power}
                                 \n> **ex.**\n> ${Data.prefix}stats 255 250 260 260 250`)
                 .addField("\u200b", "\u200b")
+                .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
                 .setFooter(Data.footer.footer, Data.footer.image);
 
             msg.channel.send(amountEmbed);
@@ -114,6 +116,7 @@ module.exports = {
                                     \n${Data.prefix}stats ${Data.emojis.str} ${Data.emojis.int} ${Data.emojis.agil} ${Data.emojis.will} ${Data.emojis.power}
                                     \n> **ex.**\n> ${Data.prefix}stats 255 250 260 260 250`)
                     .addField("\u200b", "\u200b")
+                    .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
                     .setFooter(Data.footer.footer, Data.footer.image);
 
                 msg.channel.send(typeEmbed);
@@ -129,6 +132,7 @@ module.exports = {
                                     \n${Data.prefix}stats ${Data.emojis.str} ${Data.emojis.int} ${Data.emojis.agil} ${Data.emojis.will} ${Data.emojis.power}
                                     \n> **ex.**\n> ${Data.prefix}stats 255 250 260 260 250`)
                     .addField("\u200b", "\u200b")
+                    .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
                     .setFooter(Data.footer.footer, Data.footer.image);
 
                 msg.channel.send(boundsEmbed);
