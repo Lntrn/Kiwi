@@ -120,7 +120,7 @@ module.exports = {
                 return false;
             
             // otherwise check bounds (highest selfish grant: +65 +50 +40 +40 +40 +25 = +160)
-            } else if (str < 0 || str > 415 || int < 0 || int > 410 || agil < 0 || agil > 420 || will < 0 || will > 420 || power < 0 || power > 410) {
+            } else if (str < 0 || str > 515 || int < 0 || int > 510 || agil < 0 || agil > 520 || will < 0 || will > 520 || power < 0 || power > 510) {
                 const boundsEmbed = new Discord.MessageEmbed()
                     .setColor("#DD2E44")
                     .setTitle(":exclamation: **━━━━━ ERROR ━━━━━** :exclamation:")
