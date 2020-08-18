@@ -119,7 +119,7 @@ module.exports = {
                 msg.channel.send(typeEmbed);
                 return false;
             
-            // otherwise check bounds (highest selfish grant: +65 +50 +40 +40 +40 +25 = +160)
+            // otherwise check bounds (highest selfish grant: +65 +50 +40 +40 +40 +25 = +260)
             } else if (str < 0 || str > 515 || int < 0 || int > 510 || agil < 0 || agil > 520 || will < 0 || will > 520 || power < 0 || power > 510) {
                 const boundsEmbed = new Discord.MessageEmbed()
                     .setColor("#DD2E44")
