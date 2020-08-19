@@ -27,8 +27,8 @@ module.exports = {
             }
             
             const embed = new Discord.MessageEmbed()
-                .setColor("#D5AB88")
-                .setTitle(":notebook_with_decorative_cover: **━━━━━ COMMAND STATS ━━━━━** :notebook_with_decorative_cover:")
+                .setColor("#9AAAB4")
+                .setTitle(":card_box: **━━━━━ COMMAND STATS ━━━━━** :card_box:")
                 .setDescription(dataPrintout)
                 .addField("\u200b", "\u200b")
                 .setFooter(Data.footer.footer, Data.footer.image);
