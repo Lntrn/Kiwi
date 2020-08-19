@@ -2,11 +2,13 @@
 const Discord = require("discord.js");
 // require data.js module
 const Data = require("../data.js");
+// require cmds.js module
+const CMDS = require("./cmds.js");
 
 module.exports = {
     name: "help",
     description: "provides information on Kiwi's commands",
-    execute(msg) {
+    execute(bot, msg) {
         const embed = new Discord.MessageEmbed()
             .setColor("#FFD983")
             .setTitle(":scroll: **━━━━━ KIWI HELP ━━━━━** :scroll:")
@@ -30,5 +32,8 @@ module.exports = {
             .setFooter(Data.footer.footer, Data.footer.image);
 
         msg.channel.send(embed);
+
+        // update count of help cmd uses
+        CMDS.updateData(bot, msg.guild.id, "help");
     }
 }

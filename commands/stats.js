@@ -2,6 +2,8 @@
 const Discord = require("discord.js");
 // require data.js module
 const Data = require("../data.js");
+// require cmds.js module
+const CMDS = require("./cmds.js");
 // require embeds for stat calculations
 const Stats = require("../statFunctions.js");
 
@@ -80,6 +82,9 @@ module.exports = {
                 }
             ).catch(err => console.log("Error adding reactions!"));
         }
+
+        // update count of stats cmd uses
+        CMDS.updateData(bot, msg.guild.id, "stats");
     },
     dataCheck(msg, args) {
         // if more or less than 5 arguments are provided

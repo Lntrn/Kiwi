@@ -2,6 +2,8 @@
 const Discord = require("discord.js");
 // require data.js module
 const Data = require("../data.js");
+// require cmds.js module
+const CMDS = require("./cmds.js");
 
 module.exports = {
     name: "suggestion",
@@ -33,5 +35,8 @@ module.exports = {
                 .setFooter(Data.footer.footer, Data.footer.image);
 
         msg.channel.send(response);
+
+        // update count of suggestion cmd uses
+        CMDS.updateData(bot, msg.guild.id, "suggestion");
     }
 }

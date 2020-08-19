@@ -2,13 +2,15 @@
 const Discord = require("discord.js");
 // require data.js module
 const Data = require("../data.js");
+// require cmds.js module
+const CMDS = require("./cmds.js");
 
 module.exports = {
     name: "info",
     description: "owner command to check the number of servers the bot is currently in",
     execute(bot, msg) {
-        // allow usage only if user is the owner (below ID is @Sap#5703's ID)
-        if (msg.member.id.localeCompare("193427298958049280") == 0) {
+        // allow usage only if user is the owner
+        if (msg.author.id === Data.ownerId) {
             let servers = bot.guilds.cache.array();
             let serverPrintout = "";
 
@@ -39,5 +41,8 @@ module.exports = {
 
             msg.channel.send(embed);
         }
+
+        // update count of info cmd uses
+        CMDS.updateData(bot, msg.guild.id, "info");
     }
 }

@@ -2,6 +2,8 @@
 const Discord = require("discord.js");
 // require data.js module
 const Data = require("../data.js");
+// require cmds.js module
+const CMDS = require("./cmds.js");
 
 module.exports = {
     name: "bug",
@@ -22,16 +24,19 @@ module.exports = {
         bot.channels.cache.get(Data.bugReportId).send(Data.bugReportRole);
 
         const response = new Discord.MessageEmbed()
-                .setColor("#8899A6")
-                .setTitle(`:wrench:${Data.space(1)} **━━━━━━━━ BUG REPORT ━━━━━━━━** ${Data.space(1)}:wrench:`)
-                .setDescription(`*Thank you for contributing to improving Kiwi!* ${Data.space(1)}${Data.emojis.kiwi}`
-                                + `\n\n**Bug Report:**`
-                                + `\n${args.join(" ")}`
-                                + `\n\n\n:white_check_mark: **Sucessfully Submitted to [Support Server](${Data.supportLink})!**`)
-                .addField("\u200b", "\u200b")
-                .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
-                .setFooter(Data.footer.footer, Data.footer.image);
+            .setColor("#8899A6")
+            .setTitle(`:wrench:${Data.space(1)} **━━━━━━━━ BUG REPORT ━━━━━━━━** ${Data.space(1)}:wrench:`)
+            .setDescription(`*Thank you for contributing to improving Kiwi!* ${Data.space(1)}${Data.emojis.kiwi}`
+                            + `\n\n**Bug Report:**`
+                            + `\n${args.join(" ")}`
+                            + `\n\n\n:white_check_mark: **Sucessfully Submitted to [Support Server](${Data.supportLink})!**`)
+            .addField("\u200b", "\u200b")
+            .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
+            .setFooter(Data.footer.footer, Data.footer.image);
 
         msg.channel.send(response);
+
+        // update count of bug cmd uses
+        CMDS.updateData(bot, msg.guild.id, "bug");
     }
 }

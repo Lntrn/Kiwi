@@ -61,16 +61,19 @@ bot.on("message", message => {
 	// checking command request
 	switch(command) {
 		case "info":
-			bot.commands.get("info").execute(bot,message);
+			bot.commands.get("info").execute(bot, message);
+			break;
+		case "cmds":
+			bot.commands.get("cmds").execute(message);
 			break;
 		case "stats":
 			bot.commands.get("stats").execute(bot, message, args);
 			break;
 		case "help":
-			bot.commands.get("help").execute(message);
+			bot.commands.get("help").execute(bot, message);
 			break;
 		case "invite":
-			bot.commands.get("invite").execute(message);
+			bot.commands.get("invite").execute(bot, message);
 			break;
 		case "bug":
 			bot.commands.get("bug").execute(bot, message, args);
@@ -79,7 +82,7 @@ bot.on("message", message => {
 			bot.commands.get("suggestion").execute(bot, message, args);
 			break;
 		default:
-			bot.commands.get("unrecognized").execute(message, command);
+			bot.commands.get("unrecognized").execute(bot, message, command);
 	}
 });
 

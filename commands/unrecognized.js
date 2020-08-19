@@ -2,11 +2,13 @@
 const Discord = require("discord.js");
 // require data.js module
 const Data = require("../data.js");
+// require cmds.js module
+const CMDS = require("./cmds.js");
 
 module.exports = {
     name: "unrecognized",
     description: "default response if an unrecognized command is entered",
-    execute(msg, cmd) {
+    execute(bot, msg, cmd) {
         const embed = new Discord.MessageEmbed()
             .setColor("#DD2E44")
             .setTitle(":exclamation: **━━━━━ ERROR ━━━━━** :exclamation:")
@@ -17,5 +19,8 @@ module.exports = {
             .setFooter(Data.footer.footer, Data.footer.image);
 
             msg.channel.send(embed);
+
+        // update count of unrecognized cmd uses
+        CMDS.updateData(bot, msg.guild.id, "unrecognized");
     }
 }

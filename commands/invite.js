@@ -2,11 +2,13 @@
 const Discord = require("discord.js");
 // require data.js module
 const Data = require("../data.js");
+// require cmds.js module
+const CMDS = require("./cmds.js");
 
 module.exports = {
     name: "invite",
     description: "submit a suggestion for Kiwi",
-    execute(msg) {
+    execute(bot, msg) {
         const invite = new Discord.MessageEmbed()
             .setColor("#CCD6DD")
             .setTitle(`:envelope:${Data.space(1)} **━━━━━━ INVITE KIWI ━━━━━━** ${Data.space(1)}:envelope:`)
@@ -17,5 +19,8 @@ module.exports = {
             .setFooter(Data.footer.footer, Data.footer.image);
         
         msg.channel.send(invite);
+
+        // update count of invite cmd uses
+        CMDS.updateData(bot, msg.guild.id, "invite");
     }
 }
