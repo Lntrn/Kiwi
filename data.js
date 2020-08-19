@@ -73,6 +73,7 @@ module.exports = {
     inviteLink: "https://discord.com/api/oauth2/authorize?client_id=743944201682681937&permissions=8&scope=bot",
     supportLink: "https://discord.gg/Gex446g",
     ownerMention: "<@193427298958049280>",
+    ownerId: "193427298958049280",
     space(amt) {
         let whitespace = "";
 

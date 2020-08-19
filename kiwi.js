@@ -19,6 +19,8 @@ const Data = require("./data.js");
 const bot = new Discord.Client();
 // create collection of bot commands
 bot.commands = new Discord.Collection();
+// development toggle
+let devmode = false;
 
 // fill command collection
 const commandFiles = FS.readdirSync("./commands");
@@ -32,7 +34,7 @@ bot.on("ready", () => {
 	console.log(`Logged in as ${bot.user.tag}!`);
 	
 	// send launch notification
-	const owner = bot.users.fetch("193427298958049280").then(
+	const owner = bot.users.fetch(Data.ownerId).then(
 		function(user) {
 			let date = new Date();
 			user.send("Bot Online! **" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + "**");
@@ -44,6 +46,10 @@ bot.on("message", message => {
 	// if another bot sent the message, if it has attachments, or if the prefix wasn't used, do nothing
 	if (message.author.bot || message.attachments.size !== 0 || !message.content.startsWith(Data.prefix))
 		return;
+
+	if (devmode && message.author.id !== Data.ownerId) {
+		return;
+	}
 
 	// parsing command and arguments beginning after the prefix
 	let args = message.content.substring(Data.prefix.length).split(/[\s|\r?\n|\r]/);
@@ -78,4 +84,7 @@ bot.on("message", message => {
 });
 
 // login to Discord with bot token
-bot.login(process.env.KIWITOKEN);
+if (devmode)
+	bot.login(process.env.KIWIDEVTOKEN);
+else
+	bot.login(process.env.KIWITOKEN);

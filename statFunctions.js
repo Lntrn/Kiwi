@@ -11,20 +11,28 @@ module.exports = {
         const dealer = (((2 * str) + (2 * will) + power) * 3) / 400;
         const giver = ((2 * str) + (2 * will) + power) / 200;
         const boon = ((2 * str) + (2 * will) + power) / 400;
+        const alldmgTotal = Math.round((dealer + giver + boon + giver + boon + Number.EPSILON) * 100) / 100;
+        const schoolDmgTotal = Math.round((dealer + giver + boon + Number.EPSILON) * 100) / 100;
+        const universalDmgTotal = Math.round((giver + boon + Number.EPSILON) * 100) / 100;
 
         // resist 15% 10% 5% | 10% 5%
         const ward = (((2 * str) + (2 * agil) + power) * 3) / 250;
         const proof = ((2 * str) + (2 * agil) + power) / 125;
         const defy = ((2 * str) + (2 * agil) + power) / 250;
+        const wardTotal = Math.round((ward + proof + defy + Number.EPSILON) * 100) / 100;
+        const proofDefyTotal = Math.round((proof + defy + Number.EPSILON) * 100) / 100;
 
         // accuracy 13% 9% 4% | 9% 4%
         const sniper = (((2 * int) + (2 * agil) + power) * 3) / 400;
         const shot = ((2 * int) + (2 * agil) + power) / 200;
         const eye = ((2 * int) + (2 * agil) + power) / 400;
+        const schoolAccTotal = Math.round((sniper + shot + eye + Number.EPSILON) * 100) / 100;
+        const universalAccTotal = Math.round((shot + eye + Number.EPSILON) * 100) / 100;
 
         // pierce 3% 2%
         const breaker = ((2 * str) + (2 * agil) + power) / 400;
         const piercer = (((2 * str) + (2 * agil) + power) * 3) / 2000;
+        const pierceTotal = Math.round((breaker + piercer + Number.EPSILON) * 100) / 100;
 
         const embed = new Discord.MessageEmbed()
             .setColor("#ECC088")
@@ -38,14 +46,18 @@ module.exports = {
                         + `\n**${Data.emojis.ice} Giver:** ${Data.space(4)} ${giver}% ${Data.emojis.ice}${Data.emojis.dmg}`
                         + `\n**${Data.emojis.ice} Boon:** ${Data.space(5)} ${boon}% ${Data.emojis.ice}${Data.emojis.dmg}`
                         + `\n**Pain-Giver:** ${Data.space(6)} ${giver}% ${Data.emojis.dmg}`
-                        + `\n**Pain-Bringer:** ${Data.space(2)} ${boon}% ${Data.emojis.dmg}`, true)
+                        + `\n**Pain-Bringer:** ${Data.space(2)} ${boon}% ${Data.emojis.dmg}`
+                        + `\nTotals:`
+                        + `\n${alldmgTotal}% **|** ${schoolDmgTotal}% **|** ${universalDmgTotal}% ${Data.emojis.dmg}`, true)
             .addField(`${Data.emojis.res} ━━━ RESIST ━━━ ${Data.emojis.res}`, 
                         `*boosted by: ${Data.emojis.str} & ${Data.space(1)}${Data.emojis.agil}*`
                         + `\n**${Data.emojis.ice} Ward:** ${Data.space(2)} ${ward}% ${Data.emojis.ice}${Data.emojis.res}`
                         + `\n**${Data.emojis.ice} Proof:** ${Data.space(2)} ${proof}% ${Data.emojis.ice}${Data.emojis.res}`
                         + `\n**${Data.emojis.ice} Away:** ${Data.space(5)} ${defy}% ${Data.emojis.ice}${Data.emojis.res}`
                         + `\n**Spell-Proof:** ${Data.space(3)} ${proof}% ${Data.emojis.res}`
-                        + `\n**Spell-Defying:** ${Data.space(1)} ${defy}% ${Data.emojis.res}`, true)
+                        + `\n**Spell-Defying:** ${Data.space(1)} ${defy}% ${Data.emojis.res}`
+                        + `\nTotals:`
+                        + `\n${wardTotal}% ${Data.emojis.ice}${Data.emojis.res} **|** ${proofDefyTotal}% ${Data.emojis.res}`, true)
             .addField("\u200b", "\u200b")
             .addField(`${Data.emojis.acc} ━━ ACCURACY ━━ ${Data.emojis.acc}`, 
                         `*boosted by: ${Data.emojis.int} & ${Data.space(1)}${Data.emojis.agil}*`
@@ -53,11 +65,14 @@ module.exports = {
                         + `\n**${Data.emojis.ice} Shot:** ${Data.space(6)} ${shot}% ${Data.emojis.ice}${Data.emojis.acc}`
                         + `\n**${Data.emojis.ice} Eye:** ${Data.space(6)} ${eye}% ${Data.emojis.ice}${Data.emojis.acc}`
                         + `\n**Sharp-Shot:** ${Data.space(5)} ${shot}% ${Data.emojis.acc}`
-                        + `\n**Sharp-Eye:** ${Data.space(6)} ${eye}% ${Data.emojis.acc}`, true)
-            .addField(`${Data.emojis.pierce} ━━ PIERCE ━━ ${Data.emojis.pierce}`, 
+                        + `\n**Sharp-Eye:** ${Data.space(6)} ${eye}% ${Data.emojis.acc}`
+                        + `\nTotals:`
+                        + `\n${schoolAccTotal}% ${Data.emojis.ice}${Data.emojis.acc} **|** ${universalAccTotal}% ${Data.emojis.acc}`, true)
+            .addField(`${Data.emojis.pierce} ━━━ PIERCE ━━━ ${Data.emojis.pierce}`, 
                         `*boosted by: ${Data.emojis.str} & ${Data.space(1)}${Data.emojis.agil}*`
                         + `\n**Armor Breaker:** ${Data.space(2)} ${breaker}% ${Data.emojis.pierce}`
-                        + `\n**Armor Piercer:** ${Data.space(1)} ${piercer}% ${Data.emojis.pierce}`, true)
+                        + `\n**Armor Piercer:** ${Data.space(1)} ${piercer}% ${Data.emojis.pierce}`
+                        + `\nTotal: ${pierceTotal}% ${Data.emojis.pierce}`, true)
             .addField("\u200b", "\u200b")
             .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
             .setFooter(Data.footer.footer, Data.footer.image);
@@ -72,17 +87,23 @@ module.exports = {
         const sStriker = ((2 * agil) + (2 * will) + power) * 3 / 150;
         const cStriker = ((2 * agil) + (2 * will) + power) * 3 / 125;
         const hitter = ((2 * agil) + (2 * will) + power) * 9 / 500;
+        const allCritTotal = Math.round((assailant + sStriker + cStriker + hitter + Number.EPSILON) * 100) / 100;
+        const schoolCritTotal = Math.round((assailant + sStriker + Number.EPSILON) * 100) / 100;
+        const universalCritTotal = Math.round((cStriker + hitter + Number.EPSILON) * 100) / 100;
 
         // block 30 25
         const defender = ((2 * int) + (2 * will) + power) * 3 / 125;
         const blocker = ((2 * int) + (2 * will) + power) * 9 / 500;
+        const blockTotal = Math.round((defender + blocker + Number.EPSILON) * 100) / 100;
 
         // pip conversion 30 25
         const conserver = ((2 * agil) + (2 * will) + power) * 3 / 125;
         const saver = ((2 * agil) + (2 * will) + power) * 9 / 500;
+        const pconTotal = Math.round((conserver + saver + Number.EPSILON) * 100) / 100;
 
         // pip chance 5%
         const oplenty = ((2 * str) + (2 * int) + power) / 250;
+        const pipTotal = Math.round((oplenty + 5 + Number.EPSILON) * 100) / 100;
 
         const embed = new Discord.MessageEmbed()
             .setColor("#8648F7")
@@ -95,19 +116,25 @@ module.exports = {
                         + `\n**${Data.emojis.myth} Assailant:** +${assailant} ${Data.emojis.myth}${Data.emojis.crit}`
                         + `\n**${Data.emojis.myth} Striker:** ${Data.space(7)} +${sStriker} ${Data.emojis.myth}${Data.emojis.crit}`
                         + `\n**Critical Striker:**  ${Data.space(1)} +${cStriker} ${Data.emojis.crit}`
-                        + `\n**Critical Hitter:** ${Data.space(3)} +${hitter} ${Data.emojis.crit}`, true)
+                        + `\n**Critical Hitter:** ${Data.space(3)} +${hitter} ${Data.emojis.crit}`
+                        + `\nTotals:`
+                        + `\n+${allCritTotal} **|** +${schoolCritTotal} **|** +${universalCritTotal} ${Data.emojis.crit}`, true)
             .addField(`${Data.emojis.block} ━━ BLOCK ━━ ${Data.emojis.block}`, 
                         `*boosted by: ${Data.emojis.int} & ${Data.space(1)}${Data.emojis.will}*`
                         + `\n**Defender:** ${Data.space(1)} +${defender} ${Data.emojis.block}`
-                        + `\n**Blocker:** ${Data.space(5)} +${blocker} ${Data.emojis.block}`, true)
+                        + `\n**Blocker:** ${Data.space(5)} +${blocker} ${Data.emojis.block}`
+                        + `\nTotal: +${blockTotal} ${Data.emojis.block}`, true)
             .addField("\u200b", "\u200b")
             .addField(`${Data.emojis.pcon} ━ PIP CONVERT ━ ${Data.emojis.pcon}`, 
                         `*boosted by: ${Data.emojis.agil} & ${Data.space(1)}${Data.emojis.will}*`
                         + `\n**Pip Conserver:** +${conserver} ${Data.emojis.pcon}`
-                        + `\n**Pip Saver:** ${Data.space(10)} +${saver} ${Data.emojis.pcon}`, true)
+                        + `\n**Pip Saver:** ${Data.space(10)} +${saver} ${Data.emojis.pcon}`
+                        + `\nTotal: +${pconTotal} ${Data.emojis.pcon}`, true)
             .addField(`${Data.emojis.pip} ━━━ PIPS ━━━ ${Data.emojis.pip}`, 
                         `*boosted by: ${Data.emojis.str} & ${Data.space(1)}${Data.emojis.int}*`
-                        + `\n**Pip 'O Plenty:** ${Data.space(1)} ${oplenty}% ${Data.emojis.pip}`, true)
+                        + `\n**Pip 'O Plenty:** ${Data.space(1)} ${oplenty}% ${Data.emojis.pip}`
+                        + `\n**Pip Boost:** 5% ${Data.emojis.pip}`
+                        + `\nTotal: ${pipTotal}% ${Data.emojis.pip}`, true)
             .addField("\u200b", "\u200b")
             .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
             .setFooter(Data.footer.footer, Data.footer.image);
@@ -120,16 +147,19 @@ module.exports = {
         // incoming 8% 4%
         const lively  = ((2 * str) + (2 * will) + power) * 13 / 2000;
         const healthy = ((2 * str) + (2 * will) + power) * 3 / 1000;
+        const incTotal = Math.round((lively + healthy + Number.EPSILON) * 100) / 100;
 
         // outgoing 8% 4%
         const medic = ((2 * str) + (2 * will) + power) * 13 / 2000;
         const healer = ((2 * str) + (2 * will) + power) * 3 / 1000;
+        const outTotal = Math.round((medic + healer + Number.EPSILON) * 100) / 100;
 
         // health 150 125 100 75
         const bounty = ((2 * agil) + (2 * will) + power) * 3 / 25;
         const gift = ((2 * agil) + (2 * will) + power) / 10;
         const boost = ((2 * agil) + (2 * will) + power) * 6 / 75;
         const add = ((2 * agil) + (2 * will) + power) * 3 / 50;
+        const healthTotal = Math.round((bounty + gift + boost + add + Number.EPSILON) * 100) / 100;
 
         const embed = new Discord.MessageEmbed()
             .setColor("#D41112")
@@ -138,18 +168,21 @@ module.exports = {
             .addField(`${Data.emojis.inc} ━━ INCOMING ━━ ${Data.emojis.inc}`, 
                         `*boosted by: ${Data.emojis.str} & ${Data.space(1)}${Data.emojis.will}*`
                         + `\n**Lively:** ${Data.space(6)} ${lively}% ${Data.emojis.inc}${Data.emojis.heart}`
-                        + `\n**Healthy:** ${Data.space(1)} ${healthy}% ${Data.emojis.inc}${Data.emojis.heart}`, true)
+                        + `\n**Healthy:** ${Data.space(1)} ${healthy}% ${Data.emojis.inc}${Data.emojis.heart}`
+                        + `\nTotal: ${incTotal}% ${Data.emojis.inc}${Data.emojis.heart}`, true)
             .addField(`${Data.emojis.out} ━━ OUTGOING ━━ ${Data.emojis.out}`, 
                         `*boosted by: ${Data.emojis.str} & ${Data.space(1)}${Data.emojis.will}*`
                         + `\n**Medic:** ${Data.space(3)} ${medic}% ${Data.emojis.out}${Data.emojis.heart}`
-                        + `\n**Healer:** ${Data.space(1)} ${healer}% ${Data.emojis.out}${Data.emojis.heart}`, true)
+                        + `\n**Healer:** ${Data.space(1)} ${healer}% ${Data.emojis.out}${Data.emojis.heart}`
+                        + `\nTotal: ${outTotal}% ${Data.emojis.out}${Data.emojis.heart}`, true)
             .addField("\u200b", "\u200b")
             .addField(`${Data.emojis.health} ━━ HEALTH ━━ ${Data.emojis.health}`, 
                         `*boosted by: ${Data.emojis.agil} & ${Data.space(1)}${Data.emojis.will}*`
                         + `\n**Health Bounty:** +${bounty} ${Data.emojis.health}`
                         + `\n**Health Gift:** ${Data.space(11)} +${gift} ${Data.emojis.health}`
                         + `\n**Health Boost:** ${Data.space(2)} +${boost} ${Data.emojis.health}`
-                        + `\n**Health Add:** ${Data.space(8)} +${add} ${Data.emojis.health}`, true)
+                        + `\n**Health Add:** ${Data.space(8)} +${add} ${Data.emojis.health}`
+                        + `\nTotal: +${healthTotal} ${Data.emojis.health}`, true)
             .addField("\u200b", "\u200b")
             .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
             .setFooter(Data.footer.footer, Data.footer.image);
@@ -162,16 +195,19 @@ module.exports = {
         // stun 10 7
         const recalcitrant = ((2 * str) + (2 * int) + power) / 125;
         const resistant = ((2 * str) + (2 * int) + power) / 250;
+        const stunTotal = Math.round((recalcitrant + resistant + Number.EPSILON) * 100) / 100;
 
         // fish luck 3% 3%
         const epicluck = ((2 * int) + (2 * will) + power) / 400;
         const luck = ((2 * int) + (2 * will) + power) / 400;
+        const luckTotal = Math.round((epicluck + luck + Number.EPSILON) * 100) / 100;
 
         // mana 125 100 75 50
         const bounty = ((2 * int) + (2 * will) + power) / 10;
         const gift = ((2 * int) + (2 * will) + power) * 6 / 75;
         const boost = ((2 * int) + (2 * will) + power) * 3 / 50;
         const extra = ((2 * int) + (2 * will) + power) / 25;
+        const manaTotal = Math.round((bounty + gift + boost + extra + Number.EPSILON) * 100) / 100;
 
         const embed = new Discord.MessageEmbed()
             .setColor("#E8932F")
@@ -181,18 +217,21 @@ module.exports = {
             .addField(`${Data.emojis.stunres} ━━ STUN RESIST ━━ ${Data.emojis.stunres}`, 
                         `*boosted by: ${Data.emojis.str} & ${Data.space(1)}${Data.emojis.int}*`
                         + `\n**Stun Recalcitrant:** ${recalcitrant}% ${Data.emojis.stunres}`
-                        + `\n**Stun Resistant:** ${Data.space(5)} ${resistant}% ${Data.emojis.stunres}`, true)
+                        + `\n**Stun Resistant:** ${Data.space(5)} ${resistant}% ${Data.emojis.stunres}`
+                        + `\nTotal: ${stunTotal}% ${Data.emojis.stunres}`, true)
             .addField(`${Data.emojis.luck} ━━ FISH LUCK ━━ ${Data.emojis.luck}`, 
                         `*boosted by: ${Data.emojis.int} & ${Data.space(1)}${Data.emojis.will}*`
                         + `\n**Epic Fish Luck:** ${epicluck}% ${Data.emojis.luck}`
-                        + `\n**Fish Luck:** ${Data.space(10)} ${luck}% ${Data.emojis.luck}`, true)
+                        + `\n**Fish Luck:** ${Data.space(10)} ${luck}% ${Data.emojis.luck}`
+                        + `\nTotal: ${luckTotal}% ${Data.emojis.luck}`, true)
             .addField("\u200b", "\u200b")
-            .addField(`${Data.emojis.mana} ━━ MANA ━━ ${Data.emojis.mana}`, 
+            .addField(`${Data.emojis.mana} ━━━ MANA ━━━ ${Data.emojis.mana}`, 
                         `*boosted by: ${Data.emojis.int} & ${Data.space(1)}${Data.emojis.will}*`
                         + `\n**Mana Bounty:** ${Data.space(1)} +${bounty} ${Data.emojis.mana}`
                         + `\n**Mana Gift:** ${Data.space(6)} +${gift} ${Data.emojis.mana}`
                         + `\n**Mana Boost:** ${Data.space(3)} +${boost} ${Data.emojis.mana}`
-                        + `\n**Extra Mana:** ${Data.space(4)} +${extra} ${Data.emojis.mana}`, true)
+                        + `\n**Extra Mana:** ${Data.space(4)} +${extra} ${Data.emojis.mana}`
+                        + `\nTotal: +${manaTotal} ${Data.emojis.mana}`, true)
             .addField("\u200b", "\u200b")
             .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
             .setFooter(Data.footer.footer, Data.footer.image);
