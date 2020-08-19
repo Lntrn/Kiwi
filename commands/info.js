@@ -41,8 +41,5 @@ module.exports = {
 
             msg.channel.send(embed);
         }
-
-        // update count of info cmd uses
-        CMDS.updateData(bot, msg.guild.id, "info");
     }
 }
