@@ -12,7 +12,7 @@ module.exports = {
         const embed = new Discord.MessageEmbed()
             .setColor("#FFD983")
             .setTitle(":scroll: **━━━━━ KIWI HELP ━━━━━** :scroll:")
-            .setDescription(`*List of Kiwi's commands (prefix is **${Data.prefix}** - caps sensitive):*`
+            .setDescription(`*List of Kiwi's commands (prefix is **${Data.prefix}** or **${Data.altPrefix}** - caps sensitive):*`
                             + `\n\n:small_blue_diamond:** ${Data.prefix}stats**`
                             + `\n*calculates pet talents based on provided stats*`
                             + `\n\n> ${Data.prefix}stats ${Data.emojis.str} ${Data.emojis.int} ${Data.emojis.agil} ${Data.emojis.will} ${Data.emojis.power}`

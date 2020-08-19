@@ -67,6 +67,7 @@ module.exports = {
         image: "https://i.imgur.com/wbFToRX.png"
     },
     prefix: "!k",
+    altPrefix: "k!", // both prefixes must be the same length
     bugReportId: "744862627188179005",
     devReportRole: "<@&744861411628417034>",
     suggestionId: "745083262476484668",

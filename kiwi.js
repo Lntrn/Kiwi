@@ -20,7 +20,7 @@ const bot = new Discord.Client();
 // create collection of bot commands
 bot.commands = new Discord.Collection();
 // development toggle
-let devmode = false;
+let devmode = true;
 
 // fill command collection
 const commandFiles = FS.readdirSync("./commands");
@@ -44,7 +44,7 @@ bot.on("ready", () => {
 
 bot.on("message", message => {
 	// if another bot sent the message, if it has attachments, or if the prefix wasn't used, do nothing
-	if (message.author.bot || message.attachments.size !== 0 || !message.content.startsWith(Data.prefix))
+	if (message.author.bot || message.attachments.size !== 0 || (!message.content.startsWith(Data.prefix) && !message.content.startsWith(Data.altPrefix)))
 		return;
 
 	if (devmode && message.author.id !== Data.ownerId) {

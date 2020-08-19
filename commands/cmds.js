@@ -15,6 +15,7 @@ module.exports = {
             const CMD = JSON.parse(FS.readFileSync(Path.resolve(__dirname, "../cmdData.json")));
             const servers = CMD.servers;
             let dataPrintout = "";
+            let bug = 0, suggestion = 0, invite = 0, stats = 0, help = 0, unrecognized = 0;
 
             // for all servers
             for (let server in servers) {
@@ -23,13 +24,29 @@ module.exports = {
                 // for all cmds in that server
                 for (let cmd in servers[server]) {
                     dataPrintout += `\n${Data.space(10)} :white_small_square: ${cmd}: **${servers[server][cmd]}**`
+                    
+                    if (cmd === "bug")
+                        bug += servers[server][cmd];
+                    else if (cmd === "suggestion")
+                        suggestion += servers[server][cmd];
+                    else if (cmd === "invite")
+                        invite += servers[server][cmd];
+                    else if (cmd === "stats")
+                        stats += servers[server][cmd];
+                    else if (cmd === "help")
+                        help += servers[server][cmd];
+                    else if (cmd === "unrecognized")
+                        unrecognized += servers[server][cmd];
                 }
             }
             
             const embed = new Discord.MessageEmbed()
                 .setColor("#9AAAB4")
                 .setTitle(":card_box: **━━━━━ COMMAND STATS ━━━━━** :card_box:")
-                .setDescription(dataPrintout)
+                .setDescription( `Total Commands Used: **${bug + suggestion + invite + stats + help + unrecognized}**`
+                            + `\nbug: **${bug}** ${Data.space(4)} suggestion: **${suggestion}** ${Data.space(4)} invite: **${invite}**`
+                            + `\nstats: **${stats}** ${Data.space(4)} help: **${help}** ${Data.space(4)} unrecognized: **${unrecognized}**`
+                            + `\n${dataPrintout}`)
                 .addField("\u200b", "\u200b")
                 .setFooter(Data.footer.footer, Data.footer.image);
 
