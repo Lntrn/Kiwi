@@ -52,6 +52,7 @@ module.exports = {
 
             msg.channel.send(embed).then(
                 function(sentMsg) {
+                    let date = new Date();
                     // generate reaction
                     sentMsg.react("💾");
                     // reaction filter
@@ -61,7 +62,7 @@ module.exports = {
 
                     collector.on("collect", 
                         function() {
-                            bot.channels.cache.get(Data.cmdUsageId).send("**CMD USAGE:**", 
+                            bot.channels.cache.get(Data.cmdUsageId).send(`**CMD USAGE** (${date.getMonth()}/${date.getDate()}/${date.getFullYear()})**:**`, 
                                                                         {files : [Path.resolve(__dirname, "../cmdData.json")]});
                             bot.channels.cache.get(Data.cmdUsageId).send(Data.devReportRole);
                         }
