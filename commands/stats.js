@@ -48,7 +48,7 @@ module.exports = {
                     const healFilter = (reaction, user) => reaction.emoji.id === Data.emojiIds.heart && user.id === msg.author.id;
                     const miscFilter = (reaction, user) => reaction.emoji.id === Data.emojiIds.luck && user.id === msg.author.id;
 
-                    // collectors (parse for 5 seconds)
+                    // collectors (parse for 10 seconds)
                     const baseCollector = sentMsg.createReactionCollector(baseFilter, {time: 60000});
                     const ratingCollector = sentMsg.createReactionCollector(ratingFilter, {time: 60000});
                     const healCollector = sentMsg.createReactionCollector(healFilter, {time: 60000});

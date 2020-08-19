@@ -21,7 +21,7 @@ module.exports = {
                             + `\n\n**Report:** ${args.join(" ")}`);
 
         bot.channels.cache.get(Data.bugReportId).send(report);
-        bot.channels.cache.get(Data.bugReportId).send(Data.bugReportRole);
+        bot.channels.cache.get(Data.bugReportId).send(Data.devReportRole);
 
         const response = new Discord.MessageEmbed()
             .setColor("#8899A6")

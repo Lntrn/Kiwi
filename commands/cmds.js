@@ -9,7 +9,7 @@ const Data = require("../data.js");
 module.exports = {
     name: "cmds",
     description: "owner command to check the command usage stats",
-    execute(msg) {
+    execute(bot, msg) {
         // allow usage only if user is the owner
         if (msg.author.id === Data.ownerId) {
             const CMD = JSON.parse(FS.readFileSync(Path.resolve(__dirname, "../cmdData.json")));
@@ -33,7 +33,24 @@ module.exports = {
                 .addField("\u200b", "\u200b")
                 .setFooter(Data.footer.footer, Data.footer.image);
 
-            msg.channel.send(embed);
+            msg.channel.send(embed).then(
+                function(sentMsg) {
+                    // generate reaction
+                    sentMsg.react("💾");
+                    // reaction filter
+                    const filter = (reaction, user) => reaction.emoji.name === "💾" && user.id === msg.author.id;
+                    // collector (parse for 10 seconds)
+                    const collector = sentMsg.createReactionCollector(filter, {time: 60000});
+
+                    collector.on("collect", 
+                        function() {
+                            bot.channels.cache.get(Data.cmdUsageId).send("**CMD USAGE:**", 
+                                                                        {files : [Path.resolve(__dirname, "../cmdData.json")]});
+                            bot.channels.cache.get(Data.cmdUsageId).send(Data.devReportRole);
+                        }
+                    );
+                }
+            );
 
         } else {
             const embed = new Discord.MessageEmbed()

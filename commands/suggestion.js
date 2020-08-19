@@ -21,7 +21,7 @@ module.exports = {
                             \n**Suggestion:** ${args.join(" ")}`);
 
         bot.channels.cache.get(Data.suggestionId).send(suggestion);
-        bot.channels.cache.get(Data.suggestionId).send(Data.bugReportRole);
+        bot.channels.cache.get(Data.suggestionId).send(Data.devReportRole);
 
         const response = new Discord.MessageEmbed()
                 .setColor("#FFD983")
