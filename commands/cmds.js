@@ -23,7 +23,15 @@ module.exports = {
 
                 // for all cmds in that server
                 for (let cmd in servers[server]) {
-                    dataPrintout += `\n${Data.space(10)} :white_small_square: ${cmd}: **${servers[server][cmd]}**`
+                    if (cmd !== "new") {
+                        if (cmd === "name" && servers[server]["new"] === true) {
+                            dataPrintout += `\n${Data.space(10)} :white_small_square: ${cmd}: **${servers[server][cmd]}** 🚩`;
+                            servers[server]["new"] = false;
+                            FS.writeFileSync(Path.resolve(__dirname, "../cmdData.json"), JSON.stringify(CMD));
+                        } else {
+                            dataPrintout += `\n${Data.space(10)} :white_small_square: ${cmd}: **${servers[server][cmd]}**`;
+                        }
+                    }
                     
                     if (cmd === "bug")
                         bug += servers[server][cmd];
@@ -89,17 +97,20 @@ module.exports = {
         if (!servers.hasOwnProperty(serverID)) {
             servers[serverID] = {
                 "name": bot.guilds.cache.get(serverID).name,
+                "count": 0,
                 "bug": 0,
                 "suggestion": 0,
                 "invite": 0,
                 "stats": 0,
                 "help": 0,
-                "unrecognized": 0
+                "unrecognized": 0,
+                "new": true
             };
         }
         
         // increment command count
         servers[serverID][cmd]++;
+        servers[serverID]["count"]++;
 
         FS.writeFileSync(Path.resolve(__dirname, "../cmdData.json"), JSON.stringify(CMD));
     }
