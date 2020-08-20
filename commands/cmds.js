@@ -76,7 +76,6 @@ module.exports = {
                                     .setColor("#DD2E44")
                                     .setTitle(":exclamation: **━━━━━ CMDS COMMAMND ERROR ━━━━━** :exclamation:")
                                     .setDescription(`**Error:**\n${err}`)
-                                    .addField("\u200b", "\u200b")
                                     .setFooter(Data.footer.footer, Data.footer.image);
             
                                 bot.channels.cache.get(Data.cmdUsageId).send(error);
@@ -85,8 +84,7 @@ module.exports = {
                                 const success = new Discord.MessageEmbed()
                                     .setColor("#77B255")
                                     .setTitle(":white_check_mark: **━━━━━ CMDS COMMAND SUCCESS ━━━━━** :white_check_mark:")
-                                    .setDescription("File written successfully!")
-                                    .addField("\u200b", "\u200b")
+                                    .setDescription(`File written successfully!\n\nRemoved "new" status of **${servers[server][name]}**`)
                                     .setFooter(Data.footer.footer, Data.footer.image);
             
                                 bot.channels.cache.get(Data.cmdUsageId).send(success);
@@ -147,7 +145,6 @@ module.exports = {
                         .setDescription(`**Error:** ${err}`
                                         + `\n\n**Command Used:** ${cmd}`
                                         + `\n**Server:** ${bot.guilds.cache.get(serverID).name}`)
-                        .addField("\u200b", "\u200b")
                         .setFooter(Data.footer.footer, Data.footer.image);
 
                     bot.channels.cache.get(Data.cmdLog).send(error);
@@ -159,7 +156,6 @@ module.exports = {
                         .setDescription("File written successfully!"
                                         + `\n\n**Command Used:** ${cmd}`
                                         + `\n**Server:** ${bot.guilds.cache.get(serverID).name}`)
-                        .addField("\u200b", "\u200b")
                         .setFooter(Data.footer.footer, Data.footer.image);
 
                     bot.channels.cache.get(Data.cmdLog).send(success);
