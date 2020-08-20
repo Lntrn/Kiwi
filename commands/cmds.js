@@ -27,7 +27,10 @@ module.exports = {
                         if (cmd === "name" && servers[server]["new"] === true) {
                             dataPrintout += `\n${Data.space(10)} :white_small_square: ${cmd}: **${servers[server][cmd]}** 🚩`;
                             servers[server]["new"] = false;
-                            FS.writeFileSync(Path.resolve(__dirname, "../cmdData.json"), JSON.stringify(CMD));
+                            FS.writeFile(Path.resolve(__dirname, "../cmdData.json"), JSON.stringify(CMD), 
+                                function (err) {
+                                    bot.channels.cache.get(Data.bugReportId).send(`**ERROR READING FILE**\n${err}`);
+                                });
                         } else {
                             dataPrintout += `\n${Data.space(10)} :white_small_square: ${cmd}: **${servers[server][cmd]}**`;
                         }
@@ -112,6 +115,9 @@ module.exports = {
         servers[serverID][cmd]++;
         servers[serverID]["count"]++;
 
-        FS.writeFileSync(Path.resolve(__dirname, "../cmdData.json"), JSON.stringify(CMD));
+        FS.writeFile(Path.resolve(__dirname, "../cmdData.json"), JSON.stringify(CMD), 
+            function (err) {
+                bot.channels.cache.get(Data.bugReportId).send(`**ERROR READING FILE**\n${err}`);
+            });
     }
 }
