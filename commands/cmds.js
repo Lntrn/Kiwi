@@ -29,7 +29,7 @@ module.exports = {
                             servers[server]["new"] = false;
                             FS.writeFile(Path.resolve(__dirname, "../cmdData.json"), JSON.stringify(CMD), 
                                 function (err) {
-                                    bot.channels.cache.get(Data.bugReportId).send(`**ERROR READING FILE**\n${err}`);
+                                    bot.channels.cache.get(Data.bugReportId).send(`**ERROR WRITING FILE**\n${err}`);
                                 });
                         } else {
                             dataPrintout += `\n${Data.space(10)} :white_small_square: ${cmd}: **${servers[server][cmd]}**`;
@@ -117,7 +117,7 @@ module.exports = {
 
         FS.writeFile(Path.resolve(__dirname, "../cmdData.json"), JSON.stringify(CMD), 
             function (err) {
-                bot.channels.cache.get(Data.bugReportId).send(`**ERROR READING FILE**\n${err}`);
+                bot.channels.cache.get(Data.bugReportId).send(`**ERROR WRITING FILE**\n${err}`);
             });
     }
 }
