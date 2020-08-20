@@ -115,9 +115,28 @@ module.exports = {
         servers[serverID][cmd]++;
         servers[serverID]["count"]++;
 
-        FS.writeFile(Path.resolve(__dirname, "../cmdData.json"), JSON.stringify(CMD), 
+        FS.writeFile(Path.resolve(__dirname, "../cmdData.json"), JSON.stringify(CMD),
             function (err) {
-                bot.channels.cache.get(Data.bugReportId).send(`**ERROR WRITING FILE**\n${err}`);
+                if (err) {
+                    const error = new Discord.MessageEmbed()
+                        .setColor("#DD2E44")
+                        .setTitle(":exclamation: **━━━━━ ERROR ━━━━━** :exclamation:")
+                        .setDescription(err)
+                        .addField("\u200b", "\u200b")
+                        .setFooter(Data.footer.footer, Data.footer.image);
+
+                    bot.channels.cache.get(Data.cmdUsageId).send(error);
+
+                } else {
+                    const success = new Discord.MessageEmbed()
+                        .setColor("#77B255")
+                        .setTitle(":white_check_mark: **━━━━━ SUCCESS ━━━━━** :white_check_mark:")
+                        .setDescription("File written successfully!")
+                        .addField("\u200b", "\u200b")
+                        .setFooter(Data.footer.footer, Data.footer.image);
+
+                    bot.channels.cache.get(Data.cmdUsageId).send(success);
+                }
             });
     }
 }
