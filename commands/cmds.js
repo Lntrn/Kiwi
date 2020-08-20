@@ -27,10 +27,29 @@ module.exports = {
                         if (cmd === "name" && servers[server]["new"] === true) {
                             dataPrintout += `\n${Data.space(10)} :white_small_square: ${cmd}: **${servers[server][cmd]}** 🚩`;
                             servers[server]["new"] = false;
-                            FS.writeFile(Path.resolve(__dirname, "../cmdData.json"), JSON.stringify(CMD), 
-                                function (err) {
-                                    bot.channels.cache.get(Data.bugReportId).send(`**ERROR WRITING FILE**\n${err}`);
-                                });
+                            FS.writeFile(Path.resolve(__dirname, "../cmdData.json"), JSON.stringify(CMD),
+                            function (err) {
+                                if (err) {
+                                    const error = new Discord.MessageEmbed()
+                                        .setColor("#DD2E44")
+                                        .setTitle(":exclamation: **━━━━━ CMDS COMMAMND ERROR ━━━━━** :exclamation:")
+                                        .setDescription(`**Error:**\n${err}`)
+                                        .addField("\u200b", "\u200b")
+                                        .setFooter(Data.footer.footer, Data.footer.image);
+                
+                                    bot.channels.cache.get(Data.cmdUsageId).send(error);
+                
+                                } else {
+                                    const success = new Discord.MessageEmbed()
+                                        .setColor("#77B255")
+                                        .setTitle(":white_check_mark: **━━━━━ CMDS COMMAND SUCCESS ━━━━━** :white_check_mark:")
+                                        .setDescription("File written successfully!")
+                                        .addField("\u200b", "\u200b")
+                                        .setFooter(Data.footer.footer, Data.footer.image);
+                
+                                    bot.channels.cache.get(Data.cmdUsageId).send(success);
+                                }
+                            });
                         } else {
                             dataPrintout += `\n${Data.space(10)} :white_small_square: ${cmd}: **${servers[server][cmd]}**`;
                         }
@@ -121,21 +140,25 @@ module.exports = {
                     const error = new Discord.MessageEmbed()
                         .setColor("#DD2E44")
                         .setTitle(":exclamation: **━━━━━ ERROR ━━━━━** :exclamation:")
-                        .setDescription(err)
+                        .setDescription(`**Error:** ${err}`
+                                        + `\n\n**Command Used:** ${cmd}`
+                                        + `\n**Server:** ${bot.guilds.cache.get(serverID).name}`)
                         .addField("\u200b", "\u200b")
                         .setFooter(Data.footer.footer, Data.footer.image);
 
-                    bot.channels.cache.get(Data.cmdUsageId).send(error);
+                    bot.channels.cache.get(Data.cmdLog).send(error);
 
                 } else {
                     const success = new Discord.MessageEmbed()
                         .setColor("#77B255")
                         .setTitle(":white_check_mark: **━━━━━ SUCCESS ━━━━━** :white_check_mark:")
-                        .setDescription("File written successfully!")
+                        .setDescription("File written successfully!"
+                                        + `\n\n**Command Used:** ${cmd}`
+                                        + `\n**Server:** ${bot.guilds.cache.get(serverID).name}`)
                         .addField("\u200b", "\u200b")
                         .setFooter(Data.footer.footer, Data.footer.image);
 
-                    bot.channels.cache.get(Data.cmdUsageId).send(success);
+                    bot.channels.cache.get(Data.cmdLog).send(success);
                 }
             });
     }

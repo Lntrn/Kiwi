@@ -72,6 +72,7 @@ module.exports = {
     devReportRole: "<@&744861411628417034>",
     suggestionId: "745083262476484668",
     cmdUsageId: "745691111523352653",
+    cmdLog: "746087206514327592",
     inviteLink: "https://discord.com/api/oauth2/authorize?client_id=743944201682681937&permissions=8&scope=bot",
     supportLink: "https://discord.gg/Gex446g",
     ownerMention: "<@193427298958049280>",
