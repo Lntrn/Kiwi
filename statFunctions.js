@@ -37,8 +37,7 @@ module.exports = {
         const embed = new Discord.MessageEmbed()
             .setColor("#ECC088")
             .setTitle(`${Data.emojis.dmg} **━━━━━━━━ BASE PET STATS ━━━━━━━━** ${Data.emojis.dmg}`)
-            .setDescription(`Your Stats:
-                            ${Data.emojis.str}: **${str}**/255 ${Data.space(2)}${Data.emojis.int}: **${int}**/250 ${Data.space(2)}${Data.emojis.agil}: **${agil}**/260 ${Data.space(2)}${Data.emojis.will}: **${will}**/260 ${Data.space(2)}${Data.emojis.power}: **${power}**/250
+            .setDescription(`Your Stats:\n${Data.emojis.str}: **${str}**/255 ${Data.space(2)}${Data.emojis.int}: **${int}**/250 ${Data.space(2)}${Data.emojis.agil}: **${agil}**/260 ${Data.space(2)}${Data.emojis.will}: **${will}**/260 ${Data.space(2)}${Data.emojis.power}: **${power}**/250
                             \n*${Data.emojis.ice} represents a school based talent*`)
             .addField(`${Data.emojis.dmg} ━━ DAMAGE ━━ ${Data.emojis.dmg}`, 
                         `*boosted by: ${Data.emojis.str} & ${Data.space(1)}${Data.emojis.will}*`
@@ -108,8 +107,7 @@ module.exports = {
         const embed = new Discord.MessageEmbed()
             .setColor("#8648F7")
             .setTitle(`${Data.emojis.crit} **━━━━━━━ RATING PET STATS ━━━━━━━** ${Data.emojis.crit}`)
-            .setDescription(`Your Stats:
-                            ${Data.emojis.str}: **${str}**/255 ${Data.space(2)}${Data.emojis.int}: **${int}**/250 ${Data.space(2)}${Data.emojis.agil}: **${agil}**/260 ${Data.space(2)}${Data.emojis.will}: **${will}**/260 ${Data.space(2)}${Data.emojis.power}: **${power}**/250
+            .setDescription(`Your Stats:\n${Data.emojis.str}: **${str}**/255 ${Data.space(2)}${Data.emojis.int}: **${int}**/250 ${Data.space(2)}${Data.emojis.agil}: **${agil}**/260 ${Data.space(2)}${Data.emojis.will}: **${will}**/260 ${Data.space(2)}${Data.emojis.power}: **${power}**/250
                             \n*${Data.emojis.myth} represents a school based talent*`)
             .addField(`${Data.emojis.crit} ━━ CRITICAL ━━ ${Data.emojis.crit}`, 
                         `*boosted by: ${Data.emojis.agil} & ${Data.space(1)}${Data.emojis.will}*`
@@ -164,7 +162,7 @@ module.exports = {
         const embed = new Discord.MessageEmbed()
             .setColor("#D41112")
             .setTitle(`${Data.emojis.heart} **━━━━━━━ HEALTH PET STATS ━━━━━━━** ${Data.emojis.heart}`)
-            .setDescription(`Your Stats:\n${Data.emojis.str}: **${str}**/255 ${Data.space(2)}${Data.emojis.int}: **${int}**/250 ${Data.space(2)}${Data.emojis.agil}: **${agil}**/260 ${Data.space(2)}${Data.emojis.will}: **${will}**/260 ${Data.space(2)}${Data.emojis.power}: **${power}**/250\n`)
+            .setDescription(`Your Stats:\n${Data.emojis.str}: **${str}**/255 ${Data.space(2)}${Data.emojis.int}: **${int}**/250 ${Data.space(2)}${Data.emojis.agil}: **${agil}**/260 ${Data.space(2)}${Data.emojis.will}: **${will}**/260 ${Data.space(2)}${Data.emojis.power}: **${power}**/250\n ‎`)
             .addField(`${Data.emojis.inc} ━━ INCOMING ━━ ${Data.emojis.inc}`, 
                         `*boosted by: ${Data.emojis.str} & ${Data.space(1)}${Data.emojis.will}*`
                         + `\n**Lively:** ${Data.space(6)} ${lively}% ${Data.emojis.inc}${Data.emojis.heart}`
@@ -212,8 +210,7 @@ module.exports = {
         const embed = new Discord.MessageEmbed()
             .setColor("#E8932F")
             .setTitle(`${Data.emojis.luck} **━━━━━━━ MISC PET STATS ━━━━━━━** ${Data.emojis.luck}`)
-            .setDescription(`Your Stats:
-                            ${Data.emojis.str}: **${str}**/255 ${Data.space(2)}${Data.emojis.int}: **${int}**/250 ${Data.space(2)}${Data.emojis.agil}: **${agil}**/260 ${Data.space(2)}${Data.emojis.will}: **${will}**/260 ${Data.space(2)}${Data.emojis.power}: **${power}**/250\n`)
+            .setDescription(`Your Stats:\n${Data.emojis.str}: **${str}**/255 ${Data.space(2)}${Data.emojis.int}: **${int}**/250 ${Data.space(2)}${Data.emojis.agil}: **${agil}**/260 ${Data.space(2)}${Data.emojis.will}: **${will}**/260 ${Data.space(2)}${Data.emojis.power}: **${power}**/250\n ‎`)
             .addField(`${Data.emojis.stunres} ━━ STUN RESIST ━━ ${Data.emojis.stunres}`, 
                         `*boosted by: ${Data.emojis.str} & ${Data.space(1)}${Data.emojis.int}*`
                         + `\n**Stun Recalcitrant:** ${recalcitrant}% ${Data.emojis.stunres}`
