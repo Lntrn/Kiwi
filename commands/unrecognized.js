@@ -22,6 +22,6 @@ module.exports = {
 
         // update count of unrecognized cmd uses
         // CMDS.updateData(bot, msg.author, msg.guild.id, "unrecognized");
-        CMDS.cmdLog(bot, msg.author, msg.guild.id, "unrecognized");
+        CMDS.cmdLog(bot, msg, msg.guild.id, `unrecognized: "${cmd}"`);
     }
 }

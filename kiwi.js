@@ -20,7 +20,7 @@ const bot = new Discord.Client();
 // create collection of bot commands
 bot.commands = new Discord.Collection();
 // development toggle
-let devmode = false;
+let devmode = true;
 
 // fill command collection
 const commandFiles = FS.readdirSync("./commands");

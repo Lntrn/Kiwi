@@ -38,6 +38,6 @@ module.exports = {
 
         // update count of suggestion cmd uses
         // CMDS.updateData(bot, msg.author, msg.guild.id, "suggestion");
-        CMDS.cmdLog(bot, msg.author, msg.guild.id, "suggestion");
+        CMDS.cmdLog(bot, msg, msg.guild.id, "suggestion");
     }
 }

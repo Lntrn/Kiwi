@@ -164,15 +164,16 @@ module.exports = {
                 }
             });
     },
-    cmdLog(bot, author, serverID, cmd) {
+    cmdLog(bot, msg, serverID, cmd) {
         date = new Date();
 
         const log = new Discord.MessageEmbed()
             .setColor("#FEE7B8")
             .setTitle(":dividers: **━━━━━ COMMAND LOG ━━━━━** :dividers:")
             .setDescription(`**Command Used:** ${cmd}`
-                            + `\n**User:** ${author}`
+                            + `\n**User:** ${msg.author}`
                             + `\n**Server:** ${bot.guilds.cache.get(serverID).name}`
+                            + `\n**Channel:** ${msg.channel}`
                             + `\n**Date:** ${date.toDateString()}`)
             .setFooter(Data.footer.footer, Data.footer.image);
 

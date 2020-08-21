@@ -35,6 +35,6 @@ module.exports = {
 
         // update count of help cmd uses
         // CMDS.updateData(bot, msg.author, msg.guild.id, "help");
-        CMDS.cmdLog(bot, msg.author, msg.guild.id, "help");
+        CMDS.cmdLog(bot, msg, msg.guild.id, "help");
     }
 }

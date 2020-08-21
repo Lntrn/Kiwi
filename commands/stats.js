@@ -85,7 +85,7 @@ module.exports = {
 
         // update count of stats cmd uses
         // CMDS.updateData(bot, msg.author, msg.guild.id, "stats");
-        CMDS.cmdLog(bot, msg.author, msg.guild.id, "stats");
+        CMDS.cmdLog(bot, msg, msg.guild.id, "stats");
     },
     dataCheck(msg, args) {
         // if more or less than 5 arguments are provided
