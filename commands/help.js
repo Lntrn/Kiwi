@@ -34,6 +34,7 @@ module.exports = {
         msg.channel.send(embed);
 
         // update count of help cmd uses
-        CMDS.updateData(bot, msg.guild.id, "help");
+        // CMDS.updateData(bot, msg.author, msg.guild.id, "help");
+        CMDS.cmdLog(bot, msg.author, msg.guild.id, "help");
     }
 }

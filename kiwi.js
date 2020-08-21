@@ -64,7 +64,7 @@ bot.on("message", message => {
 			bot.commands.get("info").execute(bot, message);
 			break;
 		case "cmds":
-			bot.commands.get("cmds").execute(bot, message);
+			// bot.commands.get("cmds").execute(bot, message);
 			break;
 		case "stats":
 			bot.commands.get("stats").execute(bot, message, args);

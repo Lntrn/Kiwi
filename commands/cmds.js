@@ -113,7 +113,7 @@ module.exports = {
             msg.channel.send(embed);
         }
     },
-    updateData(bot, serverID, cmd) {
+    updateData(bot, author, serverID, cmd) {
         let CMD = JSON.parse(FS.readFileSync(Path.resolve(__dirname, "../cmdData.json")));
         let servers = CMD.servers;
 
@@ -144,6 +144,7 @@ module.exports = {
                         .setTitle(":exclamation: **━━━━━ ERROR ━━━━━** :exclamation:")
                         .setDescription(`**Error:** ${err}`
                                         + `\n\n**Command Used:** ${cmd}`
+                                        + `\n**User:** ${author}`
                                         + `\n**Server:** ${bot.guilds.cache.get(serverID).name}`)
                         .setFooter(Data.footer.footer, Data.footer.image);
 
@@ -155,11 +156,26 @@ module.exports = {
                         .setTitle(":white_check_mark: **━━━━━ SUCCESS ━━━━━** :white_check_mark:")
                         .setDescription("File written successfully!"
                                         + `\n\n**Command Used:** ${cmd}`
+                                        + `\n**User:** ${author}`
                                         + `\n**Server:** ${bot.guilds.cache.get(serverID).name}`)
                         .setFooter(Data.footer.footer, Data.footer.image);
 
                     bot.channels.cache.get(Data.cmdLog).send(success);
                 }
             });
+    },
+    cmdLog(bot, author, serverID, cmd) {
+        date = new Date();
+
+        const log = new Discord.MessageEmbed()
+            .setColor("#FEE7B8")
+            .setTitle(":dividers: **━━━━━ COMMAND LOG ━━━━━** :dividers:")
+            .setDescription(`**Command Used:** ${cmd}`
+                            + `\n**User:** ${author}`
+                            + `\n**Server:** ${bot.guilds.cache.get(serverID).name}`
+                            + `\n**Date:** ${date.toDateString()}`)
+            .setFooter(Data.footer.footer, Data.footer.image);
+
+        bot.channels.cache.get(Data.cmdLog).send(log);
     }
 }

@@ -37,6 +37,7 @@ module.exports = {
         msg.channel.send(response);
 
         // update count of suggestion cmd uses
-        CMDS.updateData(bot, msg.guild.id, "suggestion");
+        // CMDS.updateData(bot, msg.author, msg.guild.id, "suggestion");
+        CMDS.cmdLog(bot, msg.author, msg.guild.id, "suggestion");
     }
 }

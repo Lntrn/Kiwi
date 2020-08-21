@@ -21,6 +21,7 @@ module.exports = {
         msg.channel.send(invite);
 
         // update count of invite cmd uses
-        CMDS.updateData(bot, msg.guild.id, "invite");
+        // CMDS.updateData(bot, msg.author, msg.guild.id, "invite");
+        CMDS.cmdLog(bot, msg.author, msg.guild.id, "invite");
     }
 }

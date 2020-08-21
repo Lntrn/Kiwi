@@ -17,7 +17,12 @@ module.exports = {
             servers.forEach(
                 function(server) {
                     joinDate = server.joinedAt;
+                    date = new Date();
+
                     serverPrintout += `\n:white_small_square: **${server.name}** [${joinDate.toDateString()}]`
+
+                    if (joinDate.toDateString() === date.toDateString())
+                        serverPrintout += "🚩";
                 }
             );
             

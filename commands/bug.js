@@ -37,6 +37,7 @@ module.exports = {
         msg.channel.send(response);
 
         // update count of bug cmd uses
-        CMDS.updateData(bot, msg.guild.id, "bug");
+        // CMDS.updateData(bot, msg.author, msg.guild.id, "bug");
+        CMDS.cmdLog(bot, msg.author, msg.guild.id, "bug");
     }
 }

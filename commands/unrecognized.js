@@ -21,6 +21,7 @@ module.exports = {
             msg.channel.send(embed);
 
         // update count of unrecognized cmd uses
-        CMDS.updateData(bot, msg.guild.id, "unrecognized");
+        // CMDS.updateData(bot, msg.author, msg.guild.id, "unrecognized");
+        CMDS.cmdLog(bot, msg.author, msg.guild.id, "unrecognized");
     }
 }
