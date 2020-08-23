@@ -2,42 +2,38 @@
 const Discord = require("discord.js");
 // require data.js module
 const Data = require("./data.js");
-// require statData.js module
-const StatData = require("./statData.js");
 
 module.exports = {
     base(str, int, agil, will, power, round) {
         // damage, resist, accuracy, pierce
-
-        if (!StatData.baseStats.generated)
-            StatData.generateBase(str, int, agil, will, power);
+        const baseStats = module.exports.generateBase(str, int, agil, will, power);
 
         // damage
-        dealer = round ? module.exports.round(StatData.baseStats.dealer) : StatData.baseStats.dealer;
-        giver = round ? module.exports.round(StatData.baseStats.giver) : StatData.baseStats.giver;
-        boon = round ? module.exports.round(StatData.baseStats.boon) : StatData.baseStats.boon;
-        alldmgTotal = round ? module.exports.round(StatData.baseStats.alldmgTotal) : StatData.baseStats.alldmgTotal;
-        schoolDmgTotal = round ? module.exports.round(StatData.baseStats.schoolDmgTotal) : StatData.baseStats.schoolDmgTotal;
-        universalDmgTotal = round ? module.exports.round(StatData.baseStats.universalDmgTotal) : StatData.baseStats.universalDmgTotal;
+        dealer = round ? module.exports.round(baseStats.dealer) : baseStats.dealer;
+        giver = round ? module.exports.round(baseStats.giver) : baseStats.giver;
+        boon = round ? module.exports.round(baseStats.boon) : baseStats.boon;
+        alldmgTotal = round ? module.exports.round(baseStats.alldmgTotal) : baseStats.alldmgTotal;
+        schoolDmgTotal = round ? module.exports.round(baseStats.schoolDmgTotal) : baseStats.schoolDmgTotal;
+        universalDmgTotal = round ? module.exports.round(baseStats.universalDmgTotal) : baseStats.universalDmgTotal;
 
         // resist
-        ward = round ? module.exports.round(StatData.baseStats.ward) : StatData.baseStats.ward;
-        proof = round ? module.exports.round(StatData.baseStats.proof) : StatData.baseStats.proof;
-        defy = round ? module.exports.round(StatData.baseStats.defy) : StatData.baseStats.defy;
-        wardTotal = round ? module.exports.round(StatData.baseStats.wardTotal) : StatData.baseStats.wardTotal;
-        proofDefyTotal = round ? module.exports.round(StatData.baseStats.proofDefyTotal) : StatData.baseStats.proofDefyTotal;
+        ward = round ? module.exports.round(baseStats.ward) : baseStats.ward;
+        proof = round ? module.exports.round(baseStats.proof) : baseStats.proof;
+        defy = round ? module.exports.round(baseStats.defy) : baseStats.defy;
+        wardTotal = round ? module.exports.round(baseStats.wardTotal) : baseStats.wardTotal;
+        proofDefyTotal = round ? module.exports.round(baseStats.proofDefyTotal) : baseStats.proofDefyTotal;
 
         // accuracy
-        sniper = round ? module.exports.round(StatData.baseStats.sniper) : StatData.baseStats.sniper;
-        shot = round ? module.exports.round(StatData.baseStats.shot) : StatData.baseStats.shot;
-        eye = round ? module.exports.round(StatData.baseStats.eye) : StatData.baseStats.eye;
-        schoolAccTotal = round ? module.exports.round(StatData.baseStats.schoolAccTotal) : StatData.baseStats.schoolAccTotal;
-        universalAccTotal = round ? module.exports.round(StatData.baseStats.universalAccTotal) : StatData.baseStats.universalAccTotal;
+        sniper = round ? module.exports.round(baseStats.sniper) : baseStats.sniper;
+        shot = round ? module.exports.round(baseStats.shot) : baseStats.shot;
+        eye = round ? module.exports.round(baseStats.eye) : baseStats.eye;
+        schoolAccTotal = round ? module.exports.round(baseStats.schoolAccTotal) : baseStats.schoolAccTotal;
+        universalAccTotal = round ? module.exports.round(baseStats.universalAccTotal) : baseStats.universalAccTotal;
 
         // pierce
-        breaker = round ? module.exports.round(StatData.baseStats.breaker) : StatData.baseStats.breaker;
-        piercer = round ? module.exports.round(StatData.baseStats.piercer) : StatData.baseStats.piercer;
-        pierceTotal = round ? module.exports.round(StatData.baseStats.pierceTotal) : StatData.baseStats.pierceTotal;
+        breaker = round ? module.exports.round(baseStats.breaker) : baseStats.breaker;
+        piercer = round ? module.exports.round(baseStats.piercer) : baseStats.piercer;
+        pierceTotal = round ? module.exports.round(baseStats.pierceTotal) : baseStats.pierceTotal;
         
         let description = `Your Stats:\n${Data.emojis.str}: **${str}**/255 ${Data.space(2)}${Data.emojis.int}: **${int}**/250 ${Data.space(2)}${Data.emojis.agil}: **${agil}**/260 ${Data.space(2)}${Data.emojis.will}: **${will}**/260 ${Data.space(2)}${Data.emojis.power}: **${power}**/250`
                             + `\n\n*${Data.emojis.ice}**:** school based talent*`;
@@ -90,32 +86,30 @@ module.exports = {
     },
     rating(str, int, agil, will, power, round) {
         // critical, block, pip convert, pips
-
-        if (!StatData.ratingStats.generated)
-            StatData.generateRating(str, int, agil, will, power);
+        const ratingStats = module.exports.generateRating(str, int, agil, will, power);
 
         // critical
-        assailant = round ? module.exports.round(StatData.ratingStats.assailant) : StatData.ratingStats.assailant;
-        sStriker = round ? module.exports.round(StatData.ratingStats.sStriker) : StatData.ratingStats.sStriker;
-        cStriker = round ? module.exports.round(StatData.ratingStats.cStriker) : StatData.ratingStats.cStriker;
-        hitter = round ? module.exports.round(StatData.ratingStats.hitter) : StatData.ratingStats.hitter;
-        allCritTotal = round ? module.exports.round(StatData.ratingStats.allCritTotal) : StatData.ratingStats.allCritTotal;
-        schoolCritTotal = round ? module.exports.round(StatData.ratingStats.schoolCritTotal) : StatData.ratingStats.schoolCritTotal;
-        universalCritTotal = round ? module.exports.round(StatData.ratingStats.universalCritTotal) : StatData.ratingStats.universalCritTotal;
+        assailant = round ? module.exports.round(ratingStats.assailant) : ratingStats.assailant;
+        sStriker = round ? module.exports.round(ratingStats.sStriker) : ratingStats.sStriker;
+        cStriker = round ? module.exports.round(ratingStats.cStriker) : ratingStats.cStriker;
+        hitter = round ? module.exports.round(ratingStats.hitter) : ratingStats.hitter;
+        allCritTotal = round ? module.exports.round(ratingStats.allCritTotal) : ratingStats.allCritTotal;
+        schoolCritTotal = round ? module.exports.round(ratingStats.schoolCritTotal) : ratingStats.schoolCritTotal;
+        universalCritTotal = round ? module.exports.round(ratingStats.universalCritTotal) : ratingStats.universalCritTotal;
         
         // block
-        defender = round ? module.exports.round(StatData.ratingStats.defender) : StatData.ratingStats.defender;
-        blocker = round ? module.exports.round(StatData.ratingStats.blocker) : StatData.ratingStats.blocker;
-        blockTotal = round ? module.exports.round(StatData.ratingStats.blockTotal) : StatData.ratingStats.blockTotal;
+        defender = round ? module.exports.round(ratingStats.defender) : ratingStats.defender;
+        blocker = round ? module.exports.round(ratingStats.blocker) : ratingStats.blocker;
+        blockTotal = round ? module.exports.round(ratingStats.blockTotal) : ratingStats.blockTotal;
         
         // pip convert
-        conserver = round ? module.exports.round(StatData.ratingStats.conserver) : StatData.ratingStats.conserver;
-        saver = round ? module.exports.round(StatData.ratingStats.saver) : StatData.ratingStats.saver;
-        pconTotal = round ? module.exports.round(StatData.ratingStats.pconTotal) : StatData.ratingStats.pconTotal;
+        conserver = round ? module.exports.round(ratingStats.conserver) : ratingStats.conserver;
+        saver = round ? module.exports.round(ratingStats.saver) : ratingStats.saver;
+        pconTotal = round ? module.exports.round(ratingStats.pconTotal) : ratingStats.pconTotal;
         
         // pips
-        oplenty = round ? module.exports.round(StatData.ratingStats.oplenty) : StatData.ratingStats.oplenty;
-        pipTotal = round ? module.exports.round(StatData.ratingStats.pipTotal) : StatData.ratingStats.pipTotal;
+        oplenty = round ? module.exports.round(ratingStats.oplenty) : ratingStats.oplenty;
+        pipTotal = round ? module.exports.round(ratingStats.pipTotal) : ratingStats.pipTotal;
 
         let description = `Your Stats:\n${Data.emojis.str}: **${str}**/255 ${Data.space(2)}${Data.emojis.int}: **${int}**/250 ${Data.space(2)}${Data.emojis.agil}: **${agil}**/260 ${Data.space(2)}${Data.emojis.will}: **${will}**/260 ${Data.space(2)}${Data.emojis.power}: **${power}**/250`
                             + `\n\n*${Data.emojis.myth}**:** school based talent*`;
@@ -159,26 +153,24 @@ module.exports = {
     },
     healing(str, int, agil, will, power, round) {
         // incoming, outgoing, health
-
-        if (!StatData.healthStats.generated)
-            StatData.generateHealth(str, int, agil, will, power);
+        const healthStats = module.exports.generateHealth(str, int, agil, will, power);
 
         // incoming
-        lively = round ? module.exports.round(StatData.healthStats.lively) : StatData.healthStats.lively;
-        healthy = round ? module.exports.round(StatData.healthStats.healthy) : StatData.healthStats.healthy;
-        incTotal = round ? module.exports.round(StatData.healthStats.incTotal) : StatData.healthStats.incTotal;
+        lively = round ? module.exports.round(healthStats.lively) : healthStats.lively;
+        healthy = round ? module.exports.round(healthStats.healthy) : healthStats.healthy;
+        incTotal = round ? module.exports.round(healthStats.incTotal) : healthStats.incTotal;
         
         // outgoing
-        medic = round ? module.exports.round(StatData.healthStats.medic) : StatData.healthStats.medic;
-        healer = round ? module.exports.round(StatData.healthStats.healer) : StatData.healthStats.healer;
-        outTotal = round ? module.exports.round(StatData.healthStats.outTotal) : StatData.healthStats.outTotal;
+        medic = round ? module.exports.round(healthStats.medic) : healthStats.medic;
+        healer = round ? module.exports.round(healthStats.healer) : healthStats.healer;
+        outTotal = round ? module.exports.round(healthStats.outTotal) : healthStats.outTotal;
         
         // health
-        bounty = round ? module.exports.round(StatData.healthStats.bounty) : StatData.healthStats.bounty;
-        gift = round ? module.exports.round(StatData.healthStats.gift) : StatData.healthStats.gift;
-        boost = round ? module.exports.round(StatData.healthStats.boost) : StatData.healthStats.boost;
-        add = round ? module.exports.round(StatData.healthStats.add) : StatData.healthStats.add;
-        healthTotal = round ? module.exports.round(StatData.healthStats.healthTotal) : StatData.healthStats.healthTotal;
+        bounty = round ? module.exports.round(healthStats.bounty) : healthStats.bounty;
+        gift = round ? module.exports.round(healthStats.gift) : healthStats.gift;
+        boost = round ? module.exports.round(healthStats.boost) : healthStats.boost;
+        add = round ? module.exports.round(healthStats.add) : healthStats.add;
+        healthTotal = round ? module.exports.round(healthStats.healthTotal) : healthStats.healthTotal;
 
         let description = `Your Stats:\n${Data.emojis.str}: **${str}**/255 ${Data.space(2)}${Data.emojis.int}: **${int}**/250 ${Data.space(2)}${Data.emojis.agil}: **${agil}**/260 ${Data.space(2)}${Data.emojis.will}: **${will}**/260 ${Data.space(2)}${Data.emojis.power}: **${power}**/250\n${Data.emptyChar}`;
         
@@ -215,26 +207,24 @@ module.exports = {
     },
     misc(str, int, agil, will, power, round) {
         // stun resist, fish luck, mana
-
-        if (!StatData.miscStats.generated)
-            StatData.generateMisc(str, int, agil, will, power);
+        const miscStats = module.exports.generateMisc(str, int, agil, will, power);
 
         // stun resist
-        recalcitrant = round ? module.exports.round(StatData.miscStats.recalcitrant) : StatData.miscStats.recalcitrant;
-        resistant = round ? module.exports.round(StatData.miscStats.resistant) : StatData.miscStats.resistant;
-        stunTotal = round ? module.exports.round(StatData.miscStats.stunTotal) : StatData.miscStats.stunTotal;
+        recalcitrant = round ? module.exports.round(miscStats.recalcitrant) : miscStats.recalcitrant;
+        resistant = round ? module.exports.round(miscStats.resistant) : miscStats.resistant;
+        stunTotal = round ? module.exports.round(miscStats.stunTotal) : miscStats.stunTotal;
         
         // fish luck
-        epicluck = round ? module.exports.round(StatData.miscStats.epicluck) : StatData.miscStats.epicluck;
-        luck = round ? module.exports.round(StatData.miscStats.luck) : StatData.miscStats.luck;
-        luckTotal = round ? module.exports.round(StatData.miscStats.luckTotal) : StatData.miscStats.luckTotal;
+        epicluck = round ? module.exports.round(miscStats.epicluck) : miscStats.epicluck;
+        luck = round ? module.exports.round(miscStats.luck) : miscStats.luck;
+        luckTotal = round ? module.exports.round(miscStats.luckTotal) : miscStats.luckTotal;
         
         // mana
-        bounty = round ? module.exports.round(StatData.miscStats.bounty) : StatData.miscStats.bounty;
-        gift = round ? module.exports.round(StatData.miscStats.gift) : StatData.miscStats.gift;
-        boost = round ? module.exports.round(StatData.miscStats.boost) : StatData.miscStats.boost;
-        extra = round ? module.exports.round(StatData.miscStats.extra) : StatData.miscStats.extra;
-        manaTotal = round ? module.exports.round(StatData.miscStats.manaTotal) : StatData.miscStats.manaTotal;
+        bounty = round ? module.exports.round(miscStats.bounty) : miscStats.bounty;
+        gift = round ? module.exports.round(miscStats.gift) : miscStats.gift;
+        boost = round ? module.exports.round(miscStats.boost) : miscStats.boost;
+        extra = round ? module.exports.round(miscStats.extra) : miscStats.extra;
+        manaTotal = round ? module.exports.round(miscStats.manaTotal) : miscStats.manaTotal;
 
         let description = `Your Stats:\n${Data.emojis.str}: **${str}**/255 ${Data.space(2)}${Data.emojis.int}: **${int}**/250 ${Data.space(2)}${Data.emojis.agil}: **${agil}**/260 ${Data.space(2)}${Data.emojis.will}: **${will}**/260 ${Data.space(2)}${Data.emojis.power}: **${power}**/250\n${Data.emptyChar}`;
         
@@ -288,5 +278,144 @@ module.exports = {
             return `${Data.emojis.fake} ${Math.round(val)}`;
         else
             return Math.round(val);
+    },
+    generateBase(str, int, agil, will, power) {
+        let baseStats = {
+            // damage 10% 6% 3% | 6% 3%
+            dealer: parseFloat((((2 * str) + (2 * will) + power) * 3) / 400),
+            giver: parseFloat(((2 * str) + (2 * will) + power) / 200),
+            boon: parseFloat(((2 * str) + (2 * will) + power) / 400),
+            alldmgTotal: 0,
+            schoolDmgTotal: 0,
+            universalDmgTotal: 0,
+
+            // resist 15% 10% 5% | 10% 5%
+            ward: (((2 * str) + (2 * agil) + power) * 3) / 250,
+            proof: ((2 * str) + (2 * agil) + power) / 125,
+            defy: ((2 * str) + (2 * agil) + power) / 250,
+            wardTotal: 0,
+            proofDefyTotal: 0,
+
+            // accuracy 13% 9% 4% | 9% 4%
+            sniper: (((2 * int) + (2 * agil) + power) * 3) / 400,
+            shot: ((2 * int) + (2 * agil) + power) / 200,
+            eye: ((2 * int) + (2 * agil) + power) / 400,
+            schoolAccTotal: 0,
+            universalAccTotal: 0,
+
+            // pierce 3% 2%
+            breaker: ((2 * str) + (2 * agil) + power) / 400,
+            piercer: (((2 * str) + (2 * agil) + power) * 3) / 2000,
+            pierceTotal: 0
+        };
+
+        baseStats.alldmgTotal = Math.round((baseStats.dealer + baseStats.giver + baseStats.boon + baseStats.giver + baseStats.boon + Number.EPSILON) * 100) / 100;
+        baseStats.schoolDmgTotal = Math.round((baseStats.dealer + baseStats.giver + baseStats.boon + Number.EPSILON) * 100) / 100;
+        baseStats.universalDmgTotal = Math.round((baseStats.giver + baseStats.boon + Number.EPSILON) * 100) / 100;
+
+        baseStats.wardTotal = Math.round((baseStats.ward + baseStats.proof + baseStats.defy + Number.EPSILON) * 100) / 100;
+        baseStats.proofDefyTotal = Math.round((baseStats.proof + baseStats.defy + Number.EPSILON) * 100) / 100;
+
+        baseStats.schoolAccTotal = Math.round((baseStats.sniper + baseStats.shot + baseStats.eye + Number.EPSILON) * 100) / 100;
+        baseStats.universalAccTotal = Math.round((baseStats.shot + baseStats.eye + Number.EPSILON) * 100) / 100;
+
+        baseStats.pierceTotal = Math.round((baseStats.breaker + baseStats.piercer + Number.EPSILON) * 100) / 100;
+
+        return baseStats;
+    },
+    generateRating(str, int, agil, will, power) {
+        let ratingStats = {
+            // critical 32 26 | 31 23
+            assailant: ((2 * agil) + (2 * will) + power) / 40,
+            sStriker: ((2 * agil) + (2 * will) + power) * 3 / 150,
+            cStriker: ((2 * agil) + (2 * will) + power) * 3 / 125,
+            hitter: ((2 * agil) + (2 * will) + power) * 9 / 500,
+            allCritTotal: 0,
+            schoolCritTotal: 0,
+            universalCritTotal: 0,
+
+            // block 30 25
+            defender: ((2 * int) + (2 * will) + power) * 3 / 125,
+            blocker: ((2 * int) + (2 * will) + power) * 9 / 500,
+            blockTotal: 0,
+
+            // pip conversion 30 25
+            conserver: ((2 * agil) + (2 * will) + power) * 3 / 125,
+            saver: ((2 * agil) + (2 * will) + power) * 9 / 500,
+            pconTotal: 0,
+
+            // pip chance 5%
+            oplenty: ((2 * str) + (2 * int) + power) / 250,
+            pipTotal: 0
+        };
+
+        ratingStats.allCritTotal = Math.round((ratingStats.assailant + ratingStats.sStriker + ratingStats.cStriker + ratingStats.hitter + Number.EPSILON) * 100) / 100;
+        ratingStats.schoolCritTotal = Math.round((ratingStats.assailant + ratingStats.sStriker + Number.EPSILON) * 100) / 100;
+        ratingStats.universalCritTotal = Math.round((ratingStats.cStriker + ratingStats.hitter + Number.EPSILON) * 100) / 100;
+
+        ratingStats.blockTotal = Math.round((ratingStats.defender + ratingStats.blocker + Number.EPSILON) * 100) / 100;
+
+        ratingStats.pconTotal = Math.round((ratingStats.conserver + ratingStats.saver + Number.EPSILON) * 100) / 100;
+
+        ratingStats.pipTotal = Math.round((ratingStats.oplenty + 5 + Number.EPSILON) * 100) / 100;
+
+        return ratingStats;
+    },
+    generateHealth(str, int, agil, will, power) {
+        let healthStats = {
+            // incoming 8% 4%
+            lively: ((2 * str) + (2 * will) + power) * 13 / 2000,
+            healthy: ((2 * str) + (2 * will) + power) * 3 / 1000,
+            incTotal: 0,
+
+            // outgoing 8% 4%
+            medic: ((2 * str) + (2 * will) + power) * 13 / 2000,
+            healer: ((2 * str) + (2 * will) + power) * 3 / 1000,
+            outTotal: 0,
+
+            // health 150 125 100 75
+            bounty: ((2 * agil) + (2 * will) + power) * 3 / 25,
+            gift: ((2 * agil) + (2 * will) + power) / 10,
+            boost: ((2 * agil) + (2 * will) + power) * 6 / 75,
+            add: ((2 * agil) + (2 * will) + power) * 3 / 50,
+            healthTotal: 0
+
+        };
+
+        healthStats.incTotal = Math.round((healthStats.lively + healthStats.healthy + Number.EPSILON) * 100) / 100;
+
+        healthStats.outTotal = Math.round((healthStats.medic + healthStats.healer + Number.EPSILON) * 100) / 100;
+
+        healthStats.healthTotal = Math.round((healthStats.bounty + healthStats.gift + healthStats.boost + healthStats.add + Number.EPSILON) * 100) / 100;
+
+        return healthStats;
+    },
+    generateMisc(str, int, agil, will, power) {
+        let miscStats = {
+            // stun 10% 7%
+            recalcitrant: ((2 * str) + (2 * int) + power) / 125,
+            resistant: ((2 * str) + (2 * int) + power) / 250,
+            stunTotal: 0,
+
+            // fish luck 3% 3%
+            epicluck: ((2 * int) + (2 * will) + power) / 400,
+            luck: ((2 * int) + (2 * will) + power) / 400,
+            luckTotal: 0,
+
+            // mana 125 100 75 50
+            bounty: ((2 * int) + (2 * will) + power) / 10,
+            gift: ((2 * int) + (2 * will) + power) * 6 / 75,
+            boost: ((2 * int) + (2 * will) + power) * 3 / 50,
+            extra: ((2 * int) + (2 * will) + power) / 25,
+            manaTotal: 0
+        };
+
+        miscStats.stunTotal = Math.round((miscStats.recalcitrant + miscStats.resistant + Number.EPSILON) * 100) / 100;
+
+        miscStats.luckTotal = Math.round((miscStats.epicluck + miscStats.luck + Number.EPSILON) * 100) / 100;
+
+        miscStats.manaTotal = Math.round((miscStats.bounty + miscStats.gift + miscStats.boost + miscStats.extra + Number.EPSILON) * 100) / 100;
+
+        return miscStats;
     }
 }
