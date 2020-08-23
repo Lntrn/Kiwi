@@ -13,14 +13,12 @@ const FS = require("fs");
 // require dotenv-flow to load environment variables
 require("dotenv-flow").config();
 // require data.js module
-const Data = require("./data.js");
+const Data = require("./utilities/data.js");
 
 // create new bot
 const bot = new Discord.Client();
-// create collection of bot commands
+// create collection of bot commands 
 bot.commands = new Discord.Collection();
-// development toggle
-let devmode = false;
 
 // fill command collection
 const commandFiles = FS.readdirSync("./commands");
@@ -47,7 +45,7 @@ bot.on("message", message => {
 	if (message.author.bot || message.attachments.size !== 0 || (!message.content.startsWith(Data.prefix) && !message.content.startsWith(Data.altPrefix)))
 		return;
 
-	if (devmode && message.author.id !== Data.ownerId) {
+	if (Data.devmode && message.author.id !== Data.ownerId) {
 		return;
 	}
 
@@ -87,7 +85,7 @@ bot.on("message", message => {
 });
 
 // login to Discord with bot token
-if (devmode)
+if (Data.devmode)
 	bot.login(process.env.KIWIDEVTOKEN);
 else
 	bot.login(process.env.KIWITOKEN);

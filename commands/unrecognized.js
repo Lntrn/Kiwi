@@ -1,7 +1,7 @@
 // require discord.js module
 const Discord = require("discord.js");
 // require data.js module
-const Data = require("../data.js");
+const Data = require("../utilities/data.js");
 // require cmds.js module
 const CMDS = require("./cmds.js");
 

@@ -4,7 +4,7 @@ const Discord = require("discord.js");
 const FS = require("fs");
 const Path = require("path");
 // require data.js module
-const Data = require("../data.js");
+const Data = require("../utilities/data.js");
 
 module.exports = {
     name: "cmds",
@@ -165,18 +165,21 @@ module.exports = {
             });
     },
     cmdLog(bot, msg, serverID, cmd) {
-        date = new Date();
+        // only log if not testing
+        if (msg.channel.id !== Data.testingId) {
+            date = new Date();
 
-        const log = new Discord.MessageEmbed()
-            .setColor("#FEE7B8")
-            .setTitle(":dividers: **━━━━━ COMMAND LOG ━━━━━** :dividers:")
-            .setDescription(`**Command Used:** ${cmd}`
-                            + `\n**User:** ${msg.author}`
-                            + `\n**Server:** ${bot.guilds.cache.get(serverID).name}`
-                            + `\n**Channel:** ${msg.channel}`
-                            + `\n**Date:** ${date.toDateString()}`)
-            .setFooter(Data.footer.footer, Data.footer.image);
+            const log = new Discord.MessageEmbed()
+                .setColor("#FEE7B8")
+                .setTitle(":dividers: **━━━━━ COMMAND LOG ━━━━━** :dividers:")
+                .setDescription(`**Command Used:** ${cmd}`
+                                + `\n**User:** ${msg.author}`
+                                + `\n**Server:** ${bot.guilds.cache.get(serverID).name}`
+                                + `\n**Channel:** ${msg.channel}`
+                                + `\n**Date:** ${date.toDateString()}`)
+                .setFooter(Data.footer.footer, Data.footer.image);
 
-        bot.channels.cache.get(Data.cmdLog).send(log);
+            bot.channels.cache.get(Data.cmdLog).send(log);
+        }
     }
 }

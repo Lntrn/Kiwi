@@ -2,6 +2,8 @@
 module.exports = {
     emojis: {
         kiwi: "<:Kiwi:745331041157513346>",
+        round: "<:rounding:747128573814505754>",
+        fake: "❗",
         str: "<:strength:744863432456667200>",
         int: "<:intellect:744863431210827856>",
         agil: "<:agility:744863430984597524>",
@@ -33,6 +35,7 @@ module.exports = {
     },
     emojiIds : {
         kiwi: "745331041157513346",
+        round: "747128573814505754",
         str: "744863432456667200",
         int: "744863431210827856",
         agil: "744863430984597524",
@@ -77,6 +80,9 @@ module.exports = {
     supportLink: "https://discord.gg/kSfpx3R",
     ownerMention: "<@193427298958049280>",
     ownerId: "193427298958049280",
+    devmode: false,
+    testingId: "727858983146356777",
+    emptyChar: " ‎",
     space(amt) {
         let whitespace = "";
 

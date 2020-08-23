@@ -1,11 +1,11 @@
 // require discord.js module
 const Discord = require("discord.js");
 // require data.js module
-const Data = require("../data.js");
+const Data = require("../utilities/data.js");
 // require cmds.js module
 const CMDS = require("./cmds.js");
 // require embeds for stat calculations
-const Stats = require("../statFunctions.js");
+const Stats = require("../utilities/statFunctions.js");
 
 module.exports = {
     name: "stats",
@@ -29,53 +29,133 @@ module.exports = {
                                 + `\n\n> **Base Stats ${Data.emojis.dmg}:** ${Data.space(8)} ${Data.emojis.dmg}, ${Data.emojis.res}, ${Data.emojis.pierce}, and ${Data.emojis.acc} stats`
                                 + `\n> **Rating Stats ${Data.emojis.crit}:** ${Data.space(3)} ${Data.emojis.crit}, ${Data.emojis.block}, ${Data.emojis.pip}, and ${Data.emojis.pcon} stats`
                                 + `\n> **Heal Stats ${Data.emojis.heart}:** ${Data.space(8)} ${Data.emojis.inc}, ${Data.emojis.out}, and ${Data.emojis.health} stats`
-                                + `\n> **Misc Stats ${Data.emojis.luck}:** ${Data.space(7)} ${Data.emojis.stunres}, ${Data.emojis.luck}, and ${Data.emojis.mana} stats`)
+                                + `\n> **Misc Stats ${Data.emojis.luck}:** ${Data.space(7)} ${Data.emojis.stunres}, ${Data.emojis.luck}, and ${Data.emojis.mana} stats`
+                                + `\n\n\n**:new: ━━ NEW UPDATE ━━ :new:**`
+                                + `\n\nPress the ${Data.emojis.round}${Data.space(1)} button to toggle *rounded* stats as they're displayed **in game**!`
+                                + `\n\nA ${Data.emojis.fake} mark means the stat is **fake**`
+                                + `\n\n> **fake stat ex.**`
+                                + `\n> shows **10%** ${Data.emojis.life}${Data.emojis.dmg} on pet, but only gives you **9%** ${Data.emojis.life}${Data.emojis.dmg} in your gear stats`)
                 .addField("\u200b", "\u200b")
                 .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
                 .setFooter(Data.footer.footer, Data.footer.image);
 
             msg.channel.send(embed).then(
                 function(sentMsg) {
+                    let page = "";
+                    let rounded = false;
+
                     // generate reactions
                     sentMsg.react(bot.emojis.cache.get(Data.emojiIds.dmg));
                     sentMsg.react(bot.emojis.cache.get(Data.emojiIds.crit));
                     sentMsg.react(bot.emojis.cache.get(Data.emojiIds.heart));
                     sentMsg.react(bot.emojis.cache.get(Data.emojiIds.luck));
+                    sentMsg.react(bot.emojis.cache.get(Data.emojiIds.round));
 
                     // reaction filters
                     const baseFilter = (reaction, user) => reaction.emoji.id === Data.emojiIds.dmg && user.id === msg.author.id;
                     const ratingFilter = (reaction, user) => reaction.emoji.id === Data.emojiIds.crit && user.id === msg.author.id;
                     const healFilter = (reaction, user) => reaction.emoji.id === Data.emojiIds.heart && user.id === msg.author.id;
                     const miscFilter = (reaction, user) => reaction.emoji.id === Data.emojiIds.luck && user.id === msg.author.id;
+                    const roundFilter = (reaction, user) => reaction.emoji.id === Data.emojiIds.round && user.id === msg.author.id;
 
                     // collectors (parse for 10 seconds)
                     const baseCollector = sentMsg.createReactionCollector(baseFilter, {time: 60000});
                     const ratingCollector = sentMsg.createReactionCollector(ratingFilter, {time: 60000});
                     const healCollector = sentMsg.createReactionCollector(healFilter, {time: 60000});
                     const miscCollector = sentMsg.createReactionCollector(miscFilter, {time: 60000});
+                    const roundCollector = sentMsg.createReactionCollector(roundFilter, {time: 60000});
 
                     baseCollector.on("collect", 
                         function() {
                             sentMsg.reactions.cache.get(Data.emojiIds.dmg).users.remove(msg.author);
-                            sentMsg.edit(Stats.base(str, int, agil, will, power));
+                            if (rounded)
+                                sentMsg.edit(Stats.base(str, int, agil, will, power, true));
+                            else
+                                sentMsg.edit(Stats.base(str, int, agil, will, power, false));
+                                
+                            page = "base";
                         }
                     );
                     ratingCollector.on("collect", 
                         function() {
                             sentMsg.reactions.cache.get(Data.emojiIds.crit).users.remove(msg.author);
-                            sentMsg.edit(Stats.rating(str, int, agil, will, power));
+                            if (rounded)
+                                sentMsg.edit(Stats.rating(str, int, agil, will, power, true));
+                            else
+                                sentMsg.edit(Stats.rating(str, int, agil, will, power, false));
+
+                            page = "rating";
                         }
                     );
                     healCollector.on("collect", 
                         function() {
                             sentMsg.reactions.cache.get(Data.emojiIds.heart).users.remove(msg.author);
-                            sentMsg.edit(Stats.healing(str, int, agil, will, power));
+                            if (rounded)
+                                sentMsg.edit(Stats.healing(str, int, agil, will, power, true));
+                            else
+                                sentMsg.edit(Stats.healing(str, int, agil, will, power, false));
+                            
+                            page = "healing";
                         }
                     );
                     miscCollector.on("collect", 
                         function() {
                             sentMsg.reactions.cache.get(Data.emojiIds.luck).users.remove(msg.author);
-                            sentMsg.edit(Stats.misc(str, int, agil, will, power));
+                            if (rounded)
+                                sentMsg.edit(Stats.misc(str, int, agil, will, power, true));
+                            else
+                                sentMsg.edit(Stats.misc(str, int, agil, will, power, false));
+                            
+                            page = "misc";
+                        }
+                    );
+                    roundCollector.on("collect", 
+                        function() {
+                            sentMsg.reactions.cache.get(Data.emojiIds.round).users.remove(msg.author);
+
+                            switch (page) {
+                                case "base":
+                                    if (rounded) {
+                                        sentMsg.edit(Stats.base(str, int, agil, will, power, false));
+                                        rounded = false;
+                                    } else {
+                                        sentMsg.edit(Stats.base(str, int, agil, will, power, true));
+                                        rounded = true;
+                                    }
+                                    break;
+                                case "rating":
+                                    if (rounded) {
+                                        sentMsg.edit(Stats.rating(str, int, agil, will, power, false));
+                                        rounded = false;
+                                    } else {
+                                        sentMsg.edit(Stats.rating(str, int, agil, will, power, true));
+                                        rounded = true;
+                                    }
+                                    break;
+                                case "healing":
+                                    if (rounded) {
+                                        sentMsg.edit(Stats.healing(str, int, agil, will, power, false));
+                                        rounded = false;
+                                    } else {
+                                        sentMsg.edit(Stats.healing(str, int, agil, will, power, true));
+                                        rounded = true;
+                                    }
+                                    break;
+                                case "misc":
+                                    if (rounded) {
+                                        sentMsg.edit(Stats.misc(str, int, agil, will, power, false));
+                                        rounded = false;
+                                    } else {
+                                        sentMsg.edit(Stats.misc(str, int, agil, will, power, true));
+                                        rounded = true;
+                                    }
+                                    break;
+                                case "":
+                                    console.log("round button pressed on main menu");
+                                    break;
+                                default:
+                                    console.log("error parsing rounding updates");
+                            }
                         }
                     );
 
