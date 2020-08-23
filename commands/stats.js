@@ -34,7 +34,9 @@ module.exports = {
                                 + `\n\nPress the ${Data.emojis.round}${Data.space(1)} button to toggle *rounded* stats as they're displayed **in game**!`
                                 + `\n\nA ${Data.emojis.fake} mark means the stat is **fake**`
                                 + `\n\n> **fake stat ex.**`
-                                + `\n> shows **10%** ${Data.emojis.life}${Data.emojis.dmg} on pet, but only gives you **9%** ${Data.emojis.life}${Data.emojis.dmg} in your gear stats`)
+                                + `\n> shows **10%** ${Data.emojis.life}${Data.emojis.dmg} on pet, but only gives you **9%** ${Data.emojis.life}${Data.emojis.dmg} in your gear stats`
+                                + `\n\n\n${Data.emojis.fake} **━━ BUG ALERT ━━** ${Data.emojis.fake}`
+                                + `\n\nThere is currently a known bug with ${Data.emojis.kiwi} Kiwis's data display. It will be fixed soon, hang tight!`)
                 .addField("\u200b", "\u200b")
                 .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
                 .setFooter(Data.footer.footer, Data.footer.image);

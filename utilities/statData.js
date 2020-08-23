@@ -160,7 +160,7 @@ module.exports = {
         module.exports.healthStats.generated = true;
     },
     generateMisc(str, int, agil, will, power) {
-        // stun 10 7
+        // stun 10% 7%
         let recalcitrant, resistant;
         module.exports.miscStats.recalcitrant = recalcitrant = ((2 * str) + (2 * int) + power) / 125;
         module.exports.miscStats.resistant = resistant = ((2 * str) + (2 * int) + power) / 250;
