@@ -275,7 +275,7 @@ module.exports = {
     
         // otherwise, if the value is fake
         if (module.exports.fake(val))
-            return `${Data.emojis.fake} ${Math.round(val)}`;
+            return `${Data.emojis.fake}${Math.round(val)}`;
         else
             return Math.round(val);
     },
