@@ -26,6 +26,7 @@ module.exports = {
                 .setDescription(`Your Stats:`
                                 + `\n${Data.emojis.str}: **${str}**/255 ${Data.space(2)}${Data.emojis.int}: **${int}**/250 ${Data.space(2)}${Data.emojis.agil}: **${agil}**/260 ${Data.space(2)}${Data.emojis.will}: **${will}**/260 ${Data.space(2)}${Data.emojis.power}: **${power}**/250`
                                 + `\n\nUse the reactions below to change pages:`
+                                + `\n***only** responds to command issuer*`
                                 + `\n\n> **Base Stats ${Data.emojis.dmg}:** ${Data.space(8)} ${Data.emojis.dmg}, ${Data.emojis.res}, ${Data.emojis.pierce}, and ${Data.emojis.acc} stats`
                                 + `\n> **Rating Stats ${Data.emojis.crit}:** ${Data.space(3)} ${Data.emojis.crit}, ${Data.emojis.block}, ${Data.emojis.pip}, and ${Data.emojis.pcon} stats`
                                 + `\n> **Heal Stats ${Data.emojis.heart}:** ${Data.space(8)} ${Data.emojis.inc}, ${Data.emojis.out}, and ${Data.emojis.health} stats`
@@ -68,6 +69,8 @@ module.exports = {
                     baseCollector.on("collect", 
                         function() {
                             sentMsg.reactions.cache.get(Data.emojiIds.dmg).users.remove(msg.author);
+                            module.exports.resetTimer(baseCollector, ratingCollector, healCollector, miscCollector, roundCollector);
+
                             if (rounded)
                                 sentMsg.edit(Stats.base(str, int, agil, will, power, true));
                             else
@@ -79,6 +82,8 @@ module.exports = {
                     ratingCollector.on("collect", 
                         function() {
                             sentMsg.reactions.cache.get(Data.emojiIds.crit).users.remove(msg.author);
+                            module.exports.resetTimer(baseCollector, ratingCollector, healCollector, miscCollector, roundCollector);
+
                             if (rounded)
                                 sentMsg.edit(Stats.rating(str, int, agil, will, power, true));
                             else
@@ -90,6 +95,8 @@ module.exports = {
                     healCollector.on("collect", 
                         function() {
                             sentMsg.reactions.cache.get(Data.emojiIds.heart).users.remove(msg.author);
+                            module.exports.resetTimer(baseCollector, ratingCollector, healCollector, miscCollector, roundCollector);
+
                             if (rounded)
                                 sentMsg.edit(Stats.healing(str, int, agil, will, power, true));
                             else
@@ -101,6 +108,8 @@ module.exports = {
                     miscCollector.on("collect", 
                         function() {
                             sentMsg.reactions.cache.get(Data.emojiIds.luck).users.remove(msg.author);
+                            module.exports.resetTimer(baseCollector, ratingCollector, healCollector, miscCollector, roundCollector);
+
                             if (rounded)
                                 sentMsg.edit(Stats.misc(str, int, agil, will, power, true));
                             else
@@ -112,6 +121,7 @@ module.exports = {
                     roundCollector.on("collect", 
                         function() {
                             sentMsg.reactions.cache.get(Data.emojiIds.round).users.remove(msg.author);
+                            module.exports.resetTimer(baseCollector, ratingCollector, healCollector, miscCollector, roundCollector);
 
                             switch (page) {
                                 case "base":
@@ -167,6 +177,13 @@ module.exports = {
         // CMDS.updateData(bot, msg.author, msg.guild.id, "stats");
         CMDS.cmdLog(bot, msg, msg.guild.id, "stats");
     },
+    resetTimer(base, rating, health, misc, round) {
+        base.resetTimer({time: 60000});
+        rating.resetTimer({time: 60000});
+        health.resetTimer({time: 60000});
+        misc.resetTimer({time: 60000});
+        round.resetTimer({time: 60000});
+    },  
     dataCheck(msg, args) {
         // if more or less than 5 arguments are provided
         if (args.length !== 5) {
