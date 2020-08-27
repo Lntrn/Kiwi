@@ -79,6 +79,9 @@ bot.on("message", message => {
 		case "suggestion":
 			bot.commands.get("suggestion").execute(bot, message, args);
 			break;
+		case "ick":
+			// do nothing (ignores MEE6 kick command)
+			break;
 		default:
 			bot.commands.get("unrecognized").execute(bot, message, command);
 	}
