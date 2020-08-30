@@ -11,7 +11,7 @@ module.exports = {
     execute(bot, msg) {
         // allow usage only if user is the owner
         if (msg.author.id === Data.ownerId) {
-            let servers = bot.guilds.cache.array();
+            let servers = bot.guilds.cache.array().sort();
             let serverPrintout = "";
 
             servers.forEach(
