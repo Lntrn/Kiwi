@@ -77,7 +77,7 @@ module.exports = {
     cmdUsageId: "745691111523352653",
     cmdLog: "746087206514327592",
     inviteLink: "https://discord.com/api/oauth2/authorize?client_id=743944201682681937&permissions=8&scope=bot",
-    supportLink: "https://discord.gg/kSfpx3R",
+    supportLink: "https://discord.gg/sFMwKCy",
     ownerMention: "<@193427298958049280>",
     ownerId: "193427298958049280",
     devmode: false,
