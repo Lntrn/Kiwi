@@ -31,14 +31,13 @@ module.exports = {
                                 + `\n> **Rating Stats ${Data.emojis.crit}:** ${Data.space(3)} ${Data.emojis.crit}, ${Data.emojis.block}, ${Data.emojis.pip}, and ${Data.emojis.pcon} stats`
                                 + `\n> **Heal Stats ${Data.emojis.heart}:** ${Data.space(8)} ${Data.emojis.inc}, ${Data.emojis.out}, and ${Data.emojis.health} stats`
                                 + `\n> **Misc Stats ${Data.emojis.luck}:** ${Data.space(7)} ${Data.emojis.stunres}, ${Data.emojis.luck}, and ${Data.emojis.mana} stats`
-                                + `\n\n\n**:new: ━━ NEW UPDATE ━━ :new:**`
-                                + `\n\nPress the ${Data.emojis.round}${Data.space(1)} button to toggle *rounded* stats as they're displayed **in game**!`
-                                + `\n\nA ${Data.emojis.fake} mark means the stat is **fake**`
-                                + `\n\n> **fake stat ex.**`
-                                + `\n> shows **10%** ${Data.emojis.life}${Data.emojis.dmg} on pet, but only gives you **9%** ${Data.emojis.life}${Data.emojis.dmg} in your gear stats`)
+                                + `\n\n> **Round Stats ${Data.emojis.round}:** ${Data.space(1)} display stats like **in-game** and report **fake** (${Data.emojis.fake}) stats`)
                 .addField("\u200b", "\u200b")
                 .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
                 .setFooter(Data.footer.footer, Data.footer.image);
+
+            if (Data.update)
+                embed.description += module.exports.update();
 
             msg.channel.send(embed).then(
                 function(sentMsg) {
@@ -244,5 +243,12 @@ module.exports = {
         }
 
         return true;
+    },
+    update() {
+        return `\n\n\n**:new: ━━ NEW UPDATE ━━ :new:**`
+            + `\n\nPress the ${Data.emojis.round}${Data.space(1)} button to toggle *rounded* stats as they're displayed **in game**!`
+            + `\n\nA ${Data.emojis.fake} mark means the stat is **fake**`
+            + `\n\n> **fake stat ex.**`
+            + `\n> shows **10%** ${Data.emojis.life}${Data.emojis.dmg} on pet, but only gives you **9%** ${Data.emojis.life}${Data.emojis.dmg} in your gear stats`;
     }
 }

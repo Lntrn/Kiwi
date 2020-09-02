@@ -80,7 +80,8 @@ module.exports = {
     supportLink: "https://discord.gg/sFMwKCy",
     ownerMention: "<@193427298958049280>",
     ownerId: "193427298958049280",
-    devmode: false,
+    devmode: true,
+    update: false,
     testingId: "727858983146356777",
     emptyChar: " ‎",
     space(amt) {
