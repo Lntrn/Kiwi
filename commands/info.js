@@ -32,7 +32,7 @@ module.exports = {
                 .setColor("#D5AB88")
                 .setTitle(":notebook_with_decorative_cover: **━━━━━ BOT DATA ━━━━━** :notebook_with_decorative_cover:")
                 .setDescription(`Logged in as **${bot.user.tag}**!`
-                            + `\n\nUsed by: **${memberCount}** members`
+                            + `\n\nHelping **${memberCount}** members`
                             + `\nIn **${bot.guilds.cache.size}** server(s):${serverPrintout}`)
                 .addField("\u200b", "\u200b")
                 .setFooter(Data.footer.text, Data.footer.image);
