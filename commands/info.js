@@ -13,13 +13,15 @@ module.exports = {
         if (msg.author.id === Data.ownerId) {
             let servers = bot.guilds.cache.array().sort();
             let serverPrintout = "";
+            let memberCount = 0;
 
             servers.forEach(
                 function(server) {
                     joinDate = server.joinedAt;
                     date = new Date();
 
-                    serverPrintout += `\n:white_small_square: **${server.name}** [${joinDate.toDateString()}]`
+                    serverPrintout += `\n:white_small_square: **${server.name}** [${joinDate.toDateString()}]`;
+                    memberCount += server.memberCount;
 
                     if (joinDate.toDateString() === date.toDateString())
                         serverPrintout += "🚩";
@@ -30,7 +32,8 @@ module.exports = {
                 .setColor("#D5AB88")
                 .setTitle(":notebook_with_decorative_cover: **━━━━━ BOT DATA ━━━━━** :notebook_with_decorative_cover:")
                 .setDescription(`Logged in as **${bot.user.tag}**!`
-                            + `\nUsed in **${bot.guilds.cache.size}** server(s):${serverPrintout}`)
+                            + `\n\nUsed by: **${memberCount}** members`
+                            + `\nIn **${bot.guilds.cache.size}** server(s):${serverPrintout}`)
                 .addField("\u200b", "\u200b")
                 .setFooter(Data.footer.text, Data.footer.image);
 

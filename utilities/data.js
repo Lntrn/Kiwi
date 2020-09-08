@@ -1,6 +1,7 @@
 // file containing ubiquitous data for Kiwi
 module.exports = {
     emojis: {
+        wizpetmasters: "<:wizpetmasters:752955530061938808>",
         kiwi: "<:Kiwi:745331041157513346>",
         round: "<:rounding:747128573814505754>",
         fake: "❗",
@@ -34,6 +35,7 @@ module.exports = {
         death: "<:death:744971321229836318>"
     },
     emojiIds : {
+        wizpetmasters: "752955530061938808",
         kiwi: "745331041157513346",
         round: "747128573814505754",
         str: "744863432456667200",
@@ -69,6 +71,10 @@ module.exports = {
         text: "© Sap#5703",
         image: "https://i.imgur.com/wbFToRX.png"
     },
+    server: {
+        text: "Pet Masters Server",
+        link: "https://discord.gg/xY9VkHq"
+    },
     prefix: "!k",
     altPrefix: "k!", // both prefixes must be the same length
     bugReportId: "744862627188179005",
@@ -80,7 +86,7 @@ module.exports = {
     supportLink: "https://discord.gg/sFMwKCy",
     ownerMention: "<@193427298958049280>",
     ownerId: "193427298958049280",
-    devmode: false,
+    devmode: true,
     update: false,
     testingId: "727858983146356777",
     emptyChar: " ‎",
