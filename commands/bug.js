@@ -32,7 +32,7 @@ module.exports = {
                             + `\n\n\n:white_check_mark: **Sucessfully Submitted to [Support Server](${Data.supportLink})!**`)
             .addField("\u200b", "\u200b")
             .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
-            .setFooter(Data.footer.footer, Data.footer.image);
+            .setFooter(Data.footer.text, Data.footer.image);
 
         msg.channel.send(response);
 

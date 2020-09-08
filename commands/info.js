@@ -32,7 +32,7 @@ module.exports = {
                 .setDescription(`Logged in as **${bot.user.tag}**!`
                             + `\nUsed in **${bot.guilds.cache.size}** server(s):${serverPrintout}`)
                 .addField("\u200b", "\u200b")
-                .setFooter(Data.footer.footer, Data.footer.image);
+                .setFooter(Data.footer.text, Data.footer.image);
 
             msg.channel.send(embed);
 
@@ -42,7 +42,7 @@ module.exports = {
             .setTitle(":exclamation: **━━━━━ ERROR ━━━━━** :exclamation:")
             .setDescription(`You must be the bot owner, ${Data.ownerMention}, to use this command!`)
             .addField("\u200b", "\u200b")
-            .setFooter(Data.footer.footer, Data.footer.image);
+            .setFooter(Data.footer.text, Data.footer.image);
 
             msg.channel.send(embed);
         }

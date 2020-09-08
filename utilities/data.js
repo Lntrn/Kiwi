@@ -66,7 +66,7 @@ module.exports = {
         death: "744971321229836318"
     },
     footer: {
-        footer: "© Sap#5703",
+        text: "© Sap#5703",
         image: "https://i.imgur.com/wbFToRX.png"
     },
     prefix: "!k",
@@ -80,7 +80,7 @@ module.exports = {
     supportLink: "https://discord.gg/sFMwKCy",
     ownerMention: "<@193427298958049280>",
     ownerId: "193427298958049280",
-    devmode: false,
+    devmode: true,
     update: false,
     testingId: "727858983146356777",
     emptyChar: " ‎",

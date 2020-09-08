@@ -29,7 +29,7 @@ module.exports = {
                             + `\n*get an invite for Kiwi!*`)
             .addField("\u200b", "\u200b")
             .addField("Still need help?", `Head on over to our [Support Server](${Data.supportLink})!\n\n[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
-            .setFooter(Data.footer.footer, Data.footer.image);
+            .setFooter(Data.footer.text, Data.footer.image);
 
         msg.channel.send(embed);
 

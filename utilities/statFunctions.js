@@ -80,7 +80,7 @@ module.exports = {
                         + `\nTotal: ${pierceTotal}% ${Data.emojis.pierce}`, true)
             .addField("\u200b", "\u200b")
             .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
-            .setFooter(Data.footer.footer, Data.footer.image);
+            .setFooter(Data.footer.text, Data.footer.image);
 
         return embed;
     },
@@ -147,7 +147,7 @@ module.exports = {
                         + `\nTotal: ${pipTotal}% ${Data.emojis.pip}`, true)
             .addField("\u200b", "\u200b")
             .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
-            .setFooter(Data.footer.footer, Data.footer.image);
+            .setFooter(Data.footer.text, Data.footer.image);
 
         return embed;
     },
@@ -201,7 +201,7 @@ module.exports = {
                         + `\nTotal: +${healthTotal} ${Data.emojis.health}`, true)
             .addField("\u200b", "\u200b")
             .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
-            .setFooter(Data.footer.footer, Data.footer.image);
+            .setFooter(Data.footer.text, Data.footer.image);
 
         return embed;
     },
@@ -255,7 +255,7 @@ module.exports = {
                         + `\nTotal: +${manaTotal} ${Data.emojis.mana}`, true)
             .addField("\u200b", "\u200b")
             .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
-            .setFooter(Data.footer.footer, Data.footer.image);
+            .setFooter(Data.footer.text, Data.footer.image);
 
         return embed;
     },

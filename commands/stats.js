@@ -34,7 +34,7 @@ module.exports = {
                                 + `\n\n> **Round Stats ${Data.emojis.round}:** ${Data.space(1)} display stats like **in-game** and catch **fake** (${Data.emojis.fake}) stats`)
                 .addField("\u200b", "\u200b")
                 .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
-                .setFooter(Data.footer.footer, Data.footer.image);
+                .setFooter(Data.footer.text, Data.footer.image);
 
             if (Data.update)
                 embed.description += module.exports.update();
@@ -195,7 +195,7 @@ module.exports = {
                                 \n> **ex.**\n> ${Data.prefix}stats 255 250 260 260 250`)
                 .addField("\u200b", "\u200b")
                 .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
-                .setFooter(Data.footer.footer, Data.footer.image);
+                .setFooter(Data.footer.text, Data.footer.image);
 
             msg.channel.send(amountEmbed);
             return false;
@@ -219,7 +219,7 @@ module.exports = {
                                     \n> **ex.**\n> ${Data.prefix}stats 255 250 260 260 250`)
                     .addField("\u200b", "\u200b")
                     .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
-                    .setFooter(Data.footer.footer, Data.footer.image);
+                    .setFooter(Data.footer.text, Data.footer.image);
 
                 msg.channel.send(typeEmbed);
                 return false;
@@ -235,7 +235,7 @@ module.exports = {
                                     \n> **ex.**\n> ${Data.prefix}stats 255 250 260 260 250`)
                     .addField("\u200b", "\u200b")
                     .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
-                    .setFooter(Data.footer.footer, Data.footer.image);
+                    .setFooter(Data.footer.text, Data.footer.image);
 
                 msg.channel.send(boundsEmbed);
                 return false;

@@ -16,7 +16,7 @@ module.exports = {
                             + `\n\nUse the **${Data.prefix}help** command for a list of Kiwi's commands`)
             .addField("\u200b", "\u200b")
             .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
-            .setFooter(Data.footer.footer, Data.footer.image);
+            .setFooter(Data.footer.text, Data.footer.image);
 
             msg.channel.send(embed);
 

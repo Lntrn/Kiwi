@@ -57,7 +57,7 @@ module.exports = {
                             + `\nstats: **${stats}** ${Data.space(4)} help: **${help}** ${Data.space(4)} unrecognized: **${unrecognized}**`
                             + `\n${dataPrintout}`)
                 .addField("\u200b", "\u200b")
-                .setFooter(Data.footer.footer, Data.footer.image);
+                .setFooter(Data.footer.text, Data.footer.image);
 
             msg.channel.send(embed).then(
                 function(sentMsg) {
@@ -76,7 +76,7 @@ module.exports = {
                                     .setColor("#DD2E44")
                                     .setTitle(":exclamation: **━━━━━ CMDS COMMAMND ERROR ━━━━━** :exclamation:")
                                     .setDescription(`**Error:**\n${err}`)
-                                    .setFooter(Data.footer.footer, Data.footer.image);
+                                    .setFooter(Data.footer.text, Data.footer.image);
             
                                 bot.channels.cache.get(Data.cmdUsageId).send(error);
             
@@ -85,7 +85,7 @@ module.exports = {
                                     .setColor("#77B255")
                                     .setTitle(":white_check_mark: **━━━━━ CMDS COMMAND SUCCESS ━━━━━** :white_check_mark:")
                                     .setDescription(`File written successfully!\n\nRemoved "new" status of **${servers[server][name]}**`)
-                                    .setFooter(Data.footer.footer, Data.footer.image);
+                                    .setFooter(Data.footer.text, Data.footer.image);
             
                                 bot.channels.cache.get(Data.cmdUsageId).send(success);
                             }
@@ -108,7 +108,7 @@ module.exports = {
             .setTitle(":exclamation: **━━━━━ ERROR ━━━━━** :exclamation:")
             .setDescription(`You must be the bot owner, ${Data.ownerMention}, to use this command!`)
             .addField("\u200b", "\u200b")
-            .setFooter(Data.footer.footer, Data.footer.image);
+            .setFooter(Data.footer.text, Data.footer.image);
 
             msg.channel.send(embed);
         }
@@ -146,7 +146,7 @@ module.exports = {
                                         + `\n\n**Command Used:** ${cmd}`
                                         + `\n**User:** ${author}`
                                         + `\n**Server:** ${bot.guilds.cache.get(serverID).name}`)
-                        .setFooter(Data.footer.footer, Data.footer.image);
+                        .setFooter(Data.footer.text, Data.footer.image);
 
                     bot.channels.cache.get(Data.cmdLog).send(error);
 
@@ -158,7 +158,7 @@ module.exports = {
                                         + `\n\n**Command Used:** ${cmd}`
                                         + `\n**User:** ${author}`
                                         + `\n**Server:** ${bot.guilds.cache.get(serverID).name}`)
-                        .setFooter(Data.footer.footer, Data.footer.image);
+                        .setFooter(Data.footer.text, Data.footer.image);
 
                     bot.channels.cache.get(Data.cmdLog).send(success);
                 }
@@ -177,7 +177,7 @@ module.exports = {
                                 + `\n**Server:** ${bot.guilds.cache.get(serverID).name}`
                                 + `\n**Channel:** ${msg.channel}`
                                 + `\n**Date:** ${date.toDateString()}`)
-                .setFooter(Data.footer.footer, Data.footer.image);
+                .setFooter(Data.footer.text, Data.footer.image);
 
             bot.channels.cache.get(Data.cmdLog).send(log);
         }
