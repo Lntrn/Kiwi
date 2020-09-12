@@ -67,7 +67,7 @@ module.exports = {
             .setTitle(":scroll: **━━━━━ KIWI HELP ━━━━━** :scroll:")
             .setDescription(`*Prefix is **${Data.prefix}** or **${Data.altPrefix}***`
                             + `\n\n:small_blue_diamond: **\`${Data.prefix}stats\`**`
-                            + `\n*calculates pet talents stats*`
+                            + `\n*calculates pet talent stats*`
                             + `\n\n> ${Data.prefix}stats ${Data.emojis.str} ${Data.emojis.int} ${Data.emojis.agil} ${Data.emojis.will} ${Data.emojis.power}`
                             + `\n> **ex.**\n> ${Data.prefix}stats 248 308 260 243 227`
                             + `\n\n:small_blue_diamond: **\`${Data.prefix}invite\`**`

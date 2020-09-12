@@ -16,7 +16,7 @@ module.exports = {
             .setColor("#DD2E44")
             .setTitle(":exclamation: **━━━━━ ERROR ━━━━━** :exclamation:")
             .setDescription(`Unrecognized command: **${cmd}**`
-                            + `\n\nUse the **${Data.prefix}help** command for a list of Kiwi's commands`)
+                            + `\n\nUse the **\`${Data.prefix}help\`** command for a list of Kiwi's commands`)
             .addField("\u200b", "\u200b")
             .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
             .setFooter(Data.footer.text, Data.footer.image);

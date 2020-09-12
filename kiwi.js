@@ -58,6 +58,9 @@ bot.on("message", message => {
 
 	// checking command request
 	switch(command) {
+		case "ping":
+			bot.commands.get("ping").execute(bot, message);
+			break;
 		case "info":
 			bot.commands.get("info").execute(bot, message);
 			break;

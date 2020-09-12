@@ -2,8 +2,6 @@
 const Discord = require("discord.js");
 // require data.js module
 const Data = require("../utilities/data.js");
-// require cmds.js module
-const CMDS = require("./cmds.js");
 
 module.exports = {
     name: "info",
