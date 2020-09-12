@@ -65,7 +65,7 @@ module.exports = {
         const embed = new Discord.MessageEmbed()
             .setColor("#FFD983")
             .setTitle(":scroll: **━━━━━ KIWI HELP ━━━━━** :scroll:")
-            .setDescription(`*Prefix is **${Data.prefix}** or **${Data.altPrefix}**:*`
+            .setDescription(`*Prefix is **${Data.prefix}** or **${Data.altPrefix}***`
                             + `\n\n:small_blue_diamond: **\`${Data.prefix}stats\`**`
                             + `\n*calculates pet talents stats*`
                             + `\n\n> ${Data.prefix}stats ${Data.emojis.str} ${Data.emojis.int} ${Data.emojis.agil} ${Data.emojis.will} ${Data.emojis.power}`
@@ -83,7 +83,7 @@ module.exports = {
         const embed = new Discord.MessageEmbed()
             .setColor("#FFD983")
             .setTitle(":scroll: **━━━━━ KIWI HELP ━━━━━** :scroll:")
-            .setDescription(`*Prefix is **${Data.prefix}** or **${Data.altPrefix}** :*`
+            .setDescription(`*Prefix is **${Data.prefix}** or **${Data.altPrefix}***`
                             + `\n\n:small_blue_diamond: **\`${Data.prefix}bug\`**`
                             + `\n*report a bug with Kiwi*`
                             + `\n\n> **ex.**\n> ${Data.prefix}bug stats aren't working 😑`
