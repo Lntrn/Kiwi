@@ -76,8 +76,8 @@ bot.on("message", message => {
 		case "bug":
 			bot.commands.get("bug").execute(bot, message, args);
 			break;
-		case "suggestion":
-			bot.commands.get("suggestion").execute(bot, message, args);
+		case "suggest":
+			bot.commands.get("suggest").execute(bot, message, args);
 			break;
 		case "ick":
 			// do nothing (ignores MEE6 kick command)

@@ -9,6 +9,9 @@ module.exports = {
     name: "invite",
     description: "submit a suggestion for Kiwi",
     execute(bot, msg) {
+        // react to command
+        msg.react(bot.emojis.cache.get(Data.emojiIds.kiwi));
+        
         const invite = new Discord.MessageEmbed()
             .setColor("#CCD6DD")
             .setTitle(`:envelope:${Data.space(1)} **━━━━━━ INVITE KIWI ━━━━━━** ${Data.space(1)}:envelope:`)

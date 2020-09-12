@@ -11,6 +11,9 @@ module.exports = {
     execute(bot, msg, args) {
         let date = new Date();
 
+        // react to command
+        msg.react(bot.emojis.cache.get(Data.emojiIds.kiwi));
+
         const report = new Discord.MessageEmbed()
             .setColor("#8899A6")
             .setTitle(`:wrench:${Data.space(1)} **━━━━━━━━ BUG REPORT ━━━━━━━━** ${Data.space(1)}:wrench:`)

@@ -9,6 +9,9 @@ module.exports = {
     name: "unrecognized",
     description: "default response if an unrecognized command is entered",
     execute(bot, msg, cmd) {
+        // react to command
+        msg.react(bot.emojis.cache.get(Data.emojiIds.kiwi));
+        
         const embed = new Discord.MessageEmbed()
             .setColor("#DD2E44")
             .setTitle(":exclamation: **━━━━━ ERROR ━━━━━** :exclamation:")

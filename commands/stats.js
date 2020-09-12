@@ -11,6 +11,9 @@ module.exports = {
     name: "stats",
     description: "calculates pet talents based on provided stats",
     execute(bot, msg, args) {
+        // react to command
+        msg.react(bot.emojis.cache.get(Data.emojiIds.kiwi));
+        
         // command check
         if (module.exports.dataCheck(msg, args)) {
             const str = parseInt(args[0]);
@@ -58,7 +61,7 @@ module.exports = {
                     const miscFilter = (reaction, user) => reaction.emoji.id === Data.emojiIds.luck && user.id === msg.author.id;
                     const roundFilter = (reaction, user) => reaction.emoji.id === Data.emojiIds.round && user.id === msg.author.id;
 
-                    // collectors (parse for 10 seconds)
+                    // collectors (parse for 60 seconds)
                     const baseCollector = sentMsg.createReactionCollector(baseFilter, {time: 60000});
                     const ratingCollector = sentMsg.createReactionCollector(ratingFilter, {time: 60000});
                     const healCollector = sentMsg.createReactionCollector(healFilter, {time: 60000});
@@ -169,7 +172,7 @@ module.exports = {
                     );
 
                 }
-            ).catch(err => console.log("Error adding reactions!"));
+            ).catch(err => console.log("Error adding reactions!" + err));
         }
 
         // update count of stats cmd uses

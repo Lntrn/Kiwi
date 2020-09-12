@@ -6,10 +6,13 @@ const Data = require("../utilities/data.js");
 const CMDS = require("./cmds.js");
 
 module.exports = {
-    name: "suggestion",
+    name: "suggest",
     description: "submit a suggestion for Kiwi",
     execute(bot, msg, args) {
         let date = new Date();
+
+        // react to command
+        msg.react(bot.emojis.cache.get(Data.emojiIds.kiwi));
 
         const suggestion = new Discord.MessageEmbed()
             .setColor("#FFD983")
