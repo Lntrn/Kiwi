@@ -1,6 +1,7 @@
 // file containing ubiquitous data for Kiwi
 module.exports = {
     emojis: {
+        spiralscholars: "<:spiralscholars:754405854278844498>",
         wizpetmasters: "<:wizpetmasters:752955530061938808>",
         kiwi: "<:Kiwi:745331041157513346>",
         round: "<:rounding:747128573814505754>",
@@ -34,7 +35,8 @@ module.exports = {
         myth: "<:myth:744971321586221227>",
         death: "<:death:744971321229836318>"
     },
-    emojiIds : {
+    emojiIds: {
+        spiralscholars: "754405854278844498",
         wizpetmasters: "752955530061938808",
         kiwi: "745331041157513346",
         round: "747128573814505754",
@@ -72,7 +74,7 @@ module.exports = {
         image: "https://i.imgur.com/wbFToRX.png"
     },
     server: {
-        text: "Pet Masters Server",
+        text: "Spiral Scholars",
         link: "https://discord.gg/xY9VkHq"
     },
     prefix: "!k",
