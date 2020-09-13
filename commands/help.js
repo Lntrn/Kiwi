@@ -75,8 +75,8 @@ module.exports = {
             .addField("\u200b", "page **1** of **2**")
             .addField("\u200b", "\u200b")
             .addField("Still need help?", `Head to our [Support Server](${Data.supportLink})!`
-                                        + `\n\n[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`
-                                        + `\n[**Spiral Scholars**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
+                                        + `\n\n[**${Data.bot.text}**](${Data.bot.invite}) ${Data.emojis.kiwi}`
+                                        + `\n[**${Data.server.text}**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
             .setFooter(Data.footer.text, Data.footer.image);
 
         return embed;
@@ -95,8 +95,8 @@ module.exports = {
             .addField("\u200b", "page **2** of **2**")
             .addField("\u200b", "\u200b")
             .addField("Still need help?", `Head to our [Support Server](${Data.supportLink})!`
-                                        + `\n\n[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`
-                                        + `\n[**Spiral Scholars**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
+                                        + `\n\n[**${Data.bot.text}**](${Data.bot.invite}) ${Data.emojis.kiwi}`
+                                        + `\n[**${Data.server.text}**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
             .setFooter(Data.footer.text, Data.footer.image);
 
         return embed;

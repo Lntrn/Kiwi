@@ -25,19 +25,23 @@ module.exports = {
 
             const embed = new Discord.MessageEmbed()
                 .setColor("#C4DE61")
-                .setTitle(`${Data.emojis.kiwi}${Data.space(1)} **━━━━━━━━ KIWI PET STATS ━━━━━━━━** ${Data.space(1)}${Data.emojis.kiwi}`)
+                .setTitle(`${Data.emojis.kiwi}${Data.space(1)} **━━━━━━ KIWI PET STATS ━━━━━━** ${Data.space(1)}${Data.emojis.kiwi}`)
                 .setDescription(`Your Stats:`
                                 + `\n${Data.emojis.str}: **${str}**/255 ${Data.space(2)}${Data.emojis.int}: **${int}**/250 ${Data.space(2)}${Data.emojis.agil}: **${agil}**/260 ${Data.space(2)}${Data.emojis.will}: **${will}**/260 ${Data.space(2)}${Data.emojis.power}: **${power}**/250`
-                                + `\n\nUse the reactions below to change pages:`
-                                + `\n***only** responds to command issuer*`
-                                + `\n\n> **Base Stats ${Data.emojis.dmg}:** ${Data.space(8)} ${Data.emojis.dmg}, ${Data.emojis.res}, ${Data.emojis.pierce}, and ${Data.emojis.acc} stats`
-                                + `\n> **Rating Stats ${Data.emojis.crit}:** ${Data.space(3)} ${Data.emojis.crit}, ${Data.emojis.block}, ${Data.emojis.pip}, and ${Data.emojis.pcon} stats`
-                                + `\n> **Heal Stats ${Data.emojis.heart}:** ${Data.space(8)} ${Data.emojis.inc}, ${Data.emojis.out}, and ${Data.emojis.health} stats`
-                                + `\n> **Misc Stats ${Data.emojis.luck}:** ${Data.space(7)} ${Data.emojis.stunres}, ${Data.emojis.luck}, and ${Data.emojis.mana} stats`
-                                + `\n\n> **Round Stats ${Data.emojis.round}:** ${Data.space(1)} display stats like **in-game** and catch **fake** (${Data.emojis.fake}) stats`)
+                                + `\n\nUse the reactions below to change pages:`)
+                .addField("\u200b", `${Data.emojis.dmg} **━ Base Stats ━** ${Data.emojis.dmg} ${Data.space(10)} ${Data.emojis.crit} **━ Rating Stats ━** ${Data.emojis.crit}`
+                                    + `\n${Data.space(10)}${Data.emojis.dmg}, ${Data.emojis.res}, ${Data.emojis.pierce}, ${Data.emojis.acc}`
+                                    + `${Data.space(34)}`
+                                    + `${Data.emojis.crit}, ${Data.emojis.block}, ${Data.emojis.pip}, ${Data.emojis.pcon}`)
+                .addField("\u200b", `${Data.emojis.heart} **━ Heal Stats ━** ${Data.emojis.heart} ${Data.space(11)} ${Data.emojis.luck} **━ Misc Stats ━** ${Data.emojis.luck}`
+                                    + `\n${Data.space(16)}${Data.emojis.inc}, ${Data.emojis.out}, ${Data.emojis.health}`
+                                    + `${Data.space(43)}`
+                                    + `${Data.emojis.stunres}, ${Data.emojis.luck}, ${Data.emojis.mana}`)
+                .addField("\u200b", `${Data.emojis.round} **━ Round Stats ━** ${Data.emojis.round}`
+                                    + `\ndisplay stats like **in-game**\nand catch **fake** (${Data.emojis.fake}) stats`)
                 .addField("\u200b", "\u200b")
-                .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`
-                                                + `\n[**Spiral Scholars**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
+                .addField("Like what you see?", `[**${Data.bot.text}**](${Data.bot.invite}) ${Data.emojis.kiwi}`
+                                                + `\n[**${Data.server.text}**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
                 .setFooter(Data.footer.text, Data.footer.image);
 
             if (Data.update)
@@ -198,8 +202,8 @@ module.exports = {
                                 \n${Data.prefix}stats ${Data.emojis.str} ${Data.emojis.int} ${Data.emojis.agil} ${Data.emojis.will} ${Data.emojis.power}
                                 \n> **ex.**\n> ${Data.prefix}stats 248 308 260 243 227`)
                 .addField("\u200b", "\u200b")
-                .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`
-                                            + `\n[**Spiral Scholars**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
+                .addField("Like what you see?", `[**${Data.bot.text}**](${Data.bot.invite}) ${Data.emojis.kiwi}`
+                                                + `\n[**${Data.server.text}**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
                 .setFooter(Data.footer.text, Data.footer.image);
 
             msg.channel.send(amountEmbed);
@@ -223,8 +227,8 @@ module.exports = {
                                     \n${Data.prefix}stats ${Data.emojis.str} ${Data.emojis.int} ${Data.emojis.agil} ${Data.emojis.will} ${Data.emojis.power}
                                     \n> **ex.**\n> ${Data.prefix}stats 248 308 260 243 227`)
                     .addField("\u200b", "\u200b")
-                    .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`
-                                                    + `\n[**Spiral Scholars**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
+                    .addField("Like what you see?", `[**${Data.bot.text}**](${Data.bot.invite}) ${Data.emojis.kiwi}`
+                                                + `\n[**${Data.server.text}**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
                     .setFooter(Data.footer.text, Data.footer.image);
 
                 msg.channel.send(typeEmbed);
@@ -240,8 +244,8 @@ module.exports = {
                                     \n${Data.prefix}stats ${Data.emojis.str} ${Data.emojis.int} ${Data.emojis.agil} ${Data.emojis.will} ${Data.emojis.power}
                                     \n> **ex.**\n> ${Data.prefix}stats 248 308 260 243 227`)
                     .addField("\u200b", "\u200b")
-                    .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`
-                                                    + `\n[**Spiral Scholars**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
+                    .addField("Like what you see?", `[**${Data.bot.text}**](${Data.bot.invite}) ${Data.emojis.kiwi}`
+                                                + `\n[**${Data.server.text}**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
                     .setFooter(Data.footer.text, Data.footer.image);
 
                 msg.channel.send(boundsEmbed);

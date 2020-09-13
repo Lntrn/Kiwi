@@ -79,8 +79,8 @@ module.exports = {
                         + `\n**Armor Piercer:** ${Data.space(1)} ${piercer}% ${Data.emojis.pierce}`
                         + `\nTotal: ${pierceTotal}% ${Data.emojis.pierce}`, true)
             .addField("\u200b", "\u200b")
-            .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`
-                                            + `\n[**Spiral Scholars**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
+            .addField("Like what you see?", `[**${Data.bot.text}**](${Data.bot.invite}) ${Data.emojis.kiwi}`
+                                            + `\n[**${Data.server.text}**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
             .setFooter(Data.footer.text, Data.footer.image);
 
         return embed;
@@ -147,8 +147,8 @@ module.exports = {
                         + `\n**Pip Boost:** 5% ${Data.emojis.pip}`
                         + `\nTotal: ${pipTotal}% ${Data.emojis.pip}`, true)
             .addField("\u200b", "\u200b")
-            .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`
-                                            + `\n[**Spiral Scholars**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
+            .addField("Like what you see?", `[**${Data.bot.text}**](${Data.bot.invite}) ${Data.emojis.kiwi}`
+                                        + `\n[**${Data.server.text}**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
             .setFooter(Data.footer.text, Data.footer.image);
 
         return embed;
@@ -202,8 +202,8 @@ module.exports = {
                         + `\n**Health Add:** ${Data.space(8)} +${add} ${Data.emojis.health}`
                         + `\nTotal: +${healthTotal} ${Data.emojis.health}`, true)
             .addField("\u200b", "\u200b")
-            .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`
-                                            + `\n[**Spiral Scholars**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
+            .addField("Like what you see?", `[**${Data.bot.text}**](${Data.bot.invite}) ${Data.emojis.kiwi}`
+                                        + `\n[**${Data.server.text}**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
             .setFooter(Data.footer.text, Data.footer.image);
 
         return embed;
@@ -257,8 +257,8 @@ module.exports = {
                         + `\n**Extra Mana:** ${Data.space(4)} +${extra} ${Data.emojis.mana}`
                         + `\nTotal: +${manaTotal} ${Data.emojis.mana}`, true)
             .addField("\u200b", "\u200b")
-            .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`
-                                            + `\n[**Spiral Scholars**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
+            .addField("Like what you see?", `[**${Data.bot.text}**](${Data.bot.invite}) ${Data.emojis.kiwi}`
+                                        + `\n[**${Data.server.text}**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
             .setFooter(Data.footer.text, Data.footer.image);
 
         return embed;

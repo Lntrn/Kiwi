@@ -18,8 +18,8 @@ module.exports = {
             .setDescription(`Unrecognized command: **${cmd}**`
                             + `\n\nUse the **\`${Data.prefix}help\`** command for a list of Kiwi's commands`)
             .addField("\u200b", "\u200b")
-            .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`
-                                            + `\n[**Spiral Scholars**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
+            .addField("Like what you see?", `[**${Data.bot.text}**](${Data.bot.invite}) ${Data.emojis.kiwi}`
+                                        + `\n[**${Data.server.text}**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
             .setFooter(Data.footer.text, Data.footer.image);
 
             msg.channel.send(embed);

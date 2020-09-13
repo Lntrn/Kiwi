@@ -19,7 +19,7 @@ module.exports = {
                             + `\nHere's a link to invite Kiwi to **your server**!`
                             + `\n\n[**Invite Me!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
             .addField("\u200b", "\u200b")
-            .addField("\u200b", `[**Spiral Scholars**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
+            .addField("\u200b", `[**${Data.server.text}**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
             .setFooter(Data.footer.text, Data.footer.image);
         
         msg.channel.send(invite);
