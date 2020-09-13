@@ -36,7 +36,8 @@ module.exports = {
                                 + `\n> **Misc Stats ${Data.emojis.luck}:** ${Data.space(7)} ${Data.emojis.stunres}, ${Data.emojis.luck}, and ${Data.emojis.mana} stats`
                                 + `\n\n> **Round Stats ${Data.emojis.round}:** ${Data.space(1)} display stats like **in-game** and catch **fake** (${Data.emojis.fake}) stats`)
                 .addField("\u200b", "\u200b")
-                .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
+                .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`
+                                                + `\n[**Spiral Scholars**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
                 .setFooter(Data.footer.text, Data.footer.image);
 
             if (Data.update)
@@ -193,11 +194,12 @@ module.exports = {
                 .setColor("#DD2E44")
                 .setTitle(":exclamation: **━━━━━ ERROR ━━━━━** :exclamation:")
                 .setDescription(`You must enter **5 numbers** with the **${Data.prefix}stats** command!
-                                \n*You did not enter **5** numbers with the command*
+                                \n*\`You did not enter 5 numbers with the command\`*
                                 \n${Data.prefix}stats ${Data.emojis.str} ${Data.emojis.int} ${Data.emojis.agil} ${Data.emojis.will} ${Data.emojis.power}
-                                \n> **ex.**\n> ${Data.prefix}stats 255 250 260 260 250`)
+                                \n> **ex.**\n> ${Data.prefix}stats 248 308 260 243 227`)
                 .addField("\u200b", "\u200b")
-                .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
+                .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`
+                                            + `\n[**Spiral Scholars**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
                 .setFooter(Data.footer.text, Data.footer.image);
 
             msg.channel.send(amountEmbed);
@@ -217,11 +219,12 @@ module.exports = {
                     .setColor("#DD2E44")
                     .setTitle(":exclamation: **━━━━━ ERROR ━━━━━** :exclamation:")
                     .setDescription(`You must enter **5 numbers** with the **${Data.prefix}stats** command!
-                                    \n*You entered a **non-number** with the command*
+                                    \n*\`You entered a non-number with the command\`*
                                     \n${Data.prefix}stats ${Data.emojis.str} ${Data.emojis.int} ${Data.emojis.agil} ${Data.emojis.will} ${Data.emojis.power}
-                                    \n> **ex.**\n> ${Data.prefix}stats 255 250 260 260 250`)
+                                    \n> **ex.**\n> ${Data.prefix}stats 248 308 260 243 227`)
                     .addField("\u200b", "\u200b")
-                    .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
+                    .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`
+                                                    + `\n[**Spiral Scholars**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
                     .setFooter(Data.footer.text, Data.footer.image);
 
                 msg.channel.send(typeEmbed);
@@ -233,11 +236,12 @@ module.exports = {
                     .setColor("#DD2E44")
                     .setTitle(":exclamation: **━━━━━ ERROR ━━━━━** :exclamation:")
                     .setDescription(`You must enter **5 numbers** with the **${Data.prefix}stats** command!
-                                    \n*You entered a stat that was either **too big** or **too small***
+                                    \n*\`You entered a stat that was either too big or too small\`*
                                     \n${Data.prefix}stats ${Data.emojis.str} ${Data.emojis.int} ${Data.emojis.agil} ${Data.emojis.will} ${Data.emojis.power}
-                                    \n> **ex.**\n> ${Data.prefix}stats 255 250 260 260 250`)
+                                    \n> **ex.**\n> ${Data.prefix}stats 248 308 260 243 227`)
                     .addField("\u200b", "\u200b")
-                    .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
+                    .addField("Like what you see?", `[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`
+                                                    + `\n[**Spiral Scholars**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
                     .setFooter(Data.footer.text, Data.footer.image);
 
                 msg.channel.send(boundsEmbed);

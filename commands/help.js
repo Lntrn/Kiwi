@@ -74,7 +74,9 @@ module.exports = {
                             + `\n*get an invite to add Kiwi to your server!*`)
             .addField("\u200b", "page **1** of **2**")
             .addField("\u200b", "\u200b")
-            .addField("Still need help?", `Head to our [Support Server](${Data.supportLink})!\n\n[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
+            .addField("Still need help?", `Head to our [Support Server](${Data.supportLink})!`
+                                        + `\n\n[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`
+                                        + `\n[**Spiral Scholars**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
             .setFooter(Data.footer.text, Data.footer.image);
 
         return embed;
@@ -92,7 +94,9 @@ module.exports = {
                             + `\n\n> **ex.**\n> ${Data.prefix}suggest make bot good pls`)
             .addField("\u200b", "page **2** of **2**")
             .addField("\u200b", "\u200b")
-            .addField("Still need help?", `Head to our [Support Server](${Data.supportLink})!\n\n[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`)
+            .addField("Still need help?", `Head to our [Support Server](${Data.supportLink})!`
+                                        + `\n\n[**Invite Kiwi!**](${Data.inviteLink}) ${Data.emojis.kiwi}`
+                                        + `\n[**Spiral Scholars**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
             .setFooter(Data.footer.text, Data.footer.image);
 
         return embed;
