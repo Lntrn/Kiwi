@@ -101,7 +101,7 @@ module.exports = {
 
             let embed = new Discord.MessageEmbed()
                 .setColor("#D5AB88")
-                .setTitle(":notebook_with_decorative_cover: **━━━━━━━ BOT SERVER DATA ━━━━━━━** :notebook_with_decorative_cover:")
+                .setTitle(":notebook_with_decorative_cover: **━━━━━━━━ BOT SERVER DATA ━━━━━━━━** :notebook_with_decorative_cover:")
                 .setDescription(`Logged in as **${bot.user.tag}**!`
                             + `\n\nHelping **${memberCount}** members`
                             + `\nIn **${bot.guilds.cache.size}** server(s):`)
@@ -117,7 +117,7 @@ module.exports = {
         } else {
             let embed = new Discord.MessageEmbed()
                 .setColor("#D5AB88")
-                .setTitle(":notebook_with_decorative_cover: **━━━━━━━ BOT SERVER DATA ━━━━━━━** :notebook_with_decorative_cover:")
+                .setTitle(":notebook_with_decorative_cover: **━━━━━━━━ BOT SERVER DATA ━━━━━━━━** :notebook_with_decorative_cover:")
                 .setDescription(`Logged in as **${bot.user.tag}**!`
                             + `\n\nHelping **${memberCount}** members`
                             + `\nIn **${bot.guilds.cache.size}** server(s):`)
