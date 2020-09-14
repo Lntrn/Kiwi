@@ -13,7 +13,7 @@ module.exports = {
         // allow usage only if user is the owner
         if (msg.author.id === Data.ownerId) {
             let servers = bot.guilds.cache.array().sort();
-            let pageCount = (servers.length / 20) + 1;
+            let pageCount = Math.floor(servers.length / 20) + 1;
             let memberCount = 0;
 
             servers.forEach(
@@ -22,7 +22,7 @@ module.exports = {
                 }
             );
 
-            msg.channel.send(module.exports.pageOne()).then(
+            msg.channel.send(module.exports.generatePage(bot, servers, memberCount, 1, pageCount)).then(
                 function(sentMsg) {
                     let page = 1;
     
@@ -45,7 +45,7 @@ module.exports = {
     
                             if (page !== 1) { 
                                 page--;
-                                sentMsg.edit(module.exports.generatePage(page));
+                                sentMsg.edit(module.exports.generatePage(bot, servers, memberCount, page, pageCount));
                             } 
                         }
                     );
@@ -56,23 +56,12 @@ module.exports = {
     
                             if (page !== pageCount) {
                                 page++;      
-                                sentMsg.edit(module.exports.generatePage(page));                                               
+                                sentMsg.edit(module.exports.generatePage(bot, servers, memberCount, page, pageCount));
                             } 
                         }
                     );
                 }
             ).catch(err => console.log("Error adding reactions!" + err));
-            
-            const embed = new Discord.MessageEmbed()
-                .setColor("#D5AB88")
-                .setTitle(":notebook_with_decorative_cover: **━━━━━ BOT DATA ━━━━━** :notebook_with_decorative_cover:")
-                .setDescription(`Logged in as **${bot.user.tag}**!`
-                            + `\n\nHelping **${memberCount}** members`
-                            + `\nIn **${bot.guilds.cache.size}** server(s):${serverPrintout}`)
-                .addField("\u200b", "\u200b")
-                .setFooter(Data.footer.text, Data.footer.image);
-
-            msg.channel.send(embed);
 
         } else {
             const embed = new Discord.MessageEmbed()
@@ -89,8 +78,8 @@ module.exports = {
         left.resetTimer({time: 60000});
         right.resetTimer({time: 60000});
     },
-    generatePage(servers, page) {
-        let start = page * 20;
+    generatePage(bot, servers, memberCount, page, pageCount) {
+        let start = (page - 1) * 20;
         
         if (start <= servers.length) {
             let printout = "";
@@ -100,16 +89,37 @@ module.exports = {
             for (i = start; (i < start + 20 && i < servers.length); i++) {
                 joinDate = servers[i].joinedAt;
 
-                printout += `\n:white_small_square: **${server.name}** [${joinDate.toDateString()}]`;
+                printout += `\n:white_small_square: **${servers[i].name}** [${joinDate.toDateString()}]`;
 
                 if (joinDate.toDateString() === date.toDateString())
                     printout += "🚩";
             }
 
-            return printout;
+            let embed = new Discord.MessageEmbed()
+                .setColor("#D5AB88")
+                .setTitle(":notebook_with_decorative_cover: **━━━━━ BOT DATA ━━━━━** :notebook_with_decorative_cover:")
+                .setDescription(`Logged in as **${bot.user.tag}**!`
+                            + `\n\nHelping **${memberCount}** members`
+                            + `\nIn **${bot.guilds.cache.size}** server(s):${printout}`)
+                .addField("\u200b", `page **${page}** of **${pageCount}**`)
+                .addField("\u200b", "\u200b")
+                .setFooter(Data.footer.text, Data.footer.image);
+
+            return embed;
 
         } else {
-            return "empty page";
+            let embed = new Discord.MessageEmbed()
+                .setColor("#D5AB88")
+                .setTitle(":notebook_with_decorative_cover: **━━━━━ BOT DATA ━━━━━** :notebook_with_decorative_cover:")
+                .setDescription(`Logged in as **${bot.user.tag}**!`
+                            + `\n\nHelping **${memberCount}** members`
+                            + `\nIn **${bot.guilds.cache.size}** server(s):`
+                            + `\n\n empty page`)
+                .addField("\u200b", `page **${page}** of **${pageCount}**`)
+                .addField("\u200b", "\u200b")
+                .setFooter(Data.footer.text, Data.footer.image);
+
+            return embed;
         }
     }
 }
