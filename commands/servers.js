@@ -105,9 +105,9 @@ module.exports = {
                 .setDescription(`Logged in as **${bot.user.tag}**!`
                             + `\n\nHelping **${memberCount}** members`
                             + `\nIn **${bot.guilds.cache.size}** server(s):`)
-                .addField("\u200b", `${serverList}`, true)
-                .addField("\u200b", `${dataList}`, true)
-                .addField("\u200b", `${idList}`, true)
+                .addField("NAME", `${serverList}`, true)
+                .addField("DATE ADDED", `${dataList}`, true)
+                .addField("ID", `${idList}`, true)
                 .addField("\u200b", `page **${page}** of **${pageCount}**`)
                 .addField("\u200b", "\u200b")
                 .setFooter(Data.footer.text, Data.footer.image);
