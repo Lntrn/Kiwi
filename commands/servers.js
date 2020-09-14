@@ -93,7 +93,7 @@ module.exports = {
                 
                 serverList += `\n**${i + 1}.** ${servers[i].name}`;
                 if (joinDate.toDateString() === date.toDateString())
-                    serverList += "🆕";
+                    serverList += " 🆕";
 
                 dataList += `\n${joinDate.toDateString()}`;
                 idList += `\n${servers[i].id}`
