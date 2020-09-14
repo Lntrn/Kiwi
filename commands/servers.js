@@ -4,8 +4,8 @@ const Discord = require("discord.js");
 const Data = require("../utilities/data.js");
 
 module.exports = {
-    name: "info",
-    description: "owner command to check the number of servers the bot is currently in",
+    name: "servers",
+    description: "owner command to check data on the servers the bot is currently in",
     execute(bot, msg) {
         // react to command
         msg.react(bot.emojis.cache.get(Data.emojiIds.kiwi));
@@ -82,25 +82,32 @@ module.exports = {
         let start = (page - 1) * 20;
         
         if (start <= servers.length) {
-            let printout = "";
+            let serverList = "";
+            let dataList = "";
+            let idList = "";
             let date = new Date();
 
             let i;
             for (i = start; (i < start + 20 && i < servers.length); i++) {
                 joinDate = servers[i].joinedAt;
-
-                printout += `\n:white_small_square: **${servers[i].name}** [${joinDate.toDateString()}]`;
-
+                
+                serverList += `\n**${i + 1}.** ${servers[i].name}`;
                 if (joinDate.toDateString() === date.toDateString())
-                    printout += "🚩";
+                    serverList += "🆕";
+
+                dataList += `\n${joinDate.toDateString()}`;
+                idList += `\n${servers[i].id}`
             }
 
             let embed = new Discord.MessageEmbed()
                 .setColor("#D5AB88")
-                .setTitle(":notebook_with_decorative_cover: **━━━━━ BOT DATA ━━━━━** :notebook_with_decorative_cover:")
+                .setTitle(":notebook_with_decorative_cover: **━━━━━━ BOT SERVER DATA ━━━━━━** :notebook_with_decorative_cover:")
                 .setDescription(`Logged in as **${bot.user.tag}**!`
                             + `\n\nHelping **${memberCount}** members`
-                            + `\nIn **${bot.guilds.cache.size}** server(s):${printout}`)
+                            + `\nIn **${bot.guilds.cache.size}** server(s):`)
+                .addField("\u200b", `${serverList}`, true)
+                .addField("\u200b", `${dataList}`, true)
+                .addField("\u200b", `${idList}`, true)
                 .addField("\u200b", `page **${page}** of **${pageCount}**`)
                 .addField("\u200b", "\u200b")
                 .setFooter(Data.footer.text, Data.footer.image);
@@ -110,11 +117,11 @@ module.exports = {
         } else {
             let embed = new Discord.MessageEmbed()
                 .setColor("#D5AB88")
-                .setTitle(":notebook_with_decorative_cover: **━━━━━ BOT DATA ━━━━━** :notebook_with_decorative_cover:")
+                .setTitle(":notebook_with_decorative_cover: **━━━━━━ BOT SERVER DATA ━━━━━━** :notebook_with_decorative_cover:")
                 .setDescription(`Logged in as **${bot.user.tag}**!`
                             + `\n\nHelping **${memberCount}** members`
-                            + `\nIn **${bot.guilds.cache.size}** server(s):`
-                            + `\n\n empty page`)
+                            + `\nIn **${bot.guilds.cache.size}** server(s):`)
+                .addField("\u200b", "empty page")
                 .addField("\u200b", `page **${page}** of **${pageCount}**`)
                 .addField("\u200b", "\u200b")
                 .setFooter(Data.footer.text, Data.footer.image);

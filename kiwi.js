@@ -61,8 +61,8 @@ bot.on("message", message => {
 		case "ping":
 			bot.commands.get("ping").execute(bot, message);
 			break;
-		case "info":
-			bot.commands.get("info").execute(bot, message);
+		case "servers":
+			bot.commands.get("servers").execute(bot, message);
 			break;
 		case "cmds":
 			// bot.commands.get("cmds").execute(bot, message);
