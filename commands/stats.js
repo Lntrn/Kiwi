@@ -6,6 +6,8 @@ const Data = require("../utilities/data.js");
 const CMDS = require("./cmds.js");
 // require embeds for stat calculations
 const Stats = require("../utilities/statFunctions.js");
+// require error logger module
+const ErrorLog = require("../utilities/error.js");
 
 module.exports = {
     name: "stats",
@@ -177,7 +179,7 @@ module.exports = {
                     );
 
                 }
-            ).catch(err => console.log("Error adding reactions!" + err));
+            ).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats (reaction menu)", err));
         }
 
         // update count of stats cmd uses

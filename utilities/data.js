@@ -88,6 +88,7 @@ module.exports = {
     cmdUsageId: "745691111523352653",
     cmdLog: "746087206514327592",
     devCmds: "745373245213114438",
+    errorLog: "756179150796226561",
     supportLink: "https://discord.gg/sFMwKCy",
     devReportRole: "<@&744861411628417034>",
     ownerMention: "<@193427298958049280>",
