@@ -17,14 +17,22 @@ const Data = require("./utilities/data.js");
 
 // create new bot
 const bot = new Discord.Client();
-// create collection of bot commands 
+// create collection of bot commands / events 
 bot.commands = new Discord.Collection();
+bot.events = new Discord.Collection();
 
 // fill command collection
 const commandFiles = FS.readdirSync("./commands");
 for (const file of commandFiles) {
 	let command = require(`./commands/${file}`);
 	bot.commands.set(command.name, command);
+}
+
+// fill event collection
+const eventFiles = FS.readdirSync("./events");
+for (const file of eventFiles) {
+	let event = require(`./events/${file}`);
+	bot.events.set(event.name, event);
 }
 
 bot.on("ready", () => {
@@ -90,8 +98,12 @@ bot.on("message", message => {
 	}
 });
 
-bot.on("guildCreate", guild => {
-	
+bot.on("guildCreate", server => {
+	bot.events.get("guildCreate").execute(bot, server);
+});
+
+bot.on("guildDelete", server => {
+	bot.events.get("guildDelete").execute(bot, server);
 });
 
 // login to Discord with bot token
