@@ -4,6 +4,8 @@ const Discord = require("discord.js");
 const Data = require("../utilities/data.js");
 // require cmds.js module
 const CMDS = require("./cmds.js");
+// require error logger module
+const ErrorLog = require("../utilities/error.js");
 
 module.exports = {
     name: "bug",
@@ -23,8 +25,8 @@ module.exports = {
                             + `\n**Server:** "${msg.guild.name}" (ID: ${msg.guild.id})`
                             + `\n\n**Report:** ${args.join(" ")}`);
 
-        bot.channels.cache.get(Data.bugReportId).send(report);
-        bot.channels.cache.get(Data.bugReportId).send(Data.devReportRole);
+        bot.channels.cache.get(Data.bugReportId).send(report).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "bug [sending report]", err));
+        bot.channels.cache.get(Data.bugReportId).send(Data.devReportRole).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "bug [notifying dev]", err));
 
         const response = new Discord.MessageEmbed()
             .setColor("#8899A6")
@@ -38,7 +40,7 @@ module.exports = {
                                         + `\n[**${Data.server.text}**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
             .setFooter(Data.footer.text, Data.footer.image);
 
-        msg.channel.send(response);
+        msg.channel.send(response).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "bug [submission reply]", err));
 
         // update count of bug cmd uses
         // CMDS.updateData(bot, msg.author, msg.guild.id, "bug");

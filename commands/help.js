@@ -4,6 +4,8 @@ const Discord = require("discord.js");
 const Data = require("../utilities/data.js");
 // require cmds.js module
 const CMDS = require("./cmds.js");
+// require error logger module
+const ErrorLog = require("../utilities/error.js");
 
 module.exports = {
     name: "help",
@@ -51,7 +53,7 @@ module.exports = {
                     }
                 );
             }
-        ).catch(err => console.log("Error adding reactions!" + err));
+        ).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "help", err));
 
         // update count of help cmd uses
         // CMDS.updateData(bot, msg.author, msg.guild.id, "help");

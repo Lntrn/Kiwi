@@ -98,12 +98,12 @@ bot.on("message", message => {
 	}
 });
 
-bot.on("guildCreate", server => {
-	bot.events.get("guildCreate").execute(bot, server);
+bot.on("guildCreate", guild => {
+	bot.events.get("guildCreate").execute(bot, guild);
 });
 
-bot.on("guildDelete", server => {
-	bot.events.get("guildDelete").execute(bot, server);
+bot.on("guildDelete", guild => {
+	bot.events.get("guildDelete").execute(bot, guild);
 });
 
 // login to Discord with bot token

@@ -2,6 +2,8 @@
 const Discord = require("discord.js");
 // require data.js module
 const Data = require("../utilities/data.js");
+// require error logger module
+const ErrorLog = require("../utilities/error.js");
 
 module.exports = {
     name: "servers",
@@ -61,7 +63,7 @@ module.exports = {
                         }
                     );
                 }
-            ).catch(err => console.log("Error adding reactions!" + err));
+            ).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "servers", err));
 
         } else {
             const embed = new Discord.MessageEmbed()
@@ -71,7 +73,7 @@ module.exports = {
             .addField("\u200b", "\u200b")
             .setFooter(Data.footer.text, Data.footer.image);
 
-            msg.channel.send(embed);
+            msg.channel.send(embed).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "servers [not dev response]", err));
         }
     },
     resetTimer(left, right) {

@@ -93,7 +93,7 @@ module.exports = {
     devReportRole: "<@&744861411628417034>",
     ownerMention: "<@193427298958049280>",
     ownerId: "193427298958049280",
-    devmode: false,
+    devmode: true,
     update: false,
     testingId: "727858983146356777",
     emptyChar: " ‎",

@@ -81,9 +81,9 @@ module.exports = {
                             module.exports.resetTimer(baseCollector, ratingCollector, healCollector, miscCollector, roundCollector);
 
                             if (rounded)
-                                sentMsg.edit(Stats.base(str, int, agil, will, power, true));
+                                sentMsg.edit(Stats.base(str, int, agil, will, power, true)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [rounded base]", err));
                             else
-                                sentMsg.edit(Stats.base(str, int, agil, will, power, false));
+                                sentMsg.edit(Stats.base(str, int, agil, will, power, false)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [base]", err));
                                 
                             page = "base";
                         }
@@ -94,9 +94,9 @@ module.exports = {
                             module.exports.resetTimer(baseCollector, ratingCollector, healCollector, miscCollector, roundCollector);
 
                             if (rounded)
-                                sentMsg.edit(Stats.rating(str, int, agil, will, power, true));
+                                sentMsg.edit(Stats.rating(str, int, agil, will, power, true)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [rounded rating]", err));
                             else
-                                sentMsg.edit(Stats.rating(str, int, agil, will, power, false));
+                                sentMsg.edit(Stats.rating(str, int, agil, will, power, false)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [rating]", err));
 
                             page = "rating";
                         }
@@ -107,9 +107,9 @@ module.exports = {
                             module.exports.resetTimer(baseCollector, ratingCollector, healCollector, miscCollector, roundCollector);
 
                             if (rounded)
-                                sentMsg.edit(Stats.healing(str, int, agil, will, power, true));
+                                sentMsg.edit(Stats.healing(str, int, agil, will, power, true)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [rounded healing]", err));
                             else
-                                sentMsg.edit(Stats.healing(str, int, agil, will, power, false));
+                                sentMsg.edit(Stats.healing(str, int, agil, will, power, false)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [healing]", err));
                             
                             page = "healing";
                         }
@@ -120,9 +120,9 @@ module.exports = {
                             module.exports.resetTimer(baseCollector, ratingCollector, healCollector, miscCollector, roundCollector);
 
                             if (rounded)
-                                sentMsg.edit(Stats.misc(str, int, agil, will, power, true));
+                                sentMsg.edit(Stats.misc(str, int, agil, will, power, true)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [rounded misc]", err));
                             else
-                                sentMsg.edit(Stats.misc(str, int, agil, will, power, false));
+                                sentMsg.edit(Stats.misc(str, int, agil, will, power, false)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [misc]", err));
                             
                             page = "misc";
                         }
@@ -135,37 +135,37 @@ module.exports = {
                             switch (page) {
                                 case "base":
                                     if (rounded) {
-                                        sentMsg.edit(Stats.base(str, int, agil, will, power, false));
+                                        sentMsg.edit(Stats.base(str, int, agil, will, power, false)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [rounded base]", err));
                                         rounded = false;
                                     } else {
-                                        sentMsg.edit(Stats.base(str, int, agil, will, power, true));
+                                        sentMsg.edit(Stats.base(str, int, agil, will, power, true)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [base]", err));
                                         rounded = true;
                                     }
                                     break;
                                 case "rating":
                                     if (rounded) {
-                                        sentMsg.edit(Stats.rating(str, int, agil, will, power, false));
+                                        sentMsg.edit(Stats.rating(str, int, agil, will, power, false)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [rounded rating]", err));
                                         rounded = false;
                                     } else {
-                                        sentMsg.edit(Stats.rating(str, int, agil, will, power, true));
+                                        sentMsg.edit(Stats.rating(str, int, agil, will, power, true)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [rating]", err));
                                         rounded = true;
                                     }
                                     break;
                                 case "healing":
                                     if (rounded) {
-                                        sentMsg.edit(Stats.healing(str, int, agil, will, power, false));
+                                        sentMsg.edit(Stats.healing(str, int, agil, will, power, false)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [rounded healing]", err));
                                         rounded = false;
                                     } else {
-                                        sentMsg.edit(Stats.healing(str, int, agil, will, power, true));
+                                        sentMsg.edit(Stats.healing(str, int, agil, will, power, true)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [healing]", err));
                                         rounded = true;
                                     }
                                     break;
                                 case "misc":
                                     if (rounded) {
-                                        sentMsg.edit(Stats.misc(str, int, agil, will, power, false));
+                                        sentMsg.edit(Stats.misc(str, int, agil, will, power, false)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [rounded misc]", err));
                                         rounded = false;
                                     } else {
-                                        sentMsg.edit(Stats.misc(str, int, agil, will, power, true));
+                                        sentMsg.edit(Stats.misc(str, int, agil, will, power, true)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [misc]", err));
                                         rounded = true;
                                     }
                                     break;
@@ -179,7 +179,7 @@ module.exports = {
                     );
 
                 }
-            ).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats (reaction menu)", err));
+            ).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [reaction menu]", err));
         }
 
         // update count of stats cmd uses
@@ -198,7 +198,7 @@ module.exports = {
         if (args.length !== 5) {
             const amountEmbed = new Discord.MessageEmbed()
                 .setColor("#DD2E44")
-                .setTitle(":exclamation: **━━━━━ ERROR ━━━━━** :exclamation:")
+                .setTitle(":exclamation: **━━━━━━━━ ERROR ━━━━━━━━** :exclamation:")
                 .setDescription(`You must enter **5 numbers** with the **${Data.prefix}stats** command!
                                 \n*\`You did not enter 5 numbers with the command\`*
                                 \n${Data.prefix}stats ${Data.emojis.str} ${Data.emojis.int} ${Data.emojis.agil} ${Data.emojis.will} ${Data.emojis.power}
@@ -208,7 +208,7 @@ module.exports = {
                                                 + `\n[**${Data.server.text}**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
                 .setFooter(Data.footer.text, Data.footer.image);
 
-            msg.channel.send(amountEmbed);
+            msg.channel.send(amountEmbed).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [not 5 num entered error]", err));
             return false;
         
         // otherwise check data
@@ -223,7 +223,7 @@ module.exports = {
             if (!Number.isInteger(str) || !Number.isInteger(int) || !Number.isInteger(agil) || !Number.isInteger(will) || !Number.isInteger(power)) {
                 const typeEmbed = new Discord.MessageEmbed()
                     .setColor("#DD2E44")
-                    .setTitle(":exclamation: **━━━━━ ERROR ━━━━━** :exclamation:")
+                    .setTitle(":exclamation: **━━━━━━━━ ERROR ━━━━━━━━** :exclamation:")
                     .setDescription(`You must enter **5 numbers** with the **${Data.prefix}stats** command!
                                     \n*\`You entered a non-number with the command\`*
                                     \n${Data.prefix}stats ${Data.emojis.str} ${Data.emojis.int} ${Data.emojis.agil} ${Data.emojis.will} ${Data.emojis.power}
@@ -233,14 +233,14 @@ module.exports = {
                                                 + `\n[**${Data.server.text}**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
                     .setFooter(Data.footer.text, Data.footer.image);
 
-                msg.channel.send(typeEmbed);
+                msg.channel.send(typeEmbed).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [non num entered error]", err));
                 return false;
             
             // otherwise check bounds (highest selfish grant: +65 +50 +40 +40 +40 +25 = +260)
             } else if (str < 0 || str > 515 || int < 0 || int > 510 || agil < 0 || agil > 520 || will < 0 || will > 520 || power < 0 || power > 510) {
                 const boundsEmbed = new Discord.MessageEmbed()
                     .setColor("#DD2E44")
-                    .setTitle(":exclamation: **━━━━━ ERROR ━━━━━** :exclamation:")
+                    .setTitle(":exclamation: **━━━━━━━━ ERROR ━━━━━━━━** :exclamation:")
                     .setDescription(`You must enter **5 numbers** with the **${Data.prefix}stats** command!
                                     \n*\`You entered a stat that was either too big or too small\`*
                                     \n${Data.prefix}stats ${Data.emojis.str} ${Data.emojis.int} ${Data.emojis.agil} ${Data.emojis.will} ${Data.emojis.power}
@@ -250,7 +250,7 @@ module.exports = {
                                                 + `\n[**${Data.server.text}**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
                     .setFooter(Data.footer.text, Data.footer.image);
 
-                msg.channel.send(boundsEmbed);
+                msg.channel.send(boundsEmbed).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [out of bounds error]", err));
                 return false;
             }
         }

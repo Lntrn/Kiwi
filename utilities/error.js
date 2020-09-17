@@ -3,11 +3,6 @@ const Discord = require("discord.js");
 // require data.js module
 const Data = require("../utilities/data.js");
 
-
-// require error logger module
-//const ErrorLog = require("../utilities/error.js");
-// ErrorLog.log(bot, msg, msg.guild.id, "CMD", err);
-
 module.exports = {
     name: "error",
     description: "sends errors that Kiwi encounters to a logging channel",

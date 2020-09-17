@@ -2,6 +2,8 @@
 const Discord = require("discord.js");
 // require data.js module
 const Data = require("../utilities/data.js");
+// require error logger module
+const ErrorLog = require("../utilities/error.js");
 
 module.exports = {
     name: "ping",
@@ -23,7 +25,7 @@ module.exports = {
                 .addField("\u200b", "\u200b")
                 .setFooter(Data.footer.text, Data.footer.image);
 
-            msg.channel.send(embed);
+            msg.channel.send(embed).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "ping", err));
 
         } else {
             const embed = new Discord.MessageEmbed()
@@ -33,7 +35,7 @@ module.exports = {
             .addField("\u200b", "\u200b")
             .setFooter(Data.footer.text, Data.footer.image);
 
-            msg.channel.send(embed);
+            msg.channel.send(embed).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "ping [not dev response]", err));
         }
     }
 }

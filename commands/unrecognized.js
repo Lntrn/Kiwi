@@ -4,6 +4,8 @@ const Discord = require("discord.js");
 const Data = require("../utilities/data.js");
 // require cmds.js module
 const CMDS = require("./cmds.js");
+// require error logger module
+const ErrorLog = require("../utilities/error.js");
 
 module.exports = {
     name: "unrecognized",
@@ -22,7 +24,7 @@ module.exports = {
                                         + `\n[**${Data.server.text}**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
             .setFooter(Data.footer.text, Data.footer.image);
 
-            msg.channel.send(embed);
+            msg.channel.send(embed).catch(err => ErrorLog.log(bot, msg, msg.guild.id, `unrecognized [${cmd}]`, err));
 
         // update count of unrecognized cmd uses
         // CMDS.updateData(bot, msg.author, msg.guild.id, "unrecognized");
