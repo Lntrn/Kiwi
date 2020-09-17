@@ -90,6 +90,10 @@ bot.on("message", message => {
 	}
 });
 
+bot.on("guildCreate", guild => {
+	
+});
+
 // login to Discord with bot token
 if (Data.devmode)
 	bot.login(process.env.KIWIDEVTOKEN);
