@@ -106,6 +106,10 @@ bot.on("guildDelete", guild => {
 	bot.events.get("guildDelete").execute(bot, guild);
 });
 
+bot.on("guildUpdate", (oldGuild, newGuild) => {
+	bot.events.get("guildUpdate").execute(bot, oldGuild, newGuild);
+})
+
 // login to Discord with bot token
 if (Data.devmode)
 	bot.login(process.env.KIWIDEVTOKEN);

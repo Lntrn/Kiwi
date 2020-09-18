@@ -37,6 +37,12 @@ module.exports = {
             await dbClient.connect();
             await bot.channels.cache.get(Data.dbLog).send(`connected to mongoDB! cmd: ${cmd}`);
 
+            const db = dbClient.db("KiwiDB");
+
+            module.exports.updateCommand(db, cmd);
+            module.exports.updateServer(db, serverID, cmd);
+            module.exports.updateUser(db, msg.author.id, cmd);
+
         } catch (err) {
             ErrorLog.log(bot, msg, serverID, `logging cmd: **${cmd}** to database`, err);
 
@@ -45,10 +51,34 @@ module.exports = {
         }
 
     },
-    async updateUser() {
+    async updateCommand(db, cmd, bot, msg, serverID) {
+        const commands = db.collection("commands");
+
+        try {
+
+        } catch (err) {
+            ErrorLog.log(bot, msg, serverID, `updating commands collection: **${cmd}**`, err);
+        }
 
     },
-    async updateServer() {
+    async updateServer(db, cmd, bot, msg, serverID) {
+        const servers = db.collection("servers");
+
+        try {
+
+        } catch (err) {
+            ErrorLog.log(bot, msg, serverID, `updating servers collection: **${cmd}**`, err);
+        }
+
+    },
+    async updateUser(db, cmd, bot, msg, serverID) {
+        const users = db.collection("users");
+
+        try {
+
+        } catch (err) {
+            ErrorLog.log(bot, msg, serverID, `updating users collection: **${cmd}**`, err);
+        }
 
     }
 }
