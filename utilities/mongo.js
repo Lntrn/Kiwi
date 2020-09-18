@@ -1,8 +1,8 @@
 // require discord.js module
 const Discord = require("discord.js");
-const { ObjectID } = require("mongodb");
 // require MongoDB Driver
 const MongoDB = require("mongodb").MongoClient;
+const { ObjectID } = require("mongodb");
 // require dotenv-flow to load environment variables
 require("dotenv-flow");
 // require data.js module
