@@ -2,8 +2,8 @@
 const Discord = require("discord.js");
 // require data.js module
 const Data = require("../utilities/data.js");
-// require cmds.js module
-const CMDS = require("./cmds.js");
+// require mongo.js module
+const Mongo = require("../utilities/mongo.js");
 // require embeds for stat calculations
 const Stats = require("../utilities/statFunctions.js");
 // require error logger module
@@ -182,9 +182,8 @@ module.exports = {
             ).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [reaction menu]", err));
         }
 
-        // update count of stats cmd uses
-        // CMDS.updateData(bot, msg.author, msg.guild.id, "stats");
-        CMDS.cmdLog(bot, msg, msg.guild.id, "stats");
+        // log command use
+        Mongo.logCMD(bot, msg, msg.guild.id, "stats");
     },
     resetTimer(base, rating, health, misc, round) {
         base.resetTimer({time: 60000});

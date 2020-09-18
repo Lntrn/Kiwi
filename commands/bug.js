@@ -2,8 +2,8 @@
 const Discord = require("discord.js");
 // require data.js module
 const Data = require("../utilities/data.js");
-// require cmds.js module
-const CMDS = require("./cmds.js");
+// require mongo.js module
+const Mongo = require("../utilities/mongo.js");
 // require error logger module
 const ErrorLog = require("../utilities/error.js");
 
@@ -42,8 +42,7 @@ module.exports = {
 
         msg.channel.send(response).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "bug [submission reply]", err));
 
-        // update count of bug cmd uses
-        // CMDS.updateData(bot, msg.author, msg.guild.id, "bug");
-        CMDS.cmdLog(bot, msg, msg.guild.id, "bug");
+        // log command use
+        Mongo.logCMD(bot, msg, msg.guild.id, "bug");
     }
 }

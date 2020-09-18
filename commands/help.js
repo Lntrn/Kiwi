@@ -2,8 +2,8 @@
 const Discord = require("discord.js");
 // require data.js module
 const Data = require("../utilities/data.js");
-// require cmds.js module
-const CMDS = require("./cmds.js");
+// require mongo.js module
+const Mongo = require("../utilities/mongo.js");
 // require error logger module
 const ErrorLog = require("../utilities/error.js");
 
@@ -55,9 +55,8 @@ module.exports = {
             }
         ).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "help", err));
 
-        // update count of help cmd uses
-        // CMDS.updateData(bot, msg.author, msg.guild.id, "help");
-        CMDS.cmdLog(bot, msg, msg.guild.id, "help");
+        // log command use
+        Mongo.logCMD(bot, msg, msg.guild.id, "help");
     },
     resetTimer(left, right) {
         left.resetTimer({time: 60000});
