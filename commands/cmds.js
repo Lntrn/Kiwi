@@ -1,7 +1,7 @@
 // require discord.js module
 const Discord = require("discord.js");
 // require data.js module
-const Data = require("./data.js");
+const Data = require("../utilities/data.js");
 // require error logger module
 const ErrorLog = require("../utilities/error.js");
 
@@ -20,7 +20,7 @@ module.exports = {
             .addField("\u200b", "\u200b")
             .setFooter(Data.footer.text, Data.footer.image);
 
-            msg.channel.send(embed).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "cmds [not dev response]", err));
+            bot.channels.cache.get(Data.devCmds).send(embed).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "cmds [not dev response]", err));
         }
     }
 }

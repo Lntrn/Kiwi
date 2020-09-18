@@ -24,7 +24,7 @@ module.exports = {
                 }
             );
 
-            msg.channel.send(module.exports.generatePage(bot, servers, memberCount, 1, pageCount)).then(
+            bot.channels.cache.get(Data.devCmds).send(module.exports.generatePage(bot, servers, memberCount, 1, pageCount)).then(
                 function(sentMsg) {
                     let page = 1;
     

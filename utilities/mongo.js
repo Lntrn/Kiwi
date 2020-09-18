@@ -31,11 +31,11 @@ module.exports = {
         }
 
         // create database client
-        const dbClient = new MongoDB(process.env.MONGOURI);
+        const dbClient = new MongoDB(process.env.MONGOURI, { useUnifiedTopology: true });
 
         try {
             await dbClient.connect();
-            await bot.channels.cache.get(Data.cmdUsageId).send("connected to mongoDB!");
+            await bot.channels.cache.get(Data.dbLog).send(`connected to mongoDB! cmd: ${cmd}`);
 
         } catch (err) {
             ErrorLog.log(bot, msg, serverID, `logging cmd: **${cmd}** to database`, err);

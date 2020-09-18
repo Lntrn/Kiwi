@@ -25,7 +25,7 @@ module.exports = {
                 .addField("\u200b", "\u200b")
                 .setFooter(Data.footer.text, Data.footer.image);
 
-            msg.channel.send(embed).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "ping", err));
+                bot.channels.cache.get(Data.devCmds).send(embed).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "ping", err));
 
         } else {
             const embed = new Discord.MessageEmbed()
