@@ -53,6 +53,7 @@ bot.on("message", message => {
 	if (message.author.bot || message.attachments.size !== 0 || (!message.content.startsWith(Data.prefix) && !message.content.startsWith(Data.altPrefix)))
 		return;
 
+	// if in devmode, only respond to dev
 	if (Data.devmode && message.author.id !== Data.ownerId) {
 		return;
 	}

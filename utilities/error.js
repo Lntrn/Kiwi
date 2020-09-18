@@ -11,7 +11,7 @@ module.exports = {
 
         const log = new Discord.MessageEmbed()
             .setColor("#DD2E44")
-            .setTitle(":exclamation: **━━━━━ ERROR ━━━━━** :exclamation:")
+            .setTitle(":exclamation: **━━━━━━━━━━━ ERROR ━━━━━━━━━━━** :exclamation:")
             .setDescription(`**Command Used:** ${cmd}`
                             + `\n**User:** ${msg.author}`
                             + `\n**Server:** ${bot.guilds.cache.get(serverID).name}`

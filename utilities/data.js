@@ -75,11 +75,11 @@ module.exports = {
     },
     server: {
         text: "Join Us!",
-        link: "https://discord.gg/xY9VkHq"
+        link: "https://discord.gg/xY9VkHq \"Join the Spiral Scholars Discord Server!\""
     },
     bot: {
         text: "Invite Kiwi!",
-        invite: "https://discord.com/api/oauth2/authorize?client_id=743944201682681937&permissions=8&scope=bot"
+        invite: "https://discord.com/api/oauth2/authorize?client_id=743944201682681937&permissions=8&scope=bot \"Invite Link for Kiwi!\""
     },
     prefix: "!k",
     altPrefix: "k!", // both prefixes must be the same length
@@ -89,13 +89,14 @@ module.exports = {
     cmdLog: "746087206514327592",
     devCmds: "745373245213114438",
     errorLog: "756179150796226561",
-    supportLink: "https://discord.gg/sFMwKCy",
+    personalTestingId: "727858983146356777",
+    devTestingId: "756514136967348254",
+    supportLink: "https://discord.gg/sFMwKCy \"Head to our Support Server for help!\"",
     devReportRole: "<@&744861411628417034>",
     ownerMention: "<@193427298958049280>",
     ownerId: "193427298958049280",
     devmode: true,
     update: false,
-    testingId: "727858983146356777",
     emptyChar: " ‎",
     space(amt) {
         let whitespace = "";
