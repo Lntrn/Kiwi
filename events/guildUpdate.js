@@ -9,16 +9,18 @@ module.exports = {
     name: "guildUpdate",
     description: "notifications for name changes for servers using Kiwi",
     execute(bot, oldGuild, newGuild) {
-        date = new Date();
+        if (oldGuild.name !== newGuild.name) {
+            date = new Date();
 
-        const log = new Discord.MessageEmbed()
-            .setColor("#FFD983")
-            .setTitle(":label: **━━━━━ SERVER NAME CHANGE ━━━━━** :label:")
-            .setDescription(`\n**Old Name:** ${oldGuild.name}`
-                            + `\n**New Name:** ${newGuild.name}`
-                            + `\n**Date:** ${date.toDateString()}`)
-            .setFooter(Data.footer.text, Data.footer.image);
+            const log = new Discord.MessageEmbed()
+                .setColor("#FFD983")
+                .setTitle(":label: **━━━━━ SERVER NAME CHANGE ━━━━━** :label:")
+                .setDescription(`\n**Old Name:** ${oldGuild.name}`
+                                + `\n**New Name:** ${newGuild.name}`
+                                + `\n**Date:** ${date.toDateString()}`)
+                .setFooter(Data.footer.text, Data.footer.image);
 
-        bot.channels.cache.get(Data.devCmds).send(log).catch(err => ErrorLog.log(bot, msg, msg.guild.id, `guildUpdate [${oldGuild}, ${newGuild}]`, err));
+            bot.channels.cache.get(Data.devCmds).send(log).catch(err => ErrorLog.log(bot, msg, msg.guild.id, `guildUpdate [${oldGuild}, ${newGuild}]`, err));
+        }
     }
 }
