@@ -27,7 +27,7 @@ module.exports = {
 
             const embed = new Discord.MessageEmbed()
                 .setColor("#C4DE61")
-                .setTitle(`${Data.emojis.kiwi}${Data.space(1)} **━━━━━━ KIWI PET STATS ━━━━━━** ${Data.space(1)}${Data.emojis.kiwi}`)
+                .setTitle(`${Data.emojis.kiwi}${Data.space(1)} **━━━━━━━ KIWI PET STATS ━━━━━━━** ${Data.space(1)}${Data.emojis.kiwi}`)
                 .setDescription(`Your Stats:`
                                 + `\n${Data.emojis.str}: **${str}**/255 ${Data.space(2)}${Data.emojis.int}: **${int}**/250 ${Data.space(2)}${Data.emojis.agil}: **${agil}**/260 ${Data.space(2)}${Data.emojis.will}: **${will}**/260 ${Data.space(2)}${Data.emojis.power}: **${power}**/250`
                                 + `\n\nUse the reactions below to change pages:`)

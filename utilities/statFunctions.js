@@ -52,7 +52,7 @@ module.exports = {
                         + `\n**${Data.emojis.ice} Boon:** ${Data.space(5)} ${boon}% ${Data.emojis.ice}${Data.emojis.dmg}`
                         + `\n**Pain-Giver:** ${Data.space(6)} ${giver}% ${Data.emojis.dmg}`
                         + `\n**Pain-Bringer:** ${Data.space(2)} ${boon}% ${Data.emojis.dmg}`
-                        + `\nTotals:`
+                        + `\n\`Totals:\``
                         + `\n${alldmgTotal}% **|** ${schoolDmgTotal}% **|** ${universalDmgTotal}% ${Data.emojis.dmg}`, true)
             .addField(`${Data.emojis.res} ━━━ RESIST ━━━ ${Data.emojis.res}`, 
                         `*boosted by: ${Data.emojis.str} & ${Data.space(1)}${Data.emojis.agil}*`
@@ -61,7 +61,7 @@ module.exports = {
                         + `\n**${Data.emojis.ice} Away:** ${Data.space(5)} ${defy}% ${Data.emojis.ice}${Data.emojis.res}`
                         + `\n**Spell-Proof:** ${Data.space(3)} ${proof}% ${Data.emojis.res}`
                         + `\n**Spell-Defying:** ${Data.space(1)} ${defy}% ${Data.emojis.res}`
-                        + `\nTotals:`
+                        + `\n\`Totals:\``
                         + `\n${wardTotal}% ${Data.emojis.ice}${Data.emojis.res} **|** ${proofDefyTotal}% ${Data.emojis.res}`, true)
             .addField("\u200b", "\u200b")
             .addField(`${Data.emojis.acc} ━━ ACCURACY ━━ ${Data.emojis.acc}`, 
@@ -71,13 +71,13 @@ module.exports = {
                         + `\n**${Data.emojis.ice} Eye:** ${Data.space(6)} ${eye}% ${Data.emojis.ice}${Data.emojis.acc}`
                         + `\n**Sharp-Shot:** ${Data.space(5)} ${shot}% ${Data.emojis.acc}`
                         + `\n**Sharp-Eye:** ${Data.space(6)} ${eye}% ${Data.emojis.acc}`
-                        + `\nTotals:`
+                        + `\n\`Totals:\``
                         + `\n${schoolAccTotal}% ${Data.emojis.ice}${Data.emojis.acc} **|** ${universalAccTotal}% ${Data.emojis.acc}`, true)
             .addField(`${Data.emojis.pierce} ━━━ PIERCE ━━━ ${Data.emojis.pierce}`, 
                         `*boosted by: ${Data.emojis.str} & ${Data.space(1)}${Data.emojis.agil}*`
                         + `\n**Armor Breaker:** ${Data.space(2)} ${breaker}% ${Data.emojis.pierce}`
                         + `\n**Armor Piercer:** ${Data.space(1)} ${piercer}% ${Data.emojis.pierce}`
-                        + `\nTotal: ${pierceTotal}% ${Data.emojis.pierce}`, true)
+                        + `\n\`Total:\` ${pierceTotal}% ${Data.emojis.pierce}`, true)
             .addField("\u200b", "\u200b")
             .addField("Like what you see?", `[**${Data.bot.text}**](${Data.bot.invite}) ${Data.emojis.kiwi}`
                                             + `\n[**${Data.server.text}**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
@@ -128,24 +128,24 @@ module.exports = {
                         + `\n**${Data.emojis.myth} Striker:** ${Data.space(7)} +${sStriker} ${Data.emojis.myth}${Data.emojis.crit}`
                         + `\n**Critical Striker:**  ${Data.space(1)} +${cStriker} ${Data.emojis.crit}`
                         + `\n**Critical Hitter:** ${Data.space(3)} +${hitter} ${Data.emojis.crit}`
-                        + `\nTotals:`
+                        + `\n\`Totals:\``
                         + `\n+${allCritTotal} **|** +${schoolCritTotal} **|** +${universalCritTotal} ${Data.emojis.crit}`, true)
             .addField(`${Data.emojis.block} ━━ BLOCK ━━ ${Data.emojis.block}`, 
                         `*boosted by: ${Data.emojis.int} & ${Data.space(1)}${Data.emojis.will}*`
                         + `\n**Defender:** ${Data.space(1)} +${defender} ${Data.emojis.block}`
                         + `\n**Blocker:** ${Data.space(5)} +${blocker} ${Data.emojis.block}`
-                        + `\nTotal: +${blockTotal} ${Data.emojis.block}`, true)
+                        + `\n\`Total:\` +${blockTotal} ${Data.emojis.block}`, true)
             .addField("\u200b", "\u200b")
             .addField(`${Data.emojis.pcon} ━ PIP CONVERT ━ ${Data.emojis.pcon}`, 
                         `*boosted by: ${Data.emojis.agil} & ${Data.space(1)}${Data.emojis.will}*`
                         + `\n**Pip Conserver:** +${conserver} ${Data.emojis.pcon}`
                         + `\n**Pip Saver:** ${Data.space(10)} +${saver} ${Data.emojis.pcon}`
-                        + `\nTotal: +${pconTotal} ${Data.emojis.pcon}`, true)
+                        + `\n\`Total:\` +${pconTotal} ${Data.emojis.pcon}`, true)
             .addField(`${Data.emojis.pip} ━━━ PIPS ━━━ ${Data.emojis.pip}`, 
                         `*boosted by: ${Data.emojis.str} & ${Data.space(1)}${Data.emojis.int}*`
                         + `\n**Pip 'O Plenty:** ${Data.space(1)} ${oplenty}% ${Data.emojis.pip}`
                         + `\n**Pip Boost:** 5% ${Data.emojis.pip}`
-                        + `\nTotal: ${pipTotal}% ${Data.emojis.pip}`, true)
+                        + `\n\`Total:\` ${pipTotal}% ${Data.emojis.pip}`, true)
             .addField("\u200b", "\u200b")
             .addField("Like what you see?", `[**${Data.bot.text}**](${Data.bot.invite}) ${Data.emojis.kiwi}`
                                         + `\n[**${Data.server.text}**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
@@ -187,12 +187,12 @@ module.exports = {
                         `*boosted by: ${Data.emojis.str} & ${Data.space(1)}${Data.emojis.will}*`
                         + `\n**Lively:** ${Data.space(6)} ${lively}% ${Data.emojis.inc}${Data.emojis.heart}`
                         + `\n**Healthy:** ${Data.space(1)} ${healthy}% ${Data.emojis.inc}${Data.emojis.heart}`
-                        + `\nTotal: ${incTotal}% ${Data.emojis.inc}${Data.emojis.heart}`, true)
+                        + `\n\`Total:\` ${incTotal}% ${Data.emojis.inc}${Data.emojis.heart}`, true)
             .addField(`${Data.emojis.out} ━━ OUTGOING ━━ ${Data.emojis.out}`, 
                         `*boosted by: ${Data.emojis.str} & ${Data.space(1)}${Data.emojis.will}*`
                         + `\n**Medic:** ${Data.space(3)} ${medic}% ${Data.emojis.out}${Data.emojis.heart}`
                         + `\n**Healer:** ${Data.space(1)} ${healer}% ${Data.emojis.out}${Data.emojis.heart}`
-                        + `\nTotal: ${outTotal}% ${Data.emojis.out}${Data.emojis.heart}`, true)
+                        + `\n\`Total:\` ${outTotal}% ${Data.emojis.out}${Data.emojis.heart}`, true)
             .addField("\u200b", "\u200b")
             .addField(`${Data.emojis.health} ━━ HEALTH ━━ ${Data.emojis.health}`, 
                         `*boosted by: ${Data.emojis.agil} & ${Data.space(1)}${Data.emojis.will}*`
@@ -200,7 +200,7 @@ module.exports = {
                         + `\n**Health Gift:** ${Data.space(11)} +${gift} ${Data.emojis.health}`
                         + `\n**Health Boost:** ${Data.space(2)} +${boost} ${Data.emojis.health}`
                         + `\n**Health Add:** ${Data.space(8)} +${add} ${Data.emojis.health}`
-                        + `\nTotal: +${healthTotal} ${Data.emojis.health}`, true)
+                        + `\n\`Total:\` +${healthTotal} ${Data.emojis.health}`, true)
             .addField("\u200b", "\u200b")
             .addField("Like what you see?", `[**${Data.bot.text}**](${Data.bot.invite}) ${Data.emojis.kiwi}`
                                         + `\n[**${Data.server.text}**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
@@ -242,12 +242,12 @@ module.exports = {
                         `*boosted by: ${Data.emojis.str} & ${Data.space(1)}${Data.emojis.int}*`
                         + `\n**Stun Recalcitrant:** ${recalcitrant}% ${Data.emojis.stunres}`
                         + `\n**Stun Resistant:** ${Data.space(5)} ${resistant}% ${Data.emojis.stunres}`
-                        + `\nTotal: ${stunTotal}% ${Data.emojis.stunres}`, true)
+                        + `\n\`Total:\` ${stunTotal}% ${Data.emojis.stunres}`, true)
             .addField(`${Data.emojis.luck} ━━ FISH LUCK ━━ ${Data.emojis.luck}`, 
                         `*boosted by: ${Data.emojis.int} & ${Data.space(1)}${Data.emojis.will}*`
                         + `\n**Epic Fish Luck:** ${epicluck}% ${Data.emojis.luck}`
                         + `\n**Fish Luck:** ${Data.space(10)} ${luck}% ${Data.emojis.luck}`
-                        + `\nTotal: ${luckTotal}% ${Data.emojis.luck}`, true)
+                        + `\n\`Total:\` ${luckTotal}% ${Data.emojis.luck}`, true)
             .addField("\u200b", "\u200b")
             .addField(`${Data.emojis.mana} ━━━ MANA ━━━ ${Data.emojis.mana}`, 
                         `*boosted by: ${Data.emojis.int} & ${Data.space(1)}${Data.emojis.will}*`
@@ -255,7 +255,7 @@ module.exports = {
                         + `\n**Mana Gift:** ${Data.space(6)} +${gift} ${Data.emojis.mana}`
                         + `\n**Mana Boost:** ${Data.space(3)} +${boost} ${Data.emojis.mana}`
                         + `\n**Extra Mana:** ${Data.space(4)} +${extra} ${Data.emojis.mana}`
-                        + `\nTotal: +${manaTotal} ${Data.emojis.mana}`, true)
+                        + `\n\`Total:\` +${manaTotal} ${Data.emojis.mana}`, true)
             .addField("\u200b", "\u200b")
             .addField("Like what you see?", `[**${Data.bot.text}**](${Data.bot.invite}) ${Data.emojis.kiwi}`
                                         + `\n[**${Data.server.text}**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
