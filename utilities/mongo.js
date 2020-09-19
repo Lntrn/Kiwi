@@ -13,7 +13,7 @@ const ErrorLog = require("./error.js");
 module.exports = {
     name: "mongo",
     description: "database accessor",
-    async logCMD(bot, msg, serverID, cmd) { // SUCCESS: 77B255 ERROR: DD2E44
+    async logCMD(bot, msg, serverID, cmd) {
         // only log if not testing
         if (msg.channel.id !== Data.personalTestingId && msg.channel.id !== Data.devTestingId) {
             date = new Date();
@@ -51,6 +51,15 @@ module.exports = {
                 await new Promise((resolve) => {
                     resolve(module.exports.updateUsers(db, cmd, bot, msg, serverID));
                 });
+
+                const success = new Discord.MessageEmbed()
+                    .setColor("#77B255")
+                    .setTitle(":white_check_mark: **━━━━━ DATA UPLOAD COMPLETE ━━━━━** :white_check_mark:")
+                    .setDescription(`**Date:** ${date.toDateString()}`
+                                    + `\n\nCommand usage successfully logged in database!`)
+                    .setFooter(Data.footer.text, Data.footer.image);
+
+                await bot.channels.cache.get(Data.dbLog).send(success);
 
             } catch (err) {
                 ErrorLog.log(bot, msg, serverID, `logging cmd: **${cmd}** to database`, err);
