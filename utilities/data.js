@@ -85,7 +85,7 @@ module.exports = {
     altPrefix: "k!", // both prefixes must be the same length
     bugReportId: "744862627188179005",
     suggestionId: "745083262476484668",
-    dbLog: "745691111523352653",
+    dbLog: "745691111523352653", // :white_check_mark: #77B255
     cmdLog: "746087206514327592",
     devCmds: "745373245213114438",
     errorLog: "756179150796226561",

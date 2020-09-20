@@ -35,7 +35,6 @@ module.exports = {
 
             try {
                 await dbClient.connect();
-
                 const db = dbClient.db("KiwiDB");
 
                 // remove extraneous command data for unrecognized command 
@@ -50,16 +49,7 @@ module.exports = {
                 });
                 await new Promise((resolve) => {
                     resolve(module.exports.updateUsers(db, cmd, bot, msg, serverID));
-                });
-
-                const success = new Discord.MessageEmbed()
-                    .setColor("#77B255")
-                    .setTitle(":white_check_mark: **━━━━━ DATA UPLOAD COMPLETE ━━━━━** :white_check_mark:")
-                    .setDescription(`**Date:** ${date.toDateString()}`
-                                    + `\n\nCommand usage successfully logged in database!`)
-                    .setFooter(Data.footer.text, Data.footer.image);
-
-                await bot.channels.cache.get(Data.dbLog).send(success);
+                });                
 
             } catch (err) {
                 ErrorLog.log(bot, msg, serverID, `logging cmd: **${cmd}** to database`, err);
