@@ -9,6 +9,41 @@ module.exports = {
     log(bot, msg, serverID, cmd, error) {
         date = new Date();
 
+        // if the error was due to lack of permissions DM command issuer
+        if (error.code === Discord.Constants.APIErrors.MISSING_PERMISSIONS) {
+            const perms = new Discord.MessageEmbed()
+                .setColor("#DD2E44")
+                .setTitle(":exclamation: **━━━━━━━━━━━ ERROR ━━━━━━━━━━━** :exclamation:")
+                .setDescription(`It seems I don't have permission to send messages in **${msg.channel}**!`
+                                + `\n\nPlease make sure I have the following permissions:`
+                                + `\n:white_small_square:**Send Messages**`
+                                + `\n:white_small_square:**Read Messages**`
+                                + `\n:white_small_square:**Manage Messages**`
+                                + `\n:white_small_square:**Read Message History**`
+                                + `\n:white_small_square:**Use External Emojis**`
+                                + `\n:white_small_square:**Add Reactions**`
+                                + `\n:white_small_square:**Embed Links**`
+                                + `\n\nIf you can't grant those permissions in **${bot.guilds.cache.get(serverID).name}**, please notify a member of staff`
+                                + `\n\nThank you! ❤️`)
+                .setFooter(Data.footer.text, Data.footer.image);
+
+            msg.author.send(perms).catch((err) => {
+                bot.users.fetch(Data.ownerId).then(
+                    function(user) {
+                        const sendError = new Discord.MessageEmbed()
+                            .setColor("#DD2E44")
+                            .setTitle(":exclamation: **━━━━━━━━━━━ ERROR ━━━━━━━━━━━** :exclamation:")
+                            .setDescription(`Couldn't DM user ${msg.author}! Check <#${Data.errorLog}> for Permissions error`
+                                            + `\n\n**Error:**`
+                                            + `\n${err}`)
+                            .setFooter(Data.footer.text, Data.footer.image);
+
+                        user.send(sendError);
+                    }
+                )
+            });
+        }
+
         const log = new Discord.MessageEmbed()
             .setColor("#DD2E44")
             .setTitle(":exclamation: **━━━━━━━━━━━ ERROR ━━━━━━━━━━━** :exclamation:")
