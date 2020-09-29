@@ -79,7 +79,7 @@ module.exports = {
     },
     bot: {
         text: "Invite Kiwi!",
-        invite: "https://discord.com/api/oauth2/authorize?client_id=743944201682681937&permissions=8&scope=bot \"Invite Link for Kiwi!\""
+        invite: "https://discord.com/api/oauth2/authorize?client_id=743944201682681937&permissions=354368&scope=bot \"Invite Link for Kiwi!\""
     },
     prefix: "!k",
     altPrefix: "k!", // both prefixes must be the same length
