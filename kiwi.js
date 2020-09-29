@@ -49,8 +49,9 @@ bot.on("ready", () => {
 });
 
 bot.on("message", message => {
+	const prefixCheck = message.content.substr(0, Data.prefix.length);
 	// if another bot sent the message, if it has attachments, or if the prefix wasn't used, do nothing
-	if (message.author.bot || message.attachments.size !== 0 || (!message.content.startsWith(Data.prefix) && !message.content.startsWith(Data.altPrefix)))
+	if (message.author.bot || message.attachments.size !== 0 || (prefixCheck.toLowerCase() !== Data.prefix && prefixCheck.toLowerCase() !== Data.altPrefix))
 		return;
 
 	// if in devmode, only respond to dev
