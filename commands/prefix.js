@@ -18,6 +18,9 @@ module.exports = {
         // react to command
         msg.react(bot.emojis.cache.get(Emojis.kiwi.id));
 
+        // get author as guild member
+        const member = bot.guilds.cache.get(msg.guild.id).members.cache.get(msg.author.id);
+
         // if no inputs provided
         if (args.length === 0) {
             let prefix = Config.defaultPrefix;
@@ -42,7 +45,7 @@ module.exports = {
 
             msg.channel.send(confirmation).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "prefix [current prefix response]", err));
 
-        } else if (msg.author.hasPermission("MANAGE_GUILD")) {
+        } else if (member.hasPermission("MANAGE_GUILD")) {
             const newPrefix = args.shift();
 
             try {
