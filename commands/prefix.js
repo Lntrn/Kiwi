@@ -22,7 +22,7 @@ module.exports = {
 
             try {
                 // get current prefix
-                prefix = await Mongo.getPrefix(bot, msg);
+                prefix = await Config.prefix(bot, msg);
 
             } catch (err) {
                 ErrorLog.log(bot, msg, msg.guild.id, `prefix [loading prefix]`, err);
@@ -32,7 +32,7 @@ module.exports = {
             const confirmation = new Discord.MessageEmbed()
                 .setColor("#8899A6")
                 .setTitle(`🛠️ **━━━━━━ PREFIX ━━━━━━** 🛠️`)
-                .setDescription(`Your server's prefix for Kiwi ${Data.space(1)}${Data.emojis.kiwi} is: \`${prefix}\``)
+                .setDescription(`Your server's prefix for Kiwi ${Data.space(1)}${Data.emojis.kiwi} is: **\`${prefix}\`**`)
                 .addField("\u200b", "\u200b")
                 .addField("Like what you see?", `[**${Data.bot.text}**](${Data.bot.invite}) ${Data.emojis.kiwi}`
                                             + `\n[**${Data.server.text}**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
@@ -54,9 +54,9 @@ module.exports = {
             // inform user of update
             const confirmation = new Discord.MessageEmbed()
                 .setColor("#77B255")
-                .setTitle(`✅ **━━━━━━ PREFIX UPDATED ━━━━━━** ✅`)
+                .setTitle(`✅ **━━━━ PREFIX UPDATED ━━━━** ✅`)
                 .setDescription(`Your server's prefix for Kiwi ${Data.space(1)}${Data.emojis.kiwi}`
-                                + `\nhas been **successfully updated** to \`${newPrefix}\`!`)
+                                + `\nhas been **successfully updated** to **\`${newPrefix}\`**!`)
                 .addField("\u200b", "\u200b")
                 .addField("Like what you see?", `[**${Data.bot.text}**](${Data.bot.invite}) ${Data.emojis.kiwi}`
                                             + `\n[**${Data.server.text}**](${Data.server.link}) ${Data.emojis.spiralscholars}`)

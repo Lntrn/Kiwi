@@ -9,8 +9,6 @@ require("dotenv-flow");
 const Data = require("./data.js");
 // require error logger module
 const ErrorLog = require("./error.js");
-// require Config
-const Config = require("./config.js");
 
 module.exports = {
     name: "mongo",
@@ -139,30 +137,6 @@ module.exports = {
             ErrorLog.log(bot, msg, serverID, `updating users collection: **${cmd}**`, err);
         }
 
-    },
-    async getPrefix(bot, msg) {
-        // create database client
-        const dbClient = new MongoDB(process.env.MONGOURI, { useUnifiedTopology: true });
-        const serverID = msg.guild.id;
-
-        try {
-            await dbClient.connect();
-            const db = dbClient.db("KiwiDB");
-            const servers = db.collection("servers");
-
-            const serverData = await servers.findOne( { "_server" : serverID } );
-
-            if (serverData.hasOwnProperty("_prefix"))
-                return serverData._prefix;
-            else
-                return Config.defaultPrefix;
-
-        } catch (err) {
-            ErrorLog.log(bot, msg, serverID, `getting server prefix for ${msg.guild.name} [${serverID}] from database`, err);
-
-        } finally {
-            dbClient.close();
-        }
     },
     async updatePrefix(bot, msg, newPrefix) {
         // create database client

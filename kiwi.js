@@ -7,10 +7,9 @@ const Discord = require("discord.js");
 const FS = require("fs");
 // require dotenv-flow to load environment variables
 require("dotenv-flow").config();
-// require data.js module
-const Data = require("./utilities/data.js");
+// require Config module
+const Config = require("./utilities/config.js");
 
-const Mongo = require("./utilities/mongo.js");
 
 // create new bot
 const bot = new Discord.Client();
@@ -41,12 +40,12 @@ for (const file of eventFiles) {
 }
 
 bot.on("ready", async () => {
-	bot.user.setActivity(`🐸 Use ${Data.prefix}help`);
+	bot.user.setActivity(`🐸 Use ${Config.defaultPrefix}help`);
 	console.log(`Logged in as ${bot.user.tag}!`);
 	
 	// send launch notification
 	try {
-		const owner = await bot.users.fetch(Data.ownerId);
+		const owner = await bot.users.fetch(Config.ownerID);
 		let date = new Date();
 		owner.send("Bot Online! **" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + "**");
 
@@ -55,19 +54,21 @@ bot.on("ready", async () => {
 	}
 });
 
-bot.on("message", message => {	
-	const prefixCheck = message.content.substr(0, Data.prefix.length);
+bot.on("message", async (message) => {
+	const prefix = await Config.prefix(bot, message); // promise rejection handled internally
+	const prefixCheck = message.content.substr(0, prefix.length);
+
 	// if another bot sent the message, if it has attachments, or if the prefix wasn't used, do nothing
-	if (message.author.bot || message.attachments.size !== 0 || (prefixCheck.toLowerCase() !== Data.prefix && prefixCheck.toLowerCase() !== Data.altPrefix))
+	if (message.author.bot || message.attachments.size !== 0 || prefixCheck.toLowerCase() !== prefix)
 		return;
 
 	// if in devmode, only respond to dev
-	if (Data.devmode && message.author.id !== Data.ownerId) {
+	if (Config.devmode && message.author.id !== Config.ownerID) {
 		return;
 	}
 
 	// parsing command and arguments beginning after the prefix
-	let args = message.content.substring(Data.prefix.length).split(/[\s|\r?\n|\r]/);
+	let args = message.content.substring(prefix.length).split(/[\s|\r?\n|\r]/);
 	// remove any remaining empty space
 	args = args.filter(ele => ele !== "" && ele !== " ");
 	// retrieve command
@@ -130,7 +131,7 @@ bot.on("guildUpdate", (oldGuild, newGuild) => {
 })
 
 // login to Discord with bot token
-if (Data.devmode)
+if (Config.devmode)
 	bot.login(process.env.KIWIDEVTOKEN);
 else
 	bot.login(process.env.KIWITOKEN);
