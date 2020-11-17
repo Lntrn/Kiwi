@@ -1,7 +1,13 @@
 // require discord.js module
 const Discord = require("discord.js");
-// require data.js module
-const Data = require("./data.js");
+// require config.js module
+const Config = require("../utilities/config.js");
+// require channels.js module
+const Channels = require("../utilities/channels.js");
+// require format.js module
+const Format = require("../utilities/format.js");
+// require roles.js module
+const Roles = require("../utilities/roles.js");
 
 module.exports = {
     name: "error",
@@ -25,18 +31,18 @@ module.exports = {
                                 + `\n▫️**Embed Links**`
                                 + `\n\nIf you can't grant those permissions in **${bot.guilds.cache.get(serverID).name}**, please notify a member of staff`
                                 + `\n\nThank you! ❤️`)
-                .setFooter(Data.footer.text, Data.footer.image);
+                .setFooter(Format.footer.text, Format.footer.image);
 
             msg.author.send(perms).catch((err) => {
-                bot.users.fetch(Data.ownerId).then(
+                bot.users.fetch(Config.ownerID).then(
                     function(user) {
                         const sendError = new Discord.MessageEmbed()
                             .setColor("#DD2E44")
                             .setTitle(":exclamation: **━━━━━━━━━━━ ERROR ━━━━━━━━━━━** :exclamation:")
-                            .setDescription(`Couldn't DM user ${msg.author}! Check <#${Data.errorLog}> for Permissions error`
+                            .setDescription(`Couldn't DM user ${msg.author}! Check ${Channels.errorLog.pub} for Permissions error`
                                             + `\n\n**Error:**`
                                             + `\n${err}`)
-                            .setFooter(Data.footer.text, Data.footer.image);
+                            .setFooter(Format.footer.text, Format.footer.image);
 
                         user.send(sendError);
                     }
@@ -54,9 +60,9 @@ module.exports = {
                             + `\n**Date:** ${date.toDateString()}`
                             + `\n\n**Error:**`
                             + `\n${error}`)
-            .setFooter(Data.footer.text, Data.footer.image);
+            .setFooter(Format.footer.text, Format.footer.image);
 
-        bot.channels.cache.get(Data.errorLog).send(log);
-        bot.channels.cache.get(Data.errorLog).send(Data.devReportRole);
+        bot.channels.cache.get(Channels.errorLog.id).send(log);
+        bot.channels.cache.get(Channels.errorLog.id).send(Roles.dev.pub);
     }
 }
