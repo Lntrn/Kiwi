@@ -55,17 +55,17 @@ bot.on("ready", async () => {
 });
 
 bot.on("message", async (message) => {
-	const prefix = await Config.prefix(bot, message); // promise rejection handled internally
-	const prefixCheck = message.content.substr(0, prefix.length);
-
-	// if another bot sent the message, if it has attachments, or if the prefix wasn't used, do nothing
-	if (message.author.bot || message.attachments.size !== 0 || prefixCheck.toLowerCase() !== prefix)
-		return;
-
 	// if in devmode, only respond to dev
 	if (Config.devmode && message.author.id !== Config.ownerID) {
 		return;
 	}
+
+	const prefix = await Config.prefix(bot, message); // promise rejection handled internally
+	const prefixCheck = message.content.substr(0, prefix.length);
+
+	// if another bot sent the message, if it has attachments, or if the prefix wasn't used, do nothing
+	if (message.author.bot || message.attachments.size !== 0 || prefixCheck.toLowerCase() !== prefix.toLowerCase())
+		return;
 
 	// parsing command and arguments beginning after the prefix
 	let args = message.content.substring(prefix.length).split(/[\s|\r?\n|\r]/);
