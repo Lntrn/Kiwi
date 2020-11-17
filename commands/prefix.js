@@ -42,7 +42,7 @@ module.exports = {
 
             msg.channel.send(confirmation).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "prefix [current prefix response]", err));
 
-        } else {
+        } else if (msg.author.hasPermission("MANAGE_GUILD")) {
             const newPrefix = args.shift();
 
             try {
