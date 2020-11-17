@@ -1,7 +1,9 @@
 // require discord.js module
 const Discord = require("discord.js");
-// require data.js module
-const Data = require("../utilities/data.js");
+// require emojis.js module
+const Emojis = require("../utilities/emojis.js");
+// require format.js module
+const Format = require("../utilities/format.js");
 // require mongo.js module
 const Mongo = require("../utilities/mongo.js");
 // require error logger module
@@ -14,7 +16,7 @@ module.exports = {
     description: "change Kiwi's prefix for the server",
     async execute(bot, msg, args) {
         // react to command
-        msg.react(bot.emojis.cache.get(Data.emojiIds.kiwi));
+        msg.react(bot.emojis.cache.get(Emojis.kiwi.id));
 
         // if no inputs provided
         if (args.length === 0) {
@@ -32,11 +34,11 @@ module.exports = {
             const confirmation = new Discord.MessageEmbed()
                 .setColor("#8899A6")
                 .setTitle(`🛠️ **━━━━━━ PREFIX ━━━━━━** 🛠️`)
-                .setDescription(`Your server's prefix for Kiwi ${Data.space(1)}${Data.emojis.kiwi} is: **\`${prefix}\`**`)
+                .setDescription(`Your server's prefix for Kiwi ${Format.space(1)}${Emojis.kiwi.pub} is: **\`${prefix}\`**`)
                 .addField("\u200b", "\u200b")
-                .addField("Like what you see?", `[**${Data.bot.text}**](${Data.bot.invite}) ${Data.emojis.kiwi}`
-                                            + `\n[**${Data.server.text}**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
-                .setFooter(Data.footer.text, Data.footer.image);
+                .addField("Like what you see?", `[**${Format.bot.text}**](${Format.bot.invite}) ${Emojis.kiwi.pub}`
+                                            + `\n[**${Format.server.text}**](${Format.server.link}) ${Emojis.spiralscholars.pub}`)
+                .setFooter(Format.footer.text, Format.footer.image);
 
             msg.channel.send(confirmation).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "prefix [current prefix response]", err));
 
@@ -55,12 +57,12 @@ module.exports = {
             const confirmation = new Discord.MessageEmbed()
                 .setColor("#77B255")
                 .setTitle(`✅ **━━━━ PREFIX UPDATED ━━━━** ✅`)
-                .setDescription(`Your server's prefix for Kiwi ${Data.space(1)}${Data.emojis.kiwi}`
+                .setDescription(`Your server's prefix for Kiwi ${Format.space(1)}${Emojis.kiwi.pub}`
                                 + `\nhas been **successfully updated** to **\`${newPrefix}\`**!`)
                 .addField("\u200b", "\u200b")
-                .addField("Like what you see?", `[**${Data.bot.text}**](${Data.bot.invite}) ${Data.emojis.kiwi}`
-                                            + `\n[**${Data.server.text}**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
-                .setFooter(Data.footer.text, Data.footer.image);
+                .addField("Like what you see?", `[**${Format.bot.text}**](${Format.bot.invite}) ${Emojis.kiwi.pub}`
+                                            + `\n[**${Format.server.text}**](${Format.server.link}) ${Emojis.spiralscholars.pub}`)
+                .setFooter(Format.footer.text, Format.footer.image);
 
             msg.channel.send(confirmation).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "prefix [update response]", err));
         }
