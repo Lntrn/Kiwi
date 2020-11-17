@@ -96,16 +96,19 @@ bot.on("message", async (message) => {
 			bot.commands.get("prefix").execute(bot, message, args);
 			break;
 
-		// Dev Commands (eventually streamline "not owner" check from here - attach not owner response to error.js)
+		// Dev Commands
 		case "ping":
-			bot.devCommands.get("ping").execute(bot, message);
+			if (message.author.id === Config.ownerID)
+				bot.devCommands.get("ping").execute(bot, message);
 			break;
 		case "servers":
-			bot.devCommands.get("servers").execute(bot, message);
+			if (message.author.id === Config.ownerID)
+				bot.devCommands.get("servers").execute(bot, message);
 			break;
-		case "cmds":
-			// bot.devCommands.get("cmds").execute(bot, message);
-			break;
+		// case "cmds":
+		// 	if (message.author.id === Config.ownerID)
+		// 		bot.devCommands.get("cmds").execute(bot, message);
+		// 	break;
 
 		// Ignore
 		case "ick":

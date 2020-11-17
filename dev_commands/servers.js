@@ -12,69 +12,56 @@ module.exports = {
         // react to command
         msg.react(bot.emojis.cache.get(Data.emojiIds.kiwi));
         
-        // allow usage only if user is the owner
-        if (msg.author.id === Data.ownerId) {
-            let servers = bot.guilds.cache.array().sort();
-            let pageCount = Math.floor(servers.length / 20) + 1;
-            let memberCount = 0;
+        let servers = bot.guilds.cache.array().sort();
+        let pageCount = Math.floor(servers.length / 20) + 1;
+        let memberCount = 0;
 
-            servers.forEach(
-                function(server) {
-                    memberCount += server.memberCount;
-                }
-            );
+        servers.forEach(
+            function(server) {
+                memberCount += server.memberCount;
+            }
+        );
 
-            bot.channels.cache.get(Data.devCmds).send(module.exports.generatePage(bot, servers, memberCount, 1, pageCount)).then(
-                function(sentMsg) {
-                    let page = 1;
-    
-                    // generate reactions
-                    sentMsg.react("⬅️");
-                    sentMsg.react("➡️");
-    
-                    // reaction filters
-                    const leftFilter = (reaction, user) => reaction.emoji.name === "⬅️" && user.id === msg.author.id;
-                    const rightFilter = (reaction, user) => reaction.emoji.name === "➡️" && user.id === msg.author.id;
-    
-                    // collectors (parse for 60 seconds)
-                    const leftCollector = sentMsg.createReactionCollector(leftFilter, {time: 60000});
-                    const rightCollector = sentMsg.createReactionCollector(rightFilter, {time: 60000});
-    
-                    leftCollector.on("collect", 
-                        function() {
-                            sentMsg.reactions.cache.get("⬅️").users.remove(msg.author);
-                            module.exports.resetTimer(leftCollector, rightCollector);
-    
-                            if (page !== 1) { 
-                                page--;
-                                sentMsg.edit(module.exports.generatePage(bot, servers, memberCount, page, pageCount));
-                            } 
-                        }
-                    );
-                    rightCollector.on("collect", 
-                        function() {
-                            sentMsg.reactions.cache.get("➡️").users.remove(msg.author);
-                            module.exports.resetTimer(leftCollector, rightCollector);
-    
-                            if (page !== pageCount) {
-                                page++;      
-                                sentMsg.edit(module.exports.generatePage(bot, servers, memberCount, page, pageCount));
-                            } 
-                        }
-                    );
-                }
-            ).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "servers", err));
+        bot.channels.cache.get(Data.devCmds).send(module.exports.generatePage(bot, servers, memberCount, 1, pageCount)).then(
+            function(sentMsg) {
+                let page = 1;
 
-        } else {
-            const embed = new Discord.MessageEmbed()
-            .setColor("#DD2E44")
-            .setTitle(":exclamation: **━━━━━ ERROR ━━━━━** :exclamation:")
-            .setDescription(`You must be the bot owner, ${Data.ownerMention}, to use this command!`)
-            .addField("\u200b", "\u200b")
-            .setFooter(Data.footer.text, Data.footer.image);
+                // generate reactions
+                sentMsg.react("⬅️");
+                sentMsg.react("➡️");
 
-            msg.channel.send(embed).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "servers [not dev response]", err));
-        }
+                // reaction filters
+                const leftFilter = (reaction, user) => reaction.emoji.name === "⬅️" && user.id === msg.author.id;
+                const rightFilter = (reaction, user) => reaction.emoji.name === "➡️" && user.id === msg.author.id;
+
+                // collectors (parse for 60 seconds)
+                const leftCollector = sentMsg.createReactionCollector(leftFilter, {time: 60000});
+                const rightCollector = sentMsg.createReactionCollector(rightFilter, {time: 60000});
+
+                leftCollector.on("collect", 
+                    function() {
+                        sentMsg.reactions.cache.get("⬅️").users.remove(msg.author);
+                        module.exports.resetTimer(leftCollector, rightCollector);
+
+                        if (page !== 1) { 
+                            page--;
+                            sentMsg.edit(module.exports.generatePage(bot, servers, memberCount, page, pageCount));
+                        } 
+                    }
+                );
+                rightCollector.on("collect", 
+                    function() {
+                        sentMsg.reactions.cache.get("➡️").users.remove(msg.author);
+                        module.exports.resetTimer(leftCollector, rightCollector);
+
+                        if (page !== pageCount) {
+                            page++;      
+                            sentMsg.edit(module.exports.generatePage(bot, servers, memberCount, page, pageCount));
+                        } 
+                    }
+                );
+            }
+        ).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "servers", err));
     },
     resetTimer(left, right) {
         left.resetTimer({time: 60000});

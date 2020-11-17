@@ -1,7 +1,11 @@
 // require discord.js module
 const Discord = require("discord.js");
-// require data.js module
-const Data = require("../utilities/data.js");
+// require emojis.js module
+const Emojis = require("../utilities/emojis.js");
+// require format.js module
+const Format = require("../utilities/format.js");
+// require channels.js module
+const Channels = require("../utilities/channels.js");
 // require error logger module
 const ErrorLog = require("../utilities/error.js");
 
@@ -10,32 +14,19 @@ module.exports = {
     description: "owner command to check bot's ping",
     execute(bot, msg) {
         // react to command
-        msg.react(bot.emojis.cache.get(Data.emojiIds.kiwi));
+        msg.react(bot.emojis.cache.get(Emojis.kiwi.id));
         
-        // allow usage only if user is the owner
-        if (msg.author.id === Data.ownerId) {
-            const yourPing = new Date().getTime() - msg.createdTimestamp;
-            const botPing = Math.round(bot.ws.ping);
+        const yourPing = new Date().getTime() - msg.createdTimestamp;
+        const botPing = Math.round(bot.ws.ping);
 
-            const embed = new Discord.MessageEmbed()
-                .setColor("#CCD6DD")
-                .setTitle(":satellite: **━━━ BOT PING ━━━** :satellite:")
-                .setDescription(`**Your Ping:** ${yourPing}ms`
-                                + `\n**Bot's Ping:** ${botPing}ms`)
-                .addField("\u200b", "\u200b")
-                .setFooter(Data.footer.text, Data.footer.image);
-
-                bot.channels.cache.get(Data.devCmds).send(embed).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "ping", err));
-
-        } else {
-            const embed = new Discord.MessageEmbed()
-            .setColor("#DD2E44")
-            .setTitle(":exclamation: **━━━━━ ERROR ━━━━━** :exclamation:")
-            .setDescription(`You must be the bot owner, ${Data.ownerMention}, to use this command!`)
+        const embed = new Discord.MessageEmbed()
+            .setColor("#CCD6DD")
+            .setTitle(":satellite: **━━━ BOT PING ━━━** :satellite:")
+            .setDescription(`**Your Ping:** ${yourPing}ms`
+                            + `\n**Bot's Ping:** ${botPing}ms`)
             .addField("\u200b", "\u200b")
-            .setFooter(Data.footer.text, Data.footer.image);
+            .setFooter(Format.footer.text, Format.footer.image);
 
-            msg.channel.send(embed).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "ping [not dev response]", err));
-        }
+        bot.channels.cache.get(Channels.devCmds.id).send(embed).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "ping", err));
     }
 }
