@@ -1,7 +1,11 @@
 // require discord.js module
 const Discord = require("discord.js");
 // require data.js module
-const Data = require("../utilities/data.js");
+const Config = require("../utilities/config.js");
+// require data.js module
+const Emojis = require("../utilities/emojis.js");
+// require data.js module
+const Format = require("../utilities/format.js");
 // require mongo.js module
 const Mongo = require("../utilities/mongo.js");
 // require error logger module
@@ -10,96 +14,107 @@ const ErrorLog = require("../utilities/error.js");
 module.exports = {
     name: "help",
     description: "provides information on Kiwi's commands",
-    execute(bot, msg) {
+    async execute(bot, msg) {
         // react to command
-        msg.react(bot.emojis.cache.get(Data.emojiIds.kiwi));
+        msg.react(bot.emojis.cache.get(Emojis.kiwi.id));
 
-        msg.channel.send(module.exports.pageOne()).then(
-            function(sentMsg) {
-                let page = 1;
+        try {
+            // load prefix
+            const prefix = await Config.prefix(bot, msg);
+            const sentMsg = await msg.channel.send(pageOne(prefix));
 
-                // generate reactions
-                sentMsg.react("⬅️");
-                sentMsg.react("➡️");
+            let page = 1;
 
-                // reaction filters
-                const leftFilter = (reaction, user) => reaction.emoji.name === "⬅️" && user.id === msg.author.id;
-                const rightFilter = (reaction, user) => reaction.emoji.name === "➡️" && user.id === msg.author.id;
+            // generate reactions
+            sentMsg.react("⬅️");
+            sentMsg.react("➡️");
 
-                // collectors (parse for 60 seconds)
-                const leftCollector = sentMsg.createReactionCollector(leftFilter, {time: 60000});
-                const rightCollector = sentMsg.createReactionCollector(rightFilter, {time: 60000});
+            // reaction filters
+            const leftFilter = (reaction, user) => reaction.emoji.name === "⬅️" && user.id === msg.author.id;
+            const rightFilter = (reaction, user) => reaction.emoji.name === "➡️" && user.id === msg.author.id;
 
-                leftCollector.on("collect", 
-                    function() {
-                        sentMsg.reactions.cache.get("⬅️").users.remove(msg.author);
-                        module.exports.resetTimer(leftCollector, rightCollector);
+            // collectors (parse for 60 seconds)
+            const leftCollector = sentMsg.createReactionCollector(leftFilter, {time: 60000});
+            const rightCollector = sentMsg.createReactionCollector(rightFilter, {time: 60000});
 
-                        if (page === 2) {
-                            sentMsg.edit(module.exports.pageOne());   
-                            page = 1;                                                     
-                        } 
-                    }
-                );
-                rightCollector.on("collect", 
-                    function() {
-                        sentMsg.reactions.cache.get("➡️").users.remove(msg.author);
-                        module.exports.resetTimer(leftCollector, rightCollector);
+            leftCollector.on("collect", 
+                function() {
+                    sentMsg.reactions.cache.get("⬅️").users.remove(msg.author);
+                    resetTimer(leftCollector, rightCollector);
 
-                        if (page === 1) {
-                            sentMsg.edit(module.exports.pageTwo());   
-                            page = 2;                                                     
-                        } 
-                    }
-                );
-            }
-        ).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "help", err));
+                    if (page === 2) {
+                        sentMsg.edit(pageOne(prefix));   
+                        page = 1;                                                     
+                    } 
+                }
+            );
+
+            rightCollector.on("collect", 
+                function() {
+                    sentMsg.reactions.cache.get("➡️").users.remove(msg.author);
+                    resetTimer(leftCollector, rightCollector);
+
+                    if (page === 1) {
+                        sentMsg.edit(pageTwo(prefix));   
+                        page = 2;                                                     
+                    } 
+                }
+            );
+
+        } catch (err) {
+            ErrorLog.log(bot, msg, msg.guild.id, "help", err);
+        }
 
         // log command use
         Mongo.logCMD(bot, msg, msg.guild.id, "help");
-    },
-    resetTimer(left, right) {
-        left.resetTimer({time: 60000});
-        right.resetTimer({time: 60000});
-    },
-    pageOne(){
-        const embed = new Discord.MessageEmbed()
-            .setColor("#FFD983")
-            .setTitle(":scroll: **━━━━━ KIWI HELP ━━━━━** :scroll:")
-            .setDescription(`*Prefix is **${Data.prefix}** or **${Data.altPrefix}***`
-                            + `\n\n:small_blue_diamond: **\`${Data.prefix}stats\`**`
-                            + `\n*calculates pet talent stats*`
-                            + `\n\n> ${Data.prefix}stats ${Data.emojis.str} ${Data.emojis.int} ${Data.emojis.agil} ${Data.emojis.will} ${Data.emojis.power}`
-                            + `\n> **ex.**\n> ${Data.prefix}stats 248 308 260 243 227`
-                            + `\n\n:small_blue_diamond: **\`${Data.prefix}invite\`**`
-                            + `\n*get an invite to add Kiwi to your server!*`)
-            .addField("\u200b", "page **1** of **2**")
-            .addField("\u200b", "\u200b")
-            .addField("Still need help?", `Head to our [Support Server](${Data.supportLink})!`
-                                        + `\n\n[**${Data.bot.text}**](${Data.bot.invite}) ${Data.emojis.kiwi}`
-                                        + `\n[**${Data.server.text}**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
-            .setFooter(Data.footer.text, Data.footer.image);
-
-        return embed;
-    },
-    pageTwo(){
-        const embed = new Discord.MessageEmbed()
-            .setColor("#FFD983")
-            .setTitle(":scroll: **━━━━━ KIWI HELP ━━━━━** :scroll:")
-            .setDescription(`*Prefix is **${Data.prefix}** or **${Data.altPrefix}***`
-                            + `\n\n:small_blue_diamond: **\`${Data.prefix}bug\`**`
-                            + `\n*report a bug with Kiwi*`
-                            + `\n\n> **ex.**\n> ${Data.prefix}bug stats aren't working 😑`
-                            + `\n\n:small_blue_diamond: **\`${Data.prefix}suggest\`**`
-                            + `\n*submit a suggestion for Kiwi*`
-                            + `\n\n> **ex.**\n> ${Data.prefix}suggest make bot good pls`)
-            .addField("\u200b", "page **2** of **2**")
-            .addField("\u200b", "\u200b")
-            .addField("Still need help?", `Head to our [Support Server](${Data.supportLink})!`
-                                        + `\n\n[**${Data.bot.text}**](${Data.bot.invite}) ${Data.emojis.kiwi}`
-                                        + `\n[**${Data.server.text}**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
-            .setFooter(Data.footer.text, Data.footer.image);
-
-        return embed;
     }
+}
+
+function resetTimer(left, right) {
+    left.resetTimer({time: 60000});
+    right.resetTimer({time: 60000});
+}
+
+function pageOne(prefix){
+    const embed = new Discord.MessageEmbed()
+        .setColor("#FFD983")
+        .setTitle(":scroll: **━━━━━ KIWI HELP ━━━━━** :scroll:")
+        .setDescription(`*Prefix is **${prefix}***`
+                        + `\n\n:small_blue_diamond: **\`${prefix} stats\`**`
+                        + `\n*calculates pet talent stats*`
+                        + `\n\n> ${prefix}stats ${Emojis.str.pub} ${Emojis.int.pub} ${Emojis.agil.pub} ${Emojis.will.pub} ${Emojis.power.pub}`
+                        + `\n> **ex.**\n> ${prefix}stats 248 308 260 243 227`
+                        + `\n\n:small_blue_diamond: **\`${prefix} invite\`**`
+                        + `\n*get an invite to add Kiwi to your server!*`
+                        + `\n\n:small_blue_diamond: **\`${prefix} prefix\`** **(❗NEW )**`
+                        + `\n*change/get Kiwi's prefix in your server!*`)
+        .addField("\u200b", "page **1** of **2**")
+        .addField("\u200b", "\u200b")
+        .addField("Still need help?", `Head to our [Support Server](${Format.supportLink})!`
+                                    + `\n\n[**${Format.bot.text}**](${Format.bot.invite}) ${Emojis.kiwi.pub}`
+                                    + `\n[**${Format.server.text}**](${Format.server.link}) ${Emojis.spiralscholars.pub}`)
+        .setFooter(Format.footer.text, Format.footer.image);
+
+    return embed;
+}
+
+function pageTwo(prefix){
+    const embed = new Discord.MessageEmbed()
+        .setColor("#FFD983")
+        .setTitle(":scroll: **━━━━━ KIWI HELP ━━━━━** :scroll:")
+        .setDescription(`*Prefix is **${prefix}***`
+                        + `\n\n:small_blue_diamond: **\`${prefix} bug\`**`
+                        + `\n*report a bug with Kiwi*`
+                        + `\n\n> **ex.**\n> ${prefix}bug stats aren't working 😑`
+                        + `\n\n:small_blue_diamond: **\`${prefix} suggest\`**`
+                        + `\n*submit a suggestion for Kiwi*`
+                        + `\n\n> **ex.**\n> ${prefix} suggest make bot good pls`)
+        .addField("\u200b", "page **2** of **2**")
+        .addField("\u200b", "\u200b")
+        .addField("Still need help?", `Head to our [Support Server](${Format.supportLink})!`
+                                    + `\n\n[**${Format.bot.text}**](${Format.bot.invite}) ${Emojis.kiwi.pub}`
+                                    + `\n[**${Format.server.text}**](${Format.server.link}) ${Emojis.spiralscholars.pub}`)
+        .setFooter(Format.footer.text, Format.footer.image);
+
+    return embed;
 }

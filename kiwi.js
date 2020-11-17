@@ -40,7 +40,7 @@ for (const file of eventFiles) {
 }
 
 bot.on("ready", async () => {
-	bot.user.setActivity(`🐸 Use ${Config.defaultPrefix}help`);
+	bot.user.setActivity(`🐸 Use ${Config.defaultPrefix} help`);
 	console.log(`Logged in as ${bot.user.tag}!`);
 	
 	// send launch notification
