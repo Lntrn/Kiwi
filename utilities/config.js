@@ -4,7 +4,7 @@ const MongoDB = require("mongodb").MongoClient;
 const ErrorLog = require("./error.js");
 
 module.exports = {
-    devmode: true,
+    devmode: false,
     update: false,
     defaultPrefix: "!k",
     ownerID: "193427298958049280",
