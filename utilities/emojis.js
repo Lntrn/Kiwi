@@ -1,6 +1,4 @@
 module.exports = {
-    // ID PUB
-
     // Server Logos
     spiralscholars: {
         id: "754405854278844498",
