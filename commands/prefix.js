@@ -1,5 +1,7 @@
 // require discord.js module
 const Discord = require("discord.js");
+// require config.js module
+const Config = require("../utilities/config.js");
 // require emojis.js module
 const Emojis = require("../utilities/emojis.js");
 // require format.js module
@@ -8,8 +10,6 @@ const Format = require("../utilities/format.js");
 const Mongo = require("../utilities/mongo.js");
 // require error logger module
 const ErrorLog = require("../utilities/error.js");
-// require Config
-const Config = require("../utilities/config.js");
 
 module.exports = {
     name: "prefix",
