@@ -40,7 +40,7 @@ module.exports = {
                                             + `\n[**${Data.server.text}**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
                 .setFooter(Data.footer.text, Data.footer.image);
 
-        msg.channel.send(response).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "bug [submission reply]", err));
+        msg.channel.send(response).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "suggest [submission reply]", err));
 
         // log command use
         Mongo.logCMD(bot, msg, msg.guild.id, "suggestion");

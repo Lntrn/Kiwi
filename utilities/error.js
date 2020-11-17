@@ -6,7 +6,7 @@ const Data = require("./data.js");
 module.exports = {
     name: "error",
     description: "sends errors that Kiwi encounters to a logging channel",
-    log(bot, msg, serverID, cmd, error) {
+    log(bot, msg, serverID, cmd, error) { // eventually remove serverID from paramaters (can be obtained from msg)
         date = new Date();
 
         // if the error was due to lack of permissions DM command issuer
@@ -16,13 +16,13 @@ module.exports = {
                 .setTitle(":exclamation: **━━━━━━━━━━━ ERROR ━━━━━━━━━━━** :exclamation:")
                 .setDescription(`It seems I don't have permission to send messages in **${msg.channel}**!`
                                 + `\n\nPlease make sure I have the following permissions:`
-                                + `\n:white_small_square:**Send Messages**`
-                                + `\n:white_small_square:**Read Messages**`
-                                + `\n:white_small_square:**Manage Messages**`
-                                + `\n:white_small_square:**Read Message History**`
-                                + `\n:white_small_square:**Use External Emojis**`
-                                + `\n:white_small_square:**Add Reactions**`
-                                + `\n:white_small_square:**Embed Links**`
+                                + `\n▫️**Send Messages**`
+                                + `\n▫️**Read Messages**`
+                                + `\n▫️**Manage Messages**`
+                                + `\n▫️**Read Message History**`
+                                + `\n▫️**Use External Emojis**`
+                                + `\n▫️**Add Reactions**`
+                                + `\n▫️**Embed Links**`
                                 + `\n\nIf you can't grant those permissions in **${bot.guilds.cache.get(serverID).name}**, please notify a member of staff`
                                 + `\n\nThank you! ❤️`)
                 .setFooter(Data.footer.text, Data.footer.image);

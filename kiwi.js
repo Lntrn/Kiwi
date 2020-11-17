@@ -1,8 +1,3 @@
-// invite link: https://discordapp.com/oauth2/authorize?&bot_id=733764727053746187&scope=bot&permissions=8
-// developer portal: https://discord.com/developers/applications
-// discord.js API: https://discordjs.guide/
-// launch command: nodemon --inspect ballotbot.js
-
 // created by Adam Elaoud (Sap#5703)
 // copyright (c) 2020
 
@@ -15,10 +10,13 @@ require("dotenv-flow").config();
 // require data.js module
 const Data = require("./utilities/data.js");
 
+const Mongo = require("./utilities/mongo.js");
+
 // create new bot
 const bot = new Discord.Client();
 // create collection of bot commands / events 
 bot.commands = new Discord.Collection();
+bot.devCommands = new Discord.Collection();
 bot.events = new Discord.Collection();
 
 // fill command collection
@@ -28,6 +26,13 @@ for (const file of commandFiles) {
 	bot.commands.set(command.name, command);
 }
 
+// fill dev command collection
+const devCommandFiles = FS.readdirSync("./dev_commands");
+for (const file of devCommandFiles) {
+	let command = require(`./dev_commands/${file}`);
+	bot.devCommands.set(command.name, command);
+}
+
 // fill event collection
 const eventFiles = FS.readdirSync("./events");
 for (const file of eventFiles) {
@@ -35,20 +40,22 @@ for (const file of eventFiles) {
 	bot.events.set(event.name, event);
 }
 
-bot.on("ready", () => {
+bot.on("ready", async () => {
 	bot.user.setActivity(`🐸 Use ${Data.prefix}help`);
 	console.log(`Logged in as ${bot.user.tag}!`);
 	
 	// send launch notification
-	const owner = bot.users.fetch(Data.ownerId).then(
-		function(user) {
-			let date = new Date();
-			user.send("Bot Online! **" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + "**");
-		}
-	).catch(err => {console.log("Error sending message! Error: ", err.message)});
+	try {
+		const owner = await bot.users.fetch(Data.ownerId);
+		let date = new Date();
+		owner.send("Bot Online! **" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + "**");
+
+	} catch (err) {
+		console.log("Error sending message! Error: ", err.message);
+	}
 });
 
-bot.on("message", message => {
+bot.on("message", message => {	
 	const prefixCheck = message.content.substr(0, Data.prefix.length);
 	// if another bot sent the message, if it has attachments, or if the prefix wasn't used, do nothing
 	if (message.author.bot || message.attachments.size !== 0 || (prefixCheck.toLowerCase() !== Data.prefix && prefixCheck.toLowerCase() !== Data.altPrefix))
@@ -68,15 +75,7 @@ bot.on("message", message => {
 
 	// checking command request
 	switch(command) {
-		case "ping":
-			bot.commands.get("ping").execute(bot, message);
-			break;
-		case "servers":
-			bot.commands.get("servers").execute(bot, message);
-			break;
-		case "cmds":
-			// bot.commands.get("cmds").execute(bot, message);
-			break;
+		// Commands
 		case "stats":
 			bot.commands.get("stats").execute(bot, message, args);
 			break;
@@ -92,9 +91,27 @@ bot.on("message", message => {
 		case "suggest":
 			bot.commands.get("suggest").execute(bot, message, args);
 			break;
+		case "prefix":
+			bot.commands.get("prefix").execute(bot, message, args);
+			break;
+
+		// Dev Commands (eventually streamline "not owner" check from here - attach not owner response to error.js)
+		case "ping":
+			bot.devCommands.get("ping").execute(bot, message);
+			break;
+		case "servers":
+			bot.devCommands.get("servers").execute(bot, message);
+			break;
+		case "cmds":
+			// bot.devCommands.get("cmds").execute(bot, message);
+			break;
+
+		// Ignore
 		case "ick":
 			// do nothing (ignores MEE6 kick command)
 			break;
+
+		// Default
 		default:
 			bot.commands.get("unrecognized").execute(bot, message, command);
 	}
