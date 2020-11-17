@@ -1,6 +1,6 @@
 module.exports = {
     // User Input
-    bugReport: {
+    bug: {
         id: "744862627188179005",
         pub: "<#744862627188179005>"
     },

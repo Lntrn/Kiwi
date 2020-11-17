@@ -31,8 +31,8 @@ module.exports = {
                             + `\n**Server:** "${msg.guild.name}" (ID: ${msg.guild.id})`
                             + `\n\n**Report:** ${args.join(" ")}`);
 
-        bot.channels.cache.get(Channels.bugReport.id).send(report).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "bug [sending report]", err));
-        bot.channels.cache.get(Channels.bugReport.id).send(Roles.dev.pub).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "bug [notifying dev]", err));
+        bot.channels.cache.get(Channels.bug.id).send(report).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "bug [sending report]", err));
+        bot.channels.cache.get(Channels.bug.id).send(Roles.dev.pub).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "bug [notifying dev]", err));
 
         const response = new Discord.MessageEmbed()
             .setColor("#8899A6")
