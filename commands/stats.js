@@ -1,7 +1,11 @@
 // require discord.js module
 const Discord = require("discord.js");
-// require data.js module
-const Data = require("../utilities/data.js");
+// require config.js module
+const Config = require("../utilities/config.js");
+// require emojis.js module
+const Emojis = require("../utilities/emojis.js");
+// require format.js module
+const Format = require("../utilities/format.js");
 // require mongo.js module
 const Mongo = require("../utilities/mongo.js");
 // require embeds for stat calculations
@@ -14,10 +18,13 @@ module.exports = {
     description: "calculates pet talents based on provided stats",
     async execute(bot, msg, args) {
         // react to command
-        msg.react(bot.emojis.cache.get(Data.emojiIds.kiwi));
+        msg.react(bot.emojis.cache.get(Emojis.kiwi.id));
+
+        // get prefix
+        const prefix = await Config.prefix(bot, msg); // promise rejection handled internally
         
         // command check
-        if (dataCheck(msg, args)) {
+        if (dataCheck(msg, args, prefix)) {
             const str = parseInt(args[0]);
             const int = parseInt(args[1]);
             const agil = parseInt(args[2]);
@@ -27,26 +34,26 @@ module.exports = {
 
             const menu = new Discord.MessageEmbed()
                 .setColor("#C4DE61")
-                .setTitle(`${Data.emojis.kiwi}${Data.space(1)} **━━━━━━━ KIWI PET STATS ━━━━━━━** ${Data.space(1)}${Data.emojis.kiwi}`)
+                .setTitle(`${Emojis.kiwi.pub}${Format.space(1)} **━━━━━━━ KIWI PET STATS ━━━━━━━** ${Format.space(1)}${Emojis.kiwi.pub}`)
                 .setDescription(`Your Stats:`
-                                + `\n${Data.emojis.str}: **${str}**/255 ${Data.space(2)}${Data.emojis.int}: **${int}**/250 ${Data.space(2)}${Data.emojis.agil}: **${agil}**/260 ${Data.space(2)}${Data.emojis.will}: **${will}**/260 ${Data.space(2)}${Data.emojis.power}: **${power}**/250`
+                                + `\n${Emojis.str.pub}: **${str}**/255 ${Format.space(2)}${Emojis.int.pub}: **${int}**/250 ${Format.space(2)}${Emojis.agil.pub}: **${agil}**/260 ${Format.space(2)}${Emojis.will.pub}: **${will}**/260 ${Format.space(2)}${Emojis.power.pub}: **${power}**/250`
                                 + `\n\nUse the reactions below to change pages:`)
-                .addField("\u200b", `${Data.emojis.dmg} **━ Base Stats ━** ${Data.emojis.dmg} ${Data.space(10)} ${Data.emojis.crit} **━ Rating Stats ━** ${Data.emojis.crit}`
-                                    + `\n${Data.space(10)}${Data.emojis.dmg}, ${Data.emojis.res}, ${Data.emojis.pierce}, ${Data.emojis.acc}`
-                                    + `${Data.space(34)}`
-                                    + `${Data.emojis.crit}, ${Data.emojis.block}, ${Data.emojis.pip}, ${Data.emojis.pcon}`)
-                .addField("\u200b", `${Data.emojis.heart} **━ Heal Stats ━** ${Data.emojis.heart} ${Data.space(11)} ${Data.emojis.luck} **━ Misc Stats ━** ${Data.emojis.luck}`
-                                    + `\n${Data.space(16)}${Data.emojis.inc}, ${Data.emojis.out}, ${Data.emojis.health}`
-                                    + `${Data.space(43)}`
-                                    + `${Data.emojis.stunres}, ${Data.emojis.luck}, ${Data.emojis.mana}`)
-                .addField("\u200b", `${Data.emojis.round} **━ Round Stats ━** ${Data.emojis.round}`
-                                    + `\ndisplay stats like **in-game**\nand catch **fake** (${Data.emojis.fake}) stats`)
+                .addField("\u200b", `${Emojis.dmg.pub} **━ Base Stats ━** ${Emojis.dmg.pub} ${Format.space(10)} ${Emojis.crit.pub} **━ Rating Stats ━** ${Emojis.crit.pub}`
+                                    + `\n${Format.space(10)}${Emojis.dmg.pub}, ${Emojis.res.pub}, ${Emojis.pierce.pub}, ${Emojis.acc.pub}`
+                                    + `${Format.space(34)}`
+                                    + `${Emojis.crit.pub}, ${Emojis.block.pub}, ${Emojis.pip.pub}, ${Emojis.pcon.pub}`)
+                .addField("\u200b", `${Emojis.heart.pub} **━ Heal Stats ━** ${Emojis.heart.pub} ${Format.space(11)} ${Emojis.luck.pub} **━ Misc Stats ━** ${Emojis.luck.pub}`
+                                    + `\n${Format.space(16)}${Emojis.inc.pub}, ${Emojis.out.pub}, ${Emojis.health.pub}`
+                                    + `${Format.space(43)}`
+                                    + `${Emojis.stunres.pub}, ${Emojis.luck.pub}, ${Emojis.mana.pub}`)
+                .addField("\u200b", `${Emojis.round.pub} **━ Round Stats ━** ${Emojis.round.pub}`
+                                    + `\ndisplay stats like **in-game**\nand catch **fake** (${Emojis.fake.pub}) stats`)
                 .addField("\u200b", "\u200b")
-                .addField("Like what you see?", `[**${Data.bot.text}**](${Data.bot.invite}) ${Data.emojis.kiwi}`
-                                                + `\n[**${Data.server.text}**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
-                .setFooter(Data.footer.text, Data.footer.image);
+                .addField("Like what you see?", `[**${Format.bot.text}**](${Format.bot.invite}) ${Emojis.kiwi.pub}`
+                                                + `\n[**${Format.server.text}**](${Format.server.link}) ${Emojis.spiralscholars.pub}`)
+                .setFooter(Format.footer.text, Format.footer.image);
 
-            if (Data.update)
+            if (Config.update)
                 menu.description += update();
 
             try {
@@ -56,18 +63,18 @@ module.exports = {
                 let rounded = false;
 
                 // generate reactions
-                sentMsg.react(bot.emojis.cache.get(Data.emojiIds.dmg));
-                sentMsg.react(bot.emojis.cache.get(Data.emojiIds.crit));
-                sentMsg.react(bot.emojis.cache.get(Data.emojiIds.heart));
-                sentMsg.react(bot.emojis.cache.get(Data.emojiIds.luck));
-                sentMsg.react(bot.emojis.cache.get(Data.emojiIds.round));
+                sentMsg.react(bot.emojis.cache.get(Emojis.dmg.id));
+                sentMsg.react(bot.emojis.cache.get(Emojis.crit.id));
+                sentMsg.react(bot.emojis.cache.get(Emojis.heart.id));
+                sentMsg.react(bot.emojis.cache.get(Emojis.luck.id));
+                sentMsg.react(bot.emojis.cache.get(Emojis.round.id));
 
                 // reaction filters
-                const baseFilter = (reaction, user) => reaction.emoji.id === Data.emojiIds.dmg && user.id === msg.author.id;
-                const ratingFilter = (reaction, user) => reaction.emoji.id === Data.emojiIds.crit && user.id === msg.author.id;
-                const healFilter = (reaction, user) => reaction.emoji.id === Data.emojiIds.heart && user.id === msg.author.id;
-                const miscFilter = (reaction, user) => reaction.emoji.id === Data.emojiIds.luck && user.id === msg.author.id;
-                const roundFilter = (reaction, user) => reaction.emoji.id === Data.emojiIds.round && user.id === msg.author.id;
+                const baseFilter = (reaction, user) => reaction.emoji.id === Emojis.dmg.id && user.id === msg.author.id;
+                const ratingFilter = (reaction, user) => reaction.emoji.id === Emojis.crit.id && user.id === msg.author.id;
+                const healFilter = (reaction, user) => reaction.emoji.id === Emojis.heart.id && user.id === msg.author.id;
+                const miscFilter = (reaction, user) => reaction.emoji.id === Emojis.luck.id && user.id === msg.author.id;
+                const roundFilter = (reaction, user) => reaction.emoji.id === Emojis.round.id && user.id === msg.author.id;
 
                 // collectors (parse for 60 seconds)
                 const baseCollector = sentMsg.createReactionCollector(baseFilter, {time: 60000});
@@ -78,7 +85,7 @@ module.exports = {
 
                 baseCollector.on("collect", 
                     function() {
-                        sentMsg.reactions.cache.get(Data.emojiIds.dmg).users.remove(msg.author);
+                        sentMsg.reactions.cache.get(Emojis.dmg.id).users.remove(msg.author);
                         resetTimer(baseCollector, ratingCollector, healCollector, miscCollector, roundCollector);
 
                         if (rounded)
@@ -92,7 +99,7 @@ module.exports = {
 
                 ratingCollector.on("collect", 
                     function() {
-                        sentMsg.reactions.cache.get(Data.emojiIds.crit).users.remove(msg.author);
+                        sentMsg.reactions.cache.get(Emojis.crit.id).users.remove(msg.author);
                         resetTimer(baseCollector, ratingCollector, healCollector, miscCollector, roundCollector);
 
                         if (rounded)
@@ -106,7 +113,7 @@ module.exports = {
 
                 healCollector.on("collect", 
                     function() {
-                        sentMsg.reactions.cache.get(Data.emojiIds.heart).users.remove(msg.author);
+                        sentMsg.reactions.cache.get(Emojis.heart.id).users.remove(msg.author);
                         resetTimer(baseCollector, ratingCollector, healCollector, miscCollector, roundCollector);
 
                         if (rounded)
@@ -120,7 +127,7 @@ module.exports = {
 
                 miscCollector.on("collect", 
                     function() {
-                        sentMsg.reactions.cache.get(Data.emojiIds.luck).users.remove(msg.author);
+                        sentMsg.reactions.cache.get(Emojis.luck.id).users.remove(msg.author);
                         resetTimer(baseCollector, ratingCollector, healCollector, miscCollector, roundCollector);
 
                         if (rounded)
@@ -134,7 +141,7 @@ module.exports = {
 
                 roundCollector.on("collect", 
                     function() {
-                        sentMsg.reactions.cache.get(Data.emojiIds.round).users.remove(msg.author);
+                        sentMsg.reactions.cache.get(Emojis.round.id).users.remove(msg.author);
                         resetTimer(baseCollector, ratingCollector, healCollector, miscCollector, roundCollector);
 
                         switch (page) {
@@ -201,20 +208,20 @@ function resetTimer(base, rating, health, misc, round) {
     round.resetTimer({time: 60000});
 }
 
-function dataCheck(msg, args) {
+function dataCheck(msg, args, prefix) {
     // if more or less than 5 arguments are provided
     if (args.length !== 5) {
         const amountEmbed = new Discord.MessageEmbed()
             .setColor("#DD2E44")
             .setTitle(":exclamation: **━━━━━━━━ ERROR ━━━━━━━━** :exclamation:")
-            .setDescription(`You must enter **5 numbers** with the **${Data.prefix}stats** command!
+            .setDescription(`You must enter **5 numbers** with the **${prefix} stats** command!
                             \n*\`You did not enter 5 numbers with the command\`*
-                            \n${Data.prefix}stats ${Data.emojis.str} ${Data.emojis.int} ${Data.emojis.agil} ${Data.emojis.will} ${Data.emojis.power}
-                            \n> **ex.**\n> ${Data.prefix}stats 248 308 260 243 227`)
+                            \n${prefix} stats ${Emojis.str.pub} ${Emojis.int.pub} ${Emojis.agil.pub} ${Emojis.will.pub} ${Emojis.power.pub}
+                            \n> **ex.**\n> ${prefix} stats 248 308 260 243 227`)
             .addField("\u200b", "\u200b")
-            .addField("Like what you see?", `[**${Data.bot.text}**](${Data.bot.invite}) ${Data.emojis.kiwi}`
-                                            + `\n[**${Data.server.text}**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
-            .setFooter(Data.footer.text, Data.footer.image);
+            .addField("Like what you see?", `[**${Format.bot.text}**](${Format.bot.invite}) ${Emojis.kiwi.pub}`
+                                            + `\n[**${Format.server.text}**](${Format.server.link}) ${Emojis.spiralscholars.pub}`)
+            .setFooter(Format.footer.text, Format.footer.image);
 
         msg.channel.send(amountEmbed).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [not 5 num entered error]", err));
         return false;
@@ -232,14 +239,14 @@ function dataCheck(msg, args) {
             const typeEmbed = new Discord.MessageEmbed()
                 .setColor("#DD2E44")
                 .setTitle(":exclamation: **━━━━━━━━ ERROR ━━━━━━━━** :exclamation:")
-                .setDescription(`You must enter **5 numbers** with the **${Data.prefix}stats** command!
+                .setDescription(`You must enter **5 numbers** with the **${prefix} stats** command!
                                 \n*\`You entered a non-number with the command\`*
-                                \n${Data.prefix}stats ${Data.emojis.str} ${Data.emojis.int} ${Data.emojis.agil} ${Data.emojis.will} ${Data.emojis.power}
-                                \n> **ex.**\n> ${Data.prefix}stats 248 308 260 243 227`)
+                                \n${prefix} stats ${Emojis.str.pub} ${Emojis.int.pub} ${Emojis.agil.pub} ${Emojis.will.pub} ${Emojis.power.pub}
+                                \n> **ex.**\n> ${prefix} stats 248 308 260 243 227`)
                 .addField("\u200b", "\u200b")
-                .addField("Like what you see?", `[**${Data.bot.text}**](${Data.bot.invite}) ${Data.emojis.kiwi}`
-                                            + `\n[**${Data.server.text}**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
-                .setFooter(Data.footer.text, Data.footer.image);
+                .addField("Like what you see?", `[**${Format.bot.text}**](${Format.bot.invite}) ${Emojis.kiwi.pub}`
+                                            + `\n[**${Format.server.text}**](${Format.server.link}) ${Emojis.spiralscholars.pub}`)
+                .setFooter(Format.footer.text, Format.footer.image);
 
             msg.channel.send(typeEmbed).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [non num entered error]", err));
             return false;
@@ -249,14 +256,14 @@ function dataCheck(msg, args) {
             const boundsEmbed = new Discord.MessageEmbed()
                 .setColor("#DD2E44")
                 .setTitle(":exclamation: **━━━━━━━━ ERROR ━━━━━━━━** :exclamation:")
-                .setDescription(`You must enter **5 numbers** with the **${Data.prefix}stats** command!
+                .setDescription(`You must enter **5 numbers** with the **${prefix} stats** command!
                                 \n*\`You entered a stat that was either too big or too small\`*
-                                \n${Data.prefix}stats ${Data.emojis.str} ${Data.emojis.int} ${Data.emojis.agil} ${Data.emojis.will} ${Data.emojis.power}
-                                \n> **ex.**\n> ${Data.prefix}stats 248 308 260 243 227`)
+                                \n${prefix} stats ${Emojis.str.pub} ${Emojis.int.pub} ${Emojis.agil.pub} ${Emojis.will.pub} ${Emojis.power.pub}
+                                \n> **ex.**\n> ${prefix} stats 248 308 260 243 227`)
                 .addField("\u200b", "\u200b")
-                .addField("Like what you see?", `[**${Data.bot.text}**](${Data.bot.invite}) ${Data.emojis.kiwi}`
-                                            + `\n[**${Data.server.text}**](${Data.server.link}) ${Data.emojis.spiralscholars}`)
-                .setFooter(Data.footer.text, Data.footer.image);
+                .addField("Like what you see?", `[**${Format.bot.text}**](${Format.bot.invite}) ${Emojis.kiwi.pub}`
+                                            + `\n[**${Format.server.text}**](${Format.server.link}) ${Emojis.spiralscholars.pub}`)
+                .setFooter(Format.footer.text, Format.footer.image);
 
             msg.channel.send(boundsEmbed).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [out of bounds error]", err));
             return false;
@@ -268,8 +275,8 @@ function dataCheck(msg, args) {
 
 function update() {
     return `\n\n\n**:new: ━━ NEW UPDATE ━━ :new:**`
-        + `\n\nPress the ${Data.emojis.round}${Data.space(1)} button to toggle *rounded* stats as they're displayed **in game**!`
-        + `\n\nA ${Data.emojis.fake} mark means the stat is **fake**`
+        + `\n\nPress the ${Emojis.round.pub}${Format.space(1)} button to toggle *rounded* stats as they're displayed **in game**!`
+        + `\n\nA ${Emojis.fake.pub} mark means the stat is **fake**`
         + `\n\n> **fake stat ex.**`
-        + `\n> shows **10%** ${Data.emojis.life}${Data.emojis.dmg} on pet, but only gives you **9%** ${Data.emojis.life}${Data.emojis.dmg} in your gear stats`;
+        + `\n> shows **10%** ${Emojis.life.pub}${Emojis.dmg.pub} on pet, but only gives you **9%** ${Emojis.life.pub}${Emojis.dmg.pub} in your gear stats`;
 }
