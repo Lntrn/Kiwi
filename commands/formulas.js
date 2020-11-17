@@ -199,7 +199,7 @@ function rating() {
                     + `\n**Blocker:** ${Format.space(2)} [(2${int}+2${will}+${power})9] / 500`)
         .addField(`${Emojis.pcon.pub} ━━━━ PIP CONVERT ━━━━ ${Emojis.pcon.pub}`, 
                     `**Pip Conserver:** [(2${agil}+2${will}+${power})3] / 125`
-                    + `\n**Pip Saver:** ${Format.space(7)} [(2${int}+2${will}+${power})9] / 500`)
+                    + `\n**Pip Saver:** ${Format.space(7)} [(2${agil}+2${will}+${power})9] / 500`)
         .addField(`${Emojis.pip.pub} ━━━━━━ PIPS ━━━━━━ ${Emojis.pip.pub}`, 
                     `**Pip 'O Plenty:** [(2${str}+2${int}+${power})3] / 250`
                     + `\n**Pip Boost:** N/A *(always 5%)*`)
