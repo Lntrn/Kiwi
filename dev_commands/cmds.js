@@ -4,8 +4,6 @@ const Discord = require("discord.js");
 const MongoDB = require("mongodb").MongoClient;
 // require dotenv-flow to load environment variables
 require("dotenv-flow");
-// require data.js module
-const Data = require("../utilities/data.js");
 // require error logger module
 const ErrorLog = require("../utilities/error.js");
 
