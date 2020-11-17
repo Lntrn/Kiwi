@@ -8,6 +8,7 @@ const Format = require("../utilities/format.js");
 const Mongo = require("../utilities/mongo.js");
 // require error logger module
 const ErrorLog = require("../utilities/error.js");
+const { health } = require("../utilities/emojis.js");
 
 module.exports = {
     name: "formulas",
@@ -16,16 +17,10 @@ module.exports = {
         // react to command
         msg.react(bot.emojis.cache.get(Emojis.kiwi.id));
         
-        const menu = new Discord.MessageEmbed()
-            .setColor("#D5AB88")
-            .setTitle(`🧮${Format.space(1)} **━━━━━━━ TALENT FORMULAS ━━━━━━━** ${Format.space(1)}🧮`)
-            .setDescription(`Use the reactions below to change pages`)
-            .addField("\u200b", "\u200b")
-            .addField("\u200b", `[**${Format.server.text}**](${Format.server.link}) ${Emojis.spiralscholars.pub}`)
-            .setFooter(Format.footer.text, Format.footer.image);
-        
         try {
-            const sentMsg = await msg.channel.send(menu);
+            const sentMsg = await msg.channel.send(menu());
+
+            page = "";
 
             // generate reactions
             sentMsg.react(bot.emojis.cache.get(Emojis.dmg.id));
@@ -49,6 +44,7 @@ module.exports = {
                 function() {
                     sentMsg.reactions.cache.get(Emojis.dmg.id).users.remove(msg.author);
                     resetTimer(baseCollector, ratingCollector, healCollector, miscCollector);
+                    page = "base";
 
                     sentMsg.edit(base()).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "formulas [base]", err));
                 }
@@ -58,6 +54,7 @@ module.exports = {
                 function() {
                     sentMsg.reactions.cache.get(Emojis.crit.id).users.remove(msg.author);
                     resetTimer(baseCollector, ratingCollector, healCollector, miscCollector);
+                    page = "rating";
 
                     sentMsg.edit(rating()).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "formulas [rating]", err));
                 }
@@ -67,6 +64,7 @@ module.exports = {
                 function() {
                     sentMsg.reactions.cache.get(Emojis.heart.id).users.remove(msg.author);
                     resetTimer(baseCollector, ratingCollector, healCollector, miscCollector);
+                    page = "heal";
 
                     sentMsg.edit(healing()).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "formulas [healing]", err));
                 }
@@ -76,8 +74,31 @@ module.exports = {
                 function() {
                     sentMsg.reactions.cache.get(Emojis.luck.id).users.remove(msg.author);
                     resetTimer(baseCollector, ratingCollector, healCollector, miscCollector);
+                    page = "misc";
 
                     sentMsg.edit(misc()).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "formulas [misc]", err));
+                }
+            );
+
+            // edit message when reaction collectors expire
+            miscCollector.on("end",
+                function() {
+                    switch (page) {
+                        case "base":
+                            sentMsg.edit("*The reaction menu on this message has expired*", base());
+                            break;
+                        case "rating":
+                            sentMsg.edit("*The reaction menu on this message has expired*", rating());
+                            break;
+                        case "heal":
+                            sentMsg.edit("*The reaction menu on this message has expired*", healing());
+                            break;
+                        case "misc":
+                            sentMsg.edit("*The reaction menu on this message has expired*", misc());
+                            break;
+                        default:
+                            sentMsg.edit("*The reaction menu on this message has expired*", menu());
+                    }
                 }
             );
 
@@ -95,6 +116,26 @@ function resetTimer(base, rating, health, misc) {
     rating.resetTimer({time: 60000});
     health.resetTimer({time: 60000});
     misc.resetTimer({time: 60000});
+}
+
+function menu() {
+    const menu = new Discord.MessageEmbed()
+        .setColor("#D5AB88")
+        .setTitle(`🧮${Format.space(1)} **━━━━━ TALENT FORMULAS ━━━━━** ${Format.space(1)}🧮`)
+        .setDescription(`Use the reactions below to change pages`)
+        .addField("\u200b", `${Emojis.dmg.pub} **━ Base Stats ━** ${Emojis.dmg.pub} ${Format.space(10)} ${Emojis.crit.pub} **━ Rating Stats ━** ${Emojis.crit.pub}`
+                            + `\n${Format.space(10)}${Emojis.dmg.pub}, ${Emojis.res.pub}, ${Emojis.pierce.pub}, ${Emojis.acc.pub}`
+                            + `${Format.space(34)}`
+                            + `${Emojis.crit.pub}, ${Emojis.block.pub}, ${Emojis.pip.pub}, ${Emojis.pcon.pub}`)
+        .addField("\u200b", `${Emojis.heart.pub} **━ Heal Stats ━** ${Emojis.heart.pub} ${Format.space(11)} ${Emojis.luck.pub} **━ Misc Stats ━** ${Emojis.luck.pub}`
+                            + `\n${Format.space(16)}${Emojis.inc.pub}, ${Emojis.out.pub}, ${Emojis.health.pub}`
+                            + `${Format.space(43)}`
+                            + `${Emojis.stunres.pub}, ${Emojis.luck.pub}, ${Emojis.mana.pub}`)
+        .addField("\u200b", "\u200b")
+        .addField("\u200b", `[**${Format.server.text}**](${Format.server.link}) ${Emojis.spiralscholars.pub}`)
+        .setFooter(Format.footer.text, Format.footer.image);
+
+    return menu;
 }
 
 function base() {

@@ -61,6 +61,16 @@ module.exports = {
                 }
             );
 
+            // edit message when reaction collectors expire
+            rightCollector.on("end", 
+                function() {
+                    if (page === 1)
+                        sentMsg.edit("*The reaction menu on this message has expired*", pageOne(prefix));
+                    else
+                        sentMsg.edit("*The reaction menu on this message has expired*", pageTwo(prefix));
+                }
+            );
+
         } catch (err) {
             ErrorLog.log(bot, msg, msg.guild.id, "help", err);
         }
@@ -79,15 +89,16 @@ function pageOne(prefix){
     const embed = new Discord.MessageEmbed()
         .setColor("#FFD983")
         .setTitle(":scroll: **━━━━━ KIWI HELP ━━━━━** :scroll:")
-        .setDescription(`*Prefix is **${prefix}***`
+        .setDescription(`*Your server's prefix is **${prefix}***`
                         + `\n\n:small_blue_diamond: **\`${prefix} stats\`**`
                         + `\n*calculates pet talent stats*`
                         + `\n\n> ${prefix}stats ${Emojis.str.pub} ${Emojis.int.pub} ${Emojis.agil.pub} ${Emojis.will.pub} ${Emojis.power.pub}`
                         + `\n> **ex.**\n> ${prefix}stats 248 308 260 243 227`
                         + `\n\n:small_blue_diamond: **\`${prefix} invite\`**`
-                        + `\n*get an invite to add Kiwi to your server!*`
+                        + `\n*get an invite to add Kiwi to your server*`
                         + `\n\n:small_blue_diamond: **\`${prefix} prefix\`** **(❗NEW )**`
-                        + `\n*change/get Kiwi's prefix in your server!*`)
+                        + `\n*change/get Kiwi's prefix in your server*`
+                        + `\n*must have **manage server** perm to use*`)
         .addField("\u200b", "page **1** of **2**")
         .addField("\u200b", "\u200b")
         .addField("Still need help?", `Head to our [Support Server](${Format.supportLink})!`
@@ -102,7 +113,9 @@ function pageTwo(prefix){
     const embed = new Discord.MessageEmbed()
         .setColor("#FFD983")
         .setTitle(":scroll: **━━━━━ KIWI HELP ━━━━━** :scroll:")
-        .setDescription(`*Prefix is **${prefix}***`
+        .setDescription(`*Your server's prefix is **${prefix}***`
+                        + `\n\n:small_blue_diamond: **\`${prefix} formulas\`** **(❗NEW )**`
+                        + `\n*view the formulas for the talents Kiwi displays*`
                         + `\n\n:small_blue_diamond: **\`${prefix} bug\`**`
                         + `\n*report a bug with Kiwi*`
                         + `\n\n> **ex.**\n> ${prefix}bug stats aren't working 😑`

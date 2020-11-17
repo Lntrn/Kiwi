@@ -30,34 +30,10 @@ module.exports = {
             const agil = parseInt(args[2]);
             const will = parseInt(args[3]);
             const power = parseInt(args[4]);
-            const happy = str + int + agil + will + power;
-
-            const menu = new Discord.MessageEmbed()
-                .setColor("#C4DE61")
-                .setTitle(`${Emojis.kiwi.pub}${Format.space(1)} **━━━━━━━ KIWI PET STATS ━━━━━━━** ${Format.space(1)}${Emojis.kiwi.pub}`)
-                .setDescription(`Your Stats:`
-                                + `\n${Emojis.str.pub}: **${str}**/255 ${Format.space(2)}${Emojis.int.pub}: **${int}**/250 ${Format.space(2)}${Emojis.agil.pub}: **${agil}**/260 ${Format.space(2)}${Emojis.will.pub}: **${will}**/260 ${Format.space(2)}${Emojis.power.pub}: **${power}**/250`
-                                + `\n\nUse the reactions below to change pages:`)
-                .addField("\u200b", `${Emojis.dmg.pub} **━ Base Stats ━** ${Emojis.dmg.pub} ${Format.space(10)} ${Emojis.crit.pub} **━ Rating Stats ━** ${Emojis.crit.pub}`
-                                    + `\n${Format.space(10)}${Emojis.dmg.pub}, ${Emojis.res.pub}, ${Emojis.pierce.pub}, ${Emojis.acc.pub}`
-                                    + `${Format.space(34)}`
-                                    + `${Emojis.crit.pub}, ${Emojis.block.pub}, ${Emojis.pip.pub}, ${Emojis.pcon.pub}`)
-                .addField("\u200b", `${Emojis.heart.pub} **━ Heal Stats ━** ${Emojis.heart.pub} ${Format.space(11)} ${Emojis.luck.pub} **━ Misc Stats ━** ${Emojis.luck.pub}`
-                                    + `\n${Format.space(16)}${Emojis.inc.pub}, ${Emojis.out.pub}, ${Emojis.health.pub}`
-                                    + `${Format.space(43)}`
-                                    + `${Emojis.stunres.pub}, ${Emojis.luck.pub}, ${Emojis.mana.pub}`)
-                .addField("\u200b", `${Emojis.round.pub} **━ Round Stats ━** ${Emojis.round.pub}`
-                                    + `\ndisplay stats like **in-game**\nand catch **fake** (${Emojis.fake.pub}) stats`)
-                .addField("\u200b", "\u200b")
-                .addField("Like what you see?", `[**${Format.bot.text}**](${Format.bot.invite}) ${Emojis.kiwi.pub}`
-                                                + `\n[**${Format.server.text}**](${Format.server.link}) ${Emojis.spiralscholars.pub}`)
-                .setFooter(Format.footer.text, Format.footer.image);
-
-            if (Config.update)
-                menu.description += update();
+            const happy = str + int + agil + will + power; // currently unused
 
             try {
-                const sentMsg = await msg.channel.send(menu);
+                const sentMsg = await msg.channel.send(menu(str, int, agil, will, power));
 
                 let page = "";
                 let rounded = false;
@@ -190,6 +166,44 @@ module.exports = {
                     }
                 );
 
+            // edit message when reaction collectors expire
+            roundCollector.on("end",
+            function() {
+                switch (page) {
+                    case "base":
+                        if (rounded) {
+                            sentMsg.edit("*The reaction menu on this message has expired*", Stats.base(str, int, agil, will, power, true)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [rounded base]", err));
+                        } else {
+                            sentMsg.edit("*The reaction menu on this message has expired*", Stats.base(str, int, agil, will, power, false)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [base]", err));
+                        }
+                        break;
+                    case "rating":
+                        if (rounded) {
+                            sentMsg.edit("*The reaction menu on this message has expired*", Stats.rating(str, int, agil, will, power, true)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [rounded rating]", err));
+                        } else {
+                            sentMsg.edit("*The reaction menu on this message has expired*", Stats.rating(str, int, agil, will, power, false)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [rating]", err));
+                        }
+                        break;
+                    case "healing":
+                        if (rounded) {
+                            sentMsg.edit("*The reaction menu on this message has expired*", Stats.healing(str, int, agil, will, power, true)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [rounded healing]", err));
+                        } else {
+                            sentMsg.edit("*The reaction menu on this message has expired*", Stats.healing(str, int, agil, will, power, false)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [healing]", err));
+                        }
+                        break;
+                    case "misc":
+                        if (rounded) {
+                            sentMsg.edit("*The reaction menu on this message has expired*", Stats.misc(str, int, agil, will, power, true)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [rounded misc]", err));
+                        } else {
+                            sentMsg.edit("*The reaction menu on this message has expired*", Stats.misc(str, int, agil, will, power, false)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [misc]", err));
+                        }
+                        break;
+                    default:
+                        sentMsg.edit("*The reaction menu on this message has expired*", menu()).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [rounded misc]", err));
+                }
+            }
+        );
+
             } catch (err) {
                 ErrorLog.log(bot, msg, msg.guild.id, "stats [reaction menu]", err);
             }
@@ -206,6 +220,32 @@ function resetTimer(base, rating, health, misc, round) {
     health.resetTimer({time: 60000});
     misc.resetTimer({time: 60000});
     round.resetTimer({time: 60000});
+}
+
+function menu(str, int, agil, will, power) {
+    const menu = new Discord.MessageEmbed()
+        .setColor("#C4DE61")
+        .setTitle(`${Emojis.kiwi.pub}${Format.space(1)} **━━━━━━━ KIWI PET STATS ━━━━━━━** ${Format.space(1)}${Emojis.kiwi.pub}`)
+        .setDescription(`Your Stats:`
+                        + `\n${Emojis.str.pub}: **${str}**/255 ${Format.space(2)}${Emojis.int.pub}: **${int}**/250 ${Format.space(2)}${Emojis.agil.pub}: **${agil}**/260 ${Format.space(2)}${Emojis.will.pub}: **${will}**/260 ${Format.space(2)}${Emojis.power.pub}: **${power}**/250`
+                        + `\n\nUse the reactions below to change pages:`)
+        .addField("\u200b", `${Emojis.dmg.pub} **━ Base Stats ━** ${Emojis.dmg.pub} ${Format.space(10)} ${Emojis.crit.pub} **━ Rating Stats ━** ${Emojis.crit.pub}`
+                            + `\n${Format.space(10)}${Emojis.dmg.pub}, ${Emojis.res.pub}, ${Emojis.pierce.pub}, ${Emojis.acc.pub}`
+                            + `${Format.space(34)}`
+                            + `${Emojis.crit.pub}, ${Emojis.block.pub}, ${Emojis.pip.pub}, ${Emojis.pcon.pub}`)
+        .addField("\u200b", `${Emojis.heart.pub} **━ Heal Stats ━** ${Emojis.heart.pub} ${Format.space(11)} ${Emojis.luck.pub} **━ Misc Stats ━** ${Emojis.luck.pub}`
+                            + `\n${Format.space(16)}${Emojis.inc.pub}, ${Emojis.out.pub}, ${Emojis.health.pub}`
+                            + `${Format.space(43)}`
+                            + `${Emojis.stunres.pub}, ${Emojis.luck.pub}, ${Emojis.mana.pub}`)
+        .addField("\u200b", `${Emojis.round.pub} **━ Round Stats ━** ${Emojis.round.pub}`
+                            + `\ndisplay stats like **in-game**\nand catch **fake** (${Emojis.fake.pub}) stats`)
+        .addField("\u200b", update())
+        .addField("\u200b", "\u200b")
+        .addField("Like what you see?", `[**${Format.bot.text}**](${Format.bot.invite}) ${Emojis.kiwi.pub}`
+                                        + `\n[**${Format.server.text}**](${Format.server.link}) ${Emojis.spiralscholars.pub}`)
+        .setFooter(Format.footer.text, Format.footer.image);
+
+    return menu;
 }
 
 function dataCheck(msg, args, prefix) {
@@ -275,8 +315,8 @@ function dataCheck(msg, args, prefix) {
 
 function update() {
     return `\n\n\n**:new: ━━ NEW UPDATE ━━ :new:**`
-        + `\n\nPress the ${Emojis.round.pub}${Format.space(1)} button to toggle *rounded* stats as they're displayed **in game**!`
-        + `\n\nA ${Emojis.fake.pub} mark means the stat is **fake**`
-        + `\n\n> **fake stat ex.**`
-        + `\n> shows **10%** ${Emojis.life.pub}${Emojis.dmg.pub} on pet, but only gives you **9%** ${Emojis.life.pub}${Emojis.dmg.pub} in your gear stats`;
+            + `\n▫️**\`prefix\`**: set a **custom prefix** for your server`
+            + `\n▫️**\`formulas\`**: get all the formulas for the stats Kiwi displays`
+            + `\n\nNew **universal prefix**: <@743944201682681937>`
+            + `\n> **ex.** <@743944201682681937> stats 235 255 248 243 249`;
 }

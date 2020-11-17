@@ -62,13 +62,29 @@ bot.on("message", async (message) => {
 
 	const prefix = await Config.prefix(bot, message); // promise rejection handled internally
 	const prefixCheck = message.content.substr(0, prefix.length);
+	const universalPrefixCheck = message.content.substr(0, Config.universalPrefix.length);
 
-	// if another bot sent the message, if it has attachments, or if the prefix wasn't used, do nothing
-	if (message.author.bot || message.attachments.size !== 0 || prefixCheck.toLowerCase() !== prefix.toLowerCase())
+	// if a bot sent the message or if it has attachments, ignore
+	if (message.author.bot || message.attachments.size !== 0)
 		return;
 
-	// parsing command and arguments beginning after the prefix
-	let args = message.content.substring(prefix.length).split(/[\s|\r?\n|\r]/);
+
+	// parse command and arguments beginning after the prefix
+	let args = "";
+
+	// if server prefix was used
+	if (prefixCheck.toLowerCase() === prefix.toLowerCase()) {
+		args = message.content.substring(prefix.length).split(/[\s|\r?\n|\r]/);
+
+	// if universal perfix was used
+	} else if (universalPrefixCheck === Config.universalPrefix) {
+		args = message.content.substring(Config.universalPrefix.length).split(/[\s|\r?\n|\r]/);
+
+	// if no prefixes match
+	} else {
+		return;
+	}
+
 	// remove any remaining empty space
 	args = args.filter(ele => ele !== "" && ele !== " ");
 	// retrieve command

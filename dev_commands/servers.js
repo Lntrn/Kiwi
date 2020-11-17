@@ -67,6 +67,13 @@ module.exports = {
                 }
             );
 
+            // edit message when reaction collectors expire
+            rightCollector.on("end", 
+                function() {
+                    sentMsg.edit("*The reaction menu on this message has expired*", generatePage(bot, servers, memberCount, page, pageCount));
+                }
+            );
+
         } catch (err) {
             ErrorLog.log(bot, msg, msg.guild.id, "servers", err);
         }
