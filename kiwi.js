@@ -95,6 +95,9 @@ bot.on("message", async (message) => {
 		case "prefix":
 			bot.commands.get("prefix").execute(bot, message, args);
 			break;
+		case "formulas":
+			bot.commands.get("formulas").execute(bot, message);
+			break;
 
 		// Dev Commands
 		case "ping":
