@@ -48,7 +48,7 @@ module.exports = {
             .setTitle(`${Emojis.dmg.pub} **━━━━━━━━ BASE PET STATS ━━━━━━━━** ${Emojis.dmg.pub}`)
             .setDescription(description)
             .addField(`${Emojis.dmg.pub} ━━ DAMAGE ━━ ${Emojis.dmg.pub}`, 
-                        `*boosted by: ${Emojis.str.pub} & ${Format.space(1)}${Emojis.will.pub}*`
+                        `*boosted by: ${Emojis.str.pub}, ${Format.space(1)}${Emojis.will.pub} & ${Format.space(1)}${Emojis.power.pub}*`
                         + `\n**${Emojis.ice.pub} Dealer:** ${Format.space(1)} ${dealer}% ${Emojis.ice.pub}${Emojis.dmg.pub}`
                         + `\n**${Emojis.ice.pub} Giver:** ${Format.space(4)} ${giver}% ${Emojis.ice.pub}${Emojis.dmg.pub}`
                         + `\n**${Emojis.ice.pub} Boon:** ${Format.space(5)} ${boon}% ${Emojis.ice.pub}${Emojis.dmg.pub}`
@@ -57,7 +57,7 @@ module.exports = {
                         + `\n\`Totals:\``
                         + `\n${alldmgTotal}% **|** ${schoolDmgTotal}% **|** ${universalDmgTotal}% ${Emojis.dmg.pub}`, true)
             .addField(`${Emojis.res.pub} ━━━ RESIST ━━━ ${Emojis.res.pub}`, 
-                        `*boosted by: ${Emojis.str.pub} & ${Format.space(1)}${Emojis.agil.pub}*`
+                        `*boosted by: ${Emojis.str.pub}, ${Format.space(1)}${Emojis.agil.pub} & ${Format.space(1)}${Emojis.power.pub}*`
                         + `\n**${Emojis.ice.pub} Ward:** ${Format.space(2)} ${ward}% ${Emojis.ice.pub}${Emojis.res.pub}`
                         + `\n**${Emojis.ice.pub} Proof:** ${Format.space(2)} ${proof}% ${Emojis.ice.pub}${Emojis.res.pub}`
                         + `\n**${Emojis.ice.pub} Away:** ${Format.space(5)} ${defy}% ${Emojis.ice.pub}${Emojis.res.pub}`
@@ -67,7 +67,7 @@ module.exports = {
                         + `\n${wardTotal}% ${Emojis.ice.pub}${Emojis.res.pub} **|** ${proofDefyTotal}% ${Emojis.res.pub}`, true)
             .addField("\u200b", "\u200b")
             .addField(`${Emojis.acc.pub} ━━ ACCURACY ━━ ${Emojis.acc.pub}`, 
-                        `*boosted by: ${Emojis.int.pub} & ${Format.space(1)}${Emojis.agil.pub}*`
+                        `*boosted by: ${Emojis.int.pub}, ${Format.space(1)}${Emojis.agil.pub} & ${Format.space(1)}${Emojis.power.pub}*`
                         + `\n**${Emojis.ice.pub} Sniper:** ${sniper}% ${Emojis.ice.pub}${Emojis.acc.pub}`
                         + `\n**${Emojis.ice.pub} Shot:** ${Format.space(6)} ${shot}% ${Emojis.ice.pub}${Emojis.acc.pub}`
                         + `\n**${Emojis.ice.pub} Eye:** ${Format.space(6)} ${eye}% ${Emojis.ice.pub}${Emojis.acc.pub}`
@@ -76,7 +76,7 @@ module.exports = {
                         + `\n\`Totals:\``
                         + `\n${schoolAccTotal}% ${Emojis.ice.pub}${Emojis.acc.pub} **|** ${universalAccTotal}% ${Emojis.acc.pub}`, true)
             .addField(`${Emojis.pierce.pub} ━━━ PIERCE ━━━ ${Emojis.pierce.pub}`, 
-                        `*boosted by: ${Emojis.str.pub} & ${Format.space(1)}${Emojis.agil.pub}*`
+                        `*boosted by: ${Emojis.str.pub}, ${Format.space(1)}${Emojis.agil.pub} & ${Format.space(1)}${Emojis.power.pub}*`
                         + `\n**Armor Breaker:** ${Format.space(2)} ${breaker}% ${Emojis.pierce.pub}`
                         + `\n**Armor Piercer:** ${Format.space(1)} ${piercer}% ${Emojis.pierce.pub}`
                         + `\n\`Total:\` ${pierceTotal}% ${Emojis.pierce.pub}`, true)
@@ -125,7 +125,7 @@ module.exports = {
             .setTitle(`${Emojis.crit.pub} **━━━━━━━ RATING PET STATS ━━━━━━━** ${Emojis.crit.pub}`)
             .setDescription(description)
             .addField(`${Emojis.crit.pub} ━━ CRITICAL ━━ ${Emojis.crit.pub}`, 
-                        `*boosted by: ${Emojis.agil.pub} & ${Format.space(1)}${Emojis.will.pub}*`
+                        `*boosted by: ${Emojis.agil.pub}, ${Format.space(1)}${Emojis.will.pub} & ${Format.space(1)}${Emojis.power.pub}*`
                         + `\n**${Emojis.myth.pub} Assailant:** +${assailant} ${Emojis.myth.pub}${Emojis.crit.pub}`
                         + `\n**${Emojis.myth.pub} Striker:** ${Format.space(7)} +${sStriker} ${Emojis.myth.pub}${Emojis.crit.pub}`
                         + `\n**Critical Striker:**  ${Format.space(1)} +${cStriker} ${Emojis.crit.pub}`
@@ -133,13 +133,13 @@ module.exports = {
                         + `\n\`Totals:\``
                         + `\n+${allCritTotal} **|** +${schoolCritTotal} **|** +${universalCritTotal} ${Emojis.crit.pub}`, true)
             .addField(`${Emojis.block.pub} ━━ BLOCK ━━ ${Emojis.block.pub}`, 
-                        `*boosted by: ${Emojis.int.pub} & ${Format.space(1)}${Emojis.will.pub}*`
+                        `*boosted by: ${Emojis.int.pub}, ${Format.space(1)}${Emojis.will.pub} & ${Format.space(1)}${Emojis.power.pub}*`
                         + `\n**Defender:** ${Format.space(1)} +${defender} ${Emojis.block.pub}`
                         + `\n**Blocker:** ${Format.space(5)} +${blocker} ${Emojis.block.pub}`
                         + `\n\`Total:\` +${blockTotal} ${Emojis.block.pub}`, true)
             .addField("\u200b", "\u200b")
             .addField(`${Emojis.pcon.pub} ━ PIP CONVERT ━ ${Emojis.pcon.pub}`, 
-                        `*boosted by: ${Emojis.agil.pub} & ${Format.space(1)}${Emojis.will.pub}*`
+                        `*boosted by: ${Emojis.agil.pub}, ${Format.space(1)}${Emojis.will.pub} & ${Format.space(1)}${Emojis.power.pub}*`
                         + `\n**Pip Conserver:** +${conserver} ${Emojis.pcon.pub}`
                         + `\n**Pip Saver:** ${Format.space(10)} +${saver} ${Emojis.pcon.pub}`
                         + `\n\`Total:\` +${pconTotal} ${Emojis.pcon.pub}`, true)
