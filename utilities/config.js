@@ -25,7 +25,7 @@ module.exports = {
 
             const serverData = await servers.findOne( { "_server" : serverID } );
 
-            if (serverData.hasOwnProperty("_prefix"))
+            if (serverData !== null && serverData.hasOwnProperty("_prefix"))
                 return serverData._prefix;
             else
                 return module.exports.defaultPrefix;
