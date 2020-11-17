@@ -5,8 +5,10 @@ const MongoDB = require("mongodb").MongoClient;
 const { ObjectID } = require("mongodb");
 // require dotenv-flow to load environment variables
 require("dotenv-flow");
-// require data.js module
-const Data = require("./data.js");
+// require channels.js module
+const Channels = require("../utilities/channels.js");
+// require format.js module
+const Format = require("../utilities/format.js");
 // require error logger module
 const ErrorLog = require("./error.js");
 
@@ -15,7 +17,7 @@ module.exports = {
     description: "database accessor",
     async logCMD(bot, msg, serverID, cmd) {
         // only log if not testing
-        if (msg.channel.id !== Data.personalTestingId && msg.channel.id !== Data.devTestingId) {
+        if (msg.channel.id !== Channels.personalTesting.id && msg.channel.id !== Channels.devTesting.id) {
             date = new Date();
 
             const log = new Discord.MessageEmbed()
@@ -26,9 +28,9 @@ module.exports = {
                                 + `\n**Server:** ${bot.guilds.cache.get(serverID).name}`
                                 + `\n**Channel:** ${msg.channel}`
                                 + `\n**Date:** ${date.toDateString()}`)
-                .setFooter(Data.footer.text, Data.footer.image);
+                .setFooter(Format.footer.text, Format.footer.image);
 
-            bot.channels.cache.get(Data.cmdLog).send(log).catch(err => ErrorLog.log(bot, msg, msg.guild.id, `cmd logging [${cmd}]`, err));
+            bot.channels.cache.get(Channels.cmdLog.id).send(log).catch(err => ErrorLog.log(bot, msg, msg.guild.id, `cmd logging [${cmd}]`, err));
         
             // create database client
             const dbClient = new MongoDB(process.env.MONGOURI, { useUnifiedTopology: true });
