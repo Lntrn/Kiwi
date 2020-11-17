@@ -107,29 +107,28 @@ function base() {
 
     const embed = new Discord.MessageEmbed()
         .setColor("#ECC088")
-        .setTitle(`${Emojis.dmg.pub} **━━━━━━━ BASE FORMULAS ━━━━━━━** ${Emojis.dmg.pub}`)
-        .addField(`${Emojis.dmg.pub} ━━━ DAMAGE ━━━ ${Emojis.dmg.pub}`, 
+        .setTitle(`${Emojis.dmg.pub} **━━━ BASE FORMULAS ━━━** ${Emojis.dmg.pub}`)
+        .addField(`${Emojis.dmg.pub} ━━━━ DAMAGE ━━━━ ${Emojis.dmg.pub}`, 
                     `**${ice} Dealer:** [(2${str}+2${will}+${power})3] / 400`
                     + `\n**${ice} Giver:** ${Format.space(8)} (2${str}+2${will}+${power}) / 200`
                     + `\n**${ice} Boon:** ${Format.space(8)} (2${str}+2${will}+${power}) / 400`
                     + `\n**Pain-Giver:** ${Format.space(4)} (2${str}+2${will}+${power}) / 200`
-                    + `\n**Pain-Bringer:** (2${str}+2${will}+${power}) / 400`, true)
-        .addField(`${Emojis.res.pub} ━━━━ RESIST ━━━━ ${Emojis.res.pub}`,
+                    + `\n**Pain-Bringer:** (2${str}+2${will}+${power}) / 400`)
+        .addField(`${Emojis.res.pub} ━━━━━ RESIST ━━━━━ ${Emojis.res.pub}`,
                     `**${ice} Ward:** ${Format.space(2)} [(2${str}+2${agil}+${power})3] / 250`
                     + `\n**${ice} Proof:** ${Format.space(10)} (2${str}+2${agil}+${power}) / 125`
                     + `\n**${ice} Away:** ${Format.space(9)} (2${str}+2${agil}+${power}) / 250`
                     + `\n**Spell-Proof:** ${Format.space(5)} (2${str}+2${agil}+${power}) / 125`
-                    + `\n**Spell-Defying:** (2${str}+2${agil}+${power}) / 250`, true)
-        .addField("\u200b", "\u200b")
-        .addField(`${Emojis.acc.pub} ━━━ ACCURACY ━━━ ${Emojis.acc.pub}`, 
+                    + `\n**Spell-Defying:** (2${str}+2${agil}+${power}) / 250`)
+        .addField(`${Emojis.acc.pub} ━━━━ ACCURACY ━━━━ ${Emojis.acc.pub}`, 
                     `**${ice} Sniper:** [(2${int}+2${agil}+${power})3] / 400`
                     + `\n**${ice} Shot:** ${Format.space(9)} (2${int}+2${agil}+${power}) / 200`
                     + `\n**${ice} Eye:** ${Format.space(12)} (2${int}+2${agil}+${power}) / 400`
                     + `\n**Sharp-Shot:** ${Format.space(3)} (2${int}+2${agil}+${power}) / 200`
-                    + `\n**Sharp-Eye:** ${Format.space(4)} (2${int}+2${agil}+${power}) / 400`, true)
-        .addField(`${Emojis.pierce.pub} ━━━━ PIERCE ━━━━ ${Emojis.pierce.pub}`, 
+                    + `\n**Sharp-Eye:** ${Format.space(4)} (2${int}+2${agil}+${power}) / 400`)
+        .addField(`${Emojis.pierce.pub} ━━━━━━ PIERCE ━━━━━━ ${Emojis.pierce.pub}`, 
                     `**Armor Breaker:** ${Format.space(8)} (2${str}+2${agil}+${power}) / 400`
-                    + `\n**Armor Piercer:** [(2${str}+2${agil}+${power})3] / 2000`, true)
+                    + `\n**Armor Piercer:** [(2${str}+2${agil}+${power})3] / 2000`)
         .addField("\u200b", "\u200b")
         .addField("Like what you see?", `[**${Format.bot.text}**](${Format.bot.invite}) ${Emojis.kiwi.pub}`
                                         + `\n[**${Format.server.text}**](${Format.server.link}) ${Emojis.spiralscholars.pub}`)
@@ -148,22 +147,21 @@ function rating() {
     
     const embed = new Discord.MessageEmbed()
         .setColor("#8648F7")
-        .setTitle(`${Emojis.crit.pub} **━━━━━━ RATING FORMULAS ━━━━━━** ${Emojis.crit.pub}`)
-        .addField(`${Emojis.crit.pub} ━━━ CRITICAL ━━━ ${Emojis.crit.pub}`, 
-                    `**${myth} Assailant:** ${Format.space(7)} (2${agil}+2${will}+${power}) / 40`
-                    + `\n**${myth} Striker:** ${Format.space(6)} [(2${agil}+2${will}+${power})3] / 150`
+        .setTitle(`${Emojis.crit.pub} **━━ RATING FORMULAS ━━** ${Emojis.crit.pub}`)
+        .addField(`${Emojis.crit.pub} ━━━━━ CRITICAL ━━━━━ ${Emojis.crit.pub}`, 
+                    `**${myth} Assailant:** ${Format.space(11)} (2${agil}+2${will}+${power}) / 40`
+                    + `\n**${myth} Striker:** ${Format.space(8)} [(2${agil}+2${will}+${power})3] / 150`
                     + `\n**Critical Striker:** [(2${agil}+2${will}+${power})3] / 125`
-                    + `\n**Critical Hitter:** [(2${agil}+2${will}+${power})9] / 500`, true)
-        .addField(`${Emojis.block.pub} ━━━ BLOCK ━━━ ${Emojis.block.pub}`, 
+                    + `\n**Critical Hitter:** [(2${agil}+2${will}+${power})9] / 500`)
+        .addField(`${Emojis.block.pub} ━━━━ BLOCK ━━━━ ${Emojis.block.pub}`, 
                     `**Defender:** [(2${int}+2${will}+${power})3] / 125`
-                    + `\n**Blocker:** ${Format.space(2)} [(2${int}+2${will}+${power})9] / 500`, true)
-        .addField("\u200b", "\u200b")
-        .addField(`${Emojis.pcon.pub} ━━ PIP CONVERT ━━ ${Emojis.pcon.pub}`, 
+                    + `\n**Blocker:** ${Format.space(2)} [(2${int}+2${will}+${power})9] / 500`)
+        .addField(`${Emojis.pcon.pub} ━━━━ PIP CONVERT ━━━━ ${Emojis.pcon.pub}`, 
                     `**Pip Conserver:** [(2${agil}+2${will}+${power})3] / 125`
-                    + `\n**Pip Saver:** ${Format.space(6)} [(2${int}+2${will}+${power})9] / 500`, true)
-        .addField(`${Emojis.pip.pub} ━━━━ PIPS ━━━━ ${Emojis.pip.pub}`, 
+                    + `\n**Pip Saver:** ${Format.space(7)} [(2${int}+2${will}+${power})9] / 500`)
+        .addField(`${Emojis.pip.pub} ━━━━━━ PIPS ━━━━━━ ${Emojis.pip.pub}`, 
                     `**Pip 'O Plenty:** [(2${str}+2${int}+${power})3] / 250`
-                    + `\n**Pip Boost:** N/A *(always 5%)*`, true)
+                    + `\n**Pip Boost:** N/A *(always 5%)*`)
         .addField("\u200b", "\u200b")
         .addField("Like what you see?", `[**${Format.bot.text}**](${Format.bot.invite}) ${Emojis.kiwi.pub}`
                                     + `\n[**${Format.server.text}**](${Format.server.link}) ${Emojis.spiralscholars.pub}`)
@@ -180,19 +178,18 @@ function healing() {
 
     const embed = new Discord.MessageEmbed()
         .setColor("#D41112")
-        .setTitle(`${Emojis.heart.pub} **━━━━━━ HEALTH FORMULAS ━━━━━━** ${Emojis.heart.pub}`)
-        .addField(`${Emojis.inc.pub} ━━ INCOMING ━━ ${Emojis.inc.pub}`, 
-                    `**Lively:** [(2${str}+2${will}+${power})13] / 2000`
-                    + `\n**Healthy:** [(2${str}+2${will}+${power})3] / 1000`, true)
-        .addField(`${Emojis.out.pub} ━━ OUTGOING ━━ ${Emojis.out.pub}`, 
+        .setTitle(`${Emojis.heart.pub} **━━ HEALTH FORMULAS ━━** ${Emojis.heart.pub}`)
+        .addField(`${Emojis.inc.pub} ━━━ INCOMING ━━━ ${Emojis.inc.pub}`, 
+                    `**Lively:** ${Format.space(1)} [(2${str}+2${will}+${power})13] / 2000`
+                    + `\n**Healthy:** [(2${str}+2${will}+${power})3] / 1000`)
+        .addField(`${Emojis.out.pub} ━━━ OUTGOING ━━━ ${Emojis.out.pub}`, 
                     `**Medic:** [(2${str}+2${will}+${power})13] / 2000`
-                    + `\n**Healer:** [(2${str}+2${will}+${power})3] / 1000`, true)
-        .addField("\u200b", "\u200b")
-        .addField(`${Emojis.health.pub} ━━ HEALTH ━━ ${Emojis.health.pub}`, 
+                    + `\n**Healer:** ${Format.space(1)} [(2${str}+2${will}+${power})3] / 1000`)
+        .addField(`${Emojis.health.pub} ━━━━━ HEALTH ━━━━━ ${Emojis.health.pub}`, 
                     `**Health Bounty:** [(2${agil}+2${will}+${power})3] / 25`
-                    + `\n**Health Gift:** (2${agil}+2${will}+${power}) / 10`
-                    + `\n**Health Boost:** [(2${agil}+2${will}+${power})6] / 75`
-                    + `\n**Health Add:** [(2${agil}+2${will}+${power})3] / 50`, true)
+                    + `\n**Health Gift:** ${Format.space(15)} (2${agil}+2${will}+${power}) / 10`
+                    + `\n**Health Boost:** ${Format.space(2)} [(2${agil}+2${will}+${power})6] / 75`
+                    + `\n**Health Add:** ${Format.space(6)} [(2${agil}+2${will}+${power})3] / 50`)
         .addField("\u200b", "\u200b")
         .addField("Like what you see?", `[**${Format.bot.text}**](${Format.bot.invite}) ${Emojis.kiwi.pub}`
                                     + `\n[**${Format.server.text}**](${Format.server.link}) ${Emojis.spiralscholars.pub}`)
@@ -209,19 +206,18 @@ function misc() {
 
     const embed = new Discord.MessageEmbed()
         .setColor("#E8932F")
-        .setTitle(`${Emojis.luck.pub} **━━━━━━ MISC FORMULAS ━━━━━━** ${Emojis.luck.pub}`)
-        .addField(`${Emojis.stunres.pub} ━━ STUN RESIST ━━ ${Emojis.stunres.pub}`, 
+        .setTitle(`${Emojis.luck.pub} **━━━ MISC FORMULAS ━━━** ${Emojis.luck.pub}`)
+        .addField(`${Emojis.stunres.pub} ━━━━ STUN RESIST ━━━━ ${Emojis.stunres.pub}`, 
                     `**Stun Recalcitrant:** (2${str}+2${int}+${power}) / 125`
-                    + `\n**Stun Resistant:** (2${str}+2${int}+${power}) / 250`, true)
-        .addField(`${Emojis.luck.pub} ━━ FISH LUCK ━━ ${Emojis.luck.pub}`, 
+                    + `\n**Stun Resistant:** ${Format.space(4)} (2${str}+2${int}+${power}) / 250`)
+        .addField(`${Emojis.luck.pub} ━━━━ FISH LUCK ━━━━ ${Emojis.luck.pub}`, 
                     `**Epic Fish Luck:** (2${int}+2${will}+${power}) / 400`
-                    + `\n**Fish Luck:** (2${int}+2${will}+${power}) / 400`, true)
-        .addField("\u200b", "\u200b")
-        .addField(`${Emojis.mana.pub} ━━━ MANA ━━━ ${Emojis.mana.pub}`, 
-                    `**Mana Bounty:** (2${int}+2${will}+${power}) / 10`
-                    + `\n**Mana Gift:** [(2${int}+2${will}+${power})6] / 75`
+                    + `\n**Fish Luck:** ${Format.space(10)} (2${int}+2${will}+${power}) / 400`)
+        .addField(`${Emojis.mana.pub} ━━━━━ MANA ━━━━━ ${Emojis.mana.pub}`, 
+                    `**Mana Bounty:** ${Format.space(4)} (2${int}+2${will}+${power}) / 10`
+                    + `\n**Mana Gift:** ${Format.space(4)} [(2${int}+2${will}+${power})6] / 75`
                     + `\n**Mana Boost:** [(2${int}+2${will}+${power})3] / 50`
-                    + `\n**Extra Mana:** (2${int}+2${will}+${power}) / 25`, true)
+                    + `\n**Extra Mana:** ${Format.space(7)} (2${int}+2${will}+${power}) / 25`)
         .addField("\u200b", "\u200b")
         .addField("Like what you see?", `[**${Format.bot.text}**](${Format.bot.invite}) ${Emojis.kiwi.pub}`
                                     + `\n[**${Format.server.text}**](${Format.server.link}) ${Emojis.spiralscholars.pub}`)

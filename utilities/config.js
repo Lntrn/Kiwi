@@ -4,11 +4,16 @@ const MongoDB = require("mongodb").MongoClient;
 const ErrorLog = require("./error.js");
 
 module.exports = {
-    devmode: true,
+    devmode: false,
     update: false,
     defaultPrefix: "!k",
+    devmodePrefix: "k",
     ownerID: "193427298958049280",
     async prefix(bot, msg) {
+        // if in devmode, only respond to devmode prefix
+        if (module.exports.devmode)
+            return module.exports.devmodePrefix;
+
         // create database client
         const dbClient = new MongoDB(process.env.MONGOURI, { useUnifiedTopology: true });
         
