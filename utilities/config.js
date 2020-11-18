@@ -4,7 +4,7 @@ const MongoDB = require("mongodb").MongoClient;
 const ErrorLog = require("./error.js");
 
 module.exports = {
-    devmode: true,
+    devmode: false,
     defaultPrefix: "!k",
     universalPrefixV1: "<@!743944201682681937>", //@'ing Kiwi
     universalPrefixV2: "<@743944201682681937>", //@'ing Kiwi
