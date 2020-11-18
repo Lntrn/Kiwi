@@ -62,7 +62,8 @@ bot.on("message", async (message) => {
 
 	const prefix = await Config.prefix(bot, message); // promise rejection handled internally
 	const prefixCheck = message.content.substr(0, prefix.length);
-	const universalPrefixCheck = message.content.substr(0, Config.universalPrefix.length);
+	const universalPrefixV1Check = message.content.substr(0, Config.universalPrefixV1.length);
+	const universalPrefixV2Check = message.content.substr(0, Config.universalPrefixV2.length);
 
 	// if a bot sent the message or if it has attachments, ignore
 	if (message.author.bot || message.attachments.size !== 0)
@@ -76,9 +77,13 @@ bot.on("message", async (message) => {
 	if (prefixCheck.toLowerCase() === prefix.toLowerCase()) {
 		args = message.content.substring(prefix.length).split(/[\s|\r?\n|\r]/);
 
-	// if universal perfix was used
-	} else if (universalPrefixCheck === Config.universalPrefix) {
-		args = message.content.substring(Config.universalPrefix.length).split(/[\s|\r?\n|\r]/);
+	// if universal perfix V1 was used
+	} else if (universalPrefixV1Check === Config.universalPrefixV1) {
+		args = message.content.substring(Config.universalPrefixV1.length).split(/[\s|\r?\n|\r]/);
+
+	// if universal perfix V2 was used
+	} else if (universalPrefixV2Check === Config.universalPrefixV2) {
+		args = message.content.substring(Config.universalPrefixV2.length).split(/[\s|\r?\n|\r]/);
 
 	// if no prefixes match
 	} else {
