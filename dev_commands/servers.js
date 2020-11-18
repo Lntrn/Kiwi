@@ -18,13 +18,7 @@ module.exports = {
         
         let servers = bot.guilds.cache.array().sort();
         let pageCount = Math.floor(servers.length / 20) + 1;
-        let memberCount = 0;
-
-        servers.forEach(
-            function(server) {
-                memberCount += server.memberCount;
-            }
-        );
+        let memberCount = Format.memberCount(bot);
 
         try {
             const sentMsg = await bot.channels.cache.get(Channels.devCmds.id).send(generatePage(bot, servers, memberCount, 1, pageCount));

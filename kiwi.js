@@ -9,6 +9,8 @@ const FS = require("fs");
 require("dotenv-flow").config();
 // require Config module
 const Config = require("./utilities/config.js");
+// require format.js module
+const Format = require("./utilities/format.js");
 
 
 // create new bot
@@ -39,9 +41,43 @@ for (const file of eventFiles) {
 	bot.events.set(event.name, event);
 }
 
+let activity = "users";
+let memberCount = 0;
+let iterations = 0;
 bot.on("ready", async () => {
-	bot.user.setActivity(`for ${Config.defaultPrefix} help`, { type: "WATCHING" });
 	console.log(`Logged in as ${bot.user.tag}!`);
+
+	// setting member count
+	memberCount = Format.memberCount(bot);
+
+	// status loop
+	setInterval(
+		function() {
+			switch (activity) {
+				case "help":
+					bot.user.setActivity(`for ${Config.defaultPrefix} help`, { type: "WATCHING" });
+					activity = "servers";
+					break;
+				case "users":
+					// only update user count every 60 min (40 iterations * 90 sec apart = 3600 secs = 1 hour)
+					if (iterations === 40) {
+						memberCount = Format.memberCount(bot);
+						iterations = 0;
+					} else {
+						iterations++;
+					}
+					
+					bot.user.setActivity(`over ${memberCount} users`, { type: "WATCHING" });
+					activity = "help";
+					break;
+				case "servers":
+					bot.user.setActivity(`over ${bot.guilds.cache.size} servers`, { type: "WATCHING" });
+					activity = "users";
+					break;
+			}
+		},
+		30000
+	);
 	
 	// send launch notification
 	try {

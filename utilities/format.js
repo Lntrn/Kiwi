@@ -22,5 +22,13 @@ module.exports = {
         }
 
         return whitespace;
+    },
+    memberCount(bot) {
+        let count = 0;
+
+        const servers = bot.guilds.cache.array().sort();
+        servers.forEach( (server) => count += server.memberCount );
+        
+        return count;
     }
 }
