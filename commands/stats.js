@@ -199,7 +199,7 @@ module.exports = {
                         }
                         break;
                     default:
-                        sentMsg.edit("*The reaction menu on this message has expired*", menu()).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [rounded misc]", err));
+                        sentMsg.edit("*The reaction menu on this message has expired*", menu(str, int, agil, will, power)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [rounded misc]", err));
                 }
             }
         );
