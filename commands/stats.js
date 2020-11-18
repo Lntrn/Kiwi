@@ -314,7 +314,7 @@ function dataCheck(msg, args, prefix) {
 }
 
 function update() {
-    return `\n\n\n**:new: ━━ NEW UPDATE ━━ :new:**`
+    return `\n\n\n**:new: ━━━━━━ NEW UPDATE ━━━━━━ :new:**`
             + `\n▫️**\`prefix\`**: set a **custom prefix** for your server`
             + `\n▫️**\`formulas\`**: get all the formulas for the stats Kiwi displays`
             + `\n\nNew **universal prefix**: <@743944201682681937>`
