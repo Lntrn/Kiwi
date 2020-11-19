@@ -64,7 +64,7 @@ module.exports = {
             // edit message when reaction collectors expire
             rightCollector.on("end", 
                 function() {
-                    sentMsg.edit("*The reaction menu on this message has expired*", generatePage(bot, servers, memberCount, page, pageCount));
+                    sentMsg.edit(Format.expirationNotice, generatePage(bot, servers, memberCount, page, pageCount));
                 }
             );
 

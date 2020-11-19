@@ -20,9 +20,11 @@ module.exports = {
         
         const embed = new Discord.MessageEmbed()
             .setColor("#DD2E44")
-            .setTitle(":exclamation: **━━━━━ ERROR ━━━━━** :exclamation:")
+            .setTitle(":exclamation: **━━━━━━ ERROR ━━━━━━** :exclamation:")
             .setDescription(`Unrecognized command: **${cmd}**`
-                            + `\n\nUse the **\`${await Config.prefix(bot, msg)} help\`** command for a list of Kiwi's commands`)
+                            + `\n\nUse the **\`help\`** for a list of Kiwi's commands`
+                            + `\n\nWas this prompt a mistake?`
+                            + `\nChange Kiwi's prefix with the **\`prefix\`** command`)
             .addField("\u200b", "\u200b")
             .addField("Like what you see?", `[**${Format.bot.text}**](${Format.bot.invite}) ${Emojis.kiwi.pub}`
                                         + `\n[**${Format.server.text}**](${Format.server.link}) ${Emojis.spiralscholars.pub}`)

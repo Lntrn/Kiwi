@@ -41,43 +41,22 @@ for (const file of eventFiles) {
 	bot.events.set(event.name, event);
 }
 
+// variables for status loop
 let activity = "users";
-let memberCount = 0;
+let memberCount;
 let iterations = 0;
+
 bot.on("ready", async () => {
 	console.log(`Logged in as ${bot.user.tag}!`);
 
-	// setting member count
-	memberCount = Format.memberCount(bot);
-
-	// status loop
-	setInterval(
-		function() {
-			switch (activity) {
-				case "help":
-					bot.user.setActivity(`for ${Config.defaultPrefix} help`, { type: "WATCHING" });
-					activity = "servers";
-					break;
-				case "users":
-					// only update user count every 60 min (40 iterations * 90 sec apart = 3600 secs = 1 hour)
-					if (iterations === 40) {
-						memberCount = Format.memberCount(bot);
-						iterations = 0;
-					} else {
-						iterations++;
-					}
-					
-					bot.user.setActivity(`over ${memberCount} users`, { type: "WATCHING" });
-					activity = "help";
-					break;
-				case "servers":
-					bot.user.setActivity(`over ${bot.guilds.cache.size} servers`, { type: "WATCHING" });
-					activity = "users";
-					break;
-			}
-		},
-		30000
-	);
+	// if not in devmode, start status loop
+	if (!Config.devmode) {
+		// initializing  member count
+		memberCount = Format.memberCount(bot);
+		statusLoop();
+	} else {
+		bot.user.setActivity(`for developments`, { type: "LISTENING" });
+	}
 	
 	// send launch notification
 	try {
@@ -92,34 +71,32 @@ bot.on("ready", async () => {
 
 bot.on("message", async (message) => {
 	// if in devmode, only respond to dev
-	if (Config.devmode && message.author.id !== Config.ownerID) {
+	if (Config.devmode && message.author.id !== Config.ownerID)
 		return;
-	}
-
-	const prefix = await Config.prefix(bot, message); // promise rejection handled internally
-	const prefixCheck = message.content.substr(0, prefix.length);
-	const universalPrefixV1Check = message.content.substr(0, Config.universalPrefixV1.length);
-	const universalPrefixV2Check = message.content.substr(0, Config.universalPrefixV2.length);
 
 	// if a bot sent the message or if it has attachments, ignore
 	if (message.author.bot || message.attachments.size !== 0)
 		return;
 
+	const prefix = await Config.prefix(bot, message); // promise rejection handled internally
+	const prefixCheck = message.content.substr(0, prefix.length);
+	const universalPrefixV1Check = message.content.substr(0, Config.universalPrefix.v1.length);
+	const universalPrefixV2Check = message.content.substr(0, Config.universalPrefix.v2.length);
 
 	// parse command and arguments beginning after the prefix
-	let args = "";
+	let args;
 
 	// if server prefix was used
 	if (prefixCheck.toLowerCase() === prefix.toLowerCase()) {
 		args = message.content.substring(prefix.length).split(/[\s|\r?\n|\r]/);
 
 	// if universal perfix V1 was used
-	} else if (universalPrefixV1Check === Config.universalPrefixV1) {
-		args = message.content.substring(Config.universalPrefixV1.length).split(/[\s|\r?\n|\r]/);
+	} else if (universalPrefixV1Check === Config.universalPrefix.v1) {
+		args = message.content.substring(Config.universalPrefix.v1.length).split(/[\s|\r?\n|\r]/);
 
 	// if universal perfix V2 was used
-	} else if (universalPrefixV2Check === Config.universalPrefixV2) {
-		args = message.content.substring(Config.universalPrefixV2.length).split(/[\s|\r?\n|\r]/);
+	} else if (universalPrefixV2Check === Config.universalPrefix.v2) {
+		args = message.content.substring(Config.universalPrefix.v2.length).split(/[\s|\r?\n|\r]/);
 
 	// if no prefixes match
 	} else {
@@ -198,3 +175,35 @@ if (Config.devmode)
 	bot.login(process.env.KIWIDEVTOKEN);
 else
 	bot.login(process.env.KIWITOKEN);
+
+
+// status loop
+function statusLoop() {
+	setInterval(
+		function() {
+			switch (activity) {
+				case "help":
+					bot.user.setActivity(`for ${Config.defaultPrefix} help`, { type: "WATCHING" });
+					activity = "servers";
+					break;
+				case "users":
+					// only update user count every 60 min (40 iterations * 90 sec apart = 3600 secs = 1 hour)
+					if (iterations === 40) {
+						memberCount = Format.memberCount(bot);
+						iterations = 0;
+					} else {
+						iterations++;
+					}
+					
+					bot.user.setActivity(`over ${memberCount} users`, { type: "WATCHING" });
+					activity = "help";
+					break;
+				case "servers":
+					bot.user.setActivity(`over ${bot.guilds.cache.size} servers`, { type: "WATCHING" });
+					activity = "users";
+					break;
+			}
+		},
+		30000
+	);
+}

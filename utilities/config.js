@@ -4,10 +4,12 @@ const MongoDB = require("mongodb").MongoClient;
 const ErrorLog = require("./error.js");
 
 module.exports = {
-    devmode: false,
+    devmode: true,
     defaultPrefix: "!k",
-    universalPrefixV1: "<@!743944201682681937>", //@'ing Kiwi
-    universalPrefixV2: "<@743944201682681937>", //@'ing Kiwi
+    universalPrefix: { //@'ing Kiwi
+        v1: "<@!743944201682681937>",
+        v2: "<@743944201682681937>"
+    },
     devmodePrefix: "k",
     ownerID: "193427298958049280",
     async prefix(bot, msg) {

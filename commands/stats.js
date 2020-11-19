@@ -172,34 +172,34 @@ module.exports = {
                 switch (page) {
                     case "base":
                         if (rounded) {
-                            sentMsg.edit("*The reaction menu on this message has expired*", Stats.base(str, int, agil, will, power, true)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [rounded base]", err));
+                            sentMsg.edit(Format.expirationNotice, Stats.base(str, int, agil, will, power, true)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [rounded base]", err));
                         } else {
-                            sentMsg.edit("*The reaction menu on this message has expired*", Stats.base(str, int, agil, will, power, false)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [base]", err));
+                            sentMsg.edit(Format.expirationNotice, Stats.base(str, int, agil, will, power, false)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [base]", err));
                         }
                         break;
                     case "rating":
                         if (rounded) {
-                            sentMsg.edit("*The reaction menu on this message has expired*", Stats.rating(str, int, agil, will, power, true)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [rounded rating]", err));
+                            sentMsg.edit(Format.expirationNotice, Stats.rating(str, int, agil, will, power, true)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [rounded rating]", err));
                         } else {
-                            sentMsg.edit("*The reaction menu on this message has expired*", Stats.rating(str, int, agil, will, power, false)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [rating]", err));
+                            sentMsg.edit(Format.expirationNotice, Stats.rating(str, int, agil, will, power, false)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [rating]", err));
                         }
                         break;
                     case "healing":
                         if (rounded) {
-                            sentMsg.edit("*The reaction menu on this message has expired*", Stats.healing(str, int, agil, will, power, true)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [rounded healing]", err));
+                            sentMsg.edit(Format.expirationNotice, Stats.healing(str, int, agil, will, power, true)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [rounded healing]", err));
                         } else {
-                            sentMsg.edit("*The reaction menu on this message has expired*", Stats.healing(str, int, agil, will, power, false)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [healing]", err));
+                            sentMsg.edit(Format.expirationNotice, Stats.healing(str, int, agil, will, power, false)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [healing]", err));
                         }
                         break;
                     case "misc":
                         if (rounded) {
-                            sentMsg.edit("*The reaction menu on this message has expired*", Stats.misc(str, int, agil, will, power, true)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [rounded misc]", err));
+                            sentMsg.edit(Format.expirationNotice, Stats.misc(str, int, agil, will, power, true)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [rounded misc]", err));
                         } else {
-                            sentMsg.edit("*The reaction menu on this message has expired*", Stats.misc(str, int, agil, will, power, false)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [misc]", err));
+                            sentMsg.edit(Format.expirationNotice, Stats.misc(str, int, agil, will, power, false)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [misc]", err));
                         }
                         break;
                     default:
-                        sentMsg.edit("*The reaction menu on this message has expired*", menu(str, int, agil, will, power)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [rounded misc]", err));
+                        sentMsg.edit(Format.expirationNotice, menu(str, int, agil, will, power)).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "stats [rounded misc]", err));
                 }
             }
         );

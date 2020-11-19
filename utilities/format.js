@@ -12,6 +12,7 @@ module.exports = {
         invite: "https://discord.com/api/oauth2/authorize?client_id=743944201682681937&permissions=354368&scope=bot \"Invite Link for Kiwi!\""
     },
     supportLink: "https://discord.gg/sFMwKCy \"Head to our Support Server for help!\"",
+    expirationNotice: "*The reaction menu on this message has expired*",
     emptyChar: " ‎",
     space(amt) {
         let whitespace = "";

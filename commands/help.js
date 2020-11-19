@@ -65,9 +65,9 @@ module.exports = {
             rightCollector.on("end", 
                 function() {
                     if (page === 1)
-                        sentMsg.edit("*The reaction menu on this message has expired*", pageOne(prefix));
+                        sentMsg.edit(Format.expirationNotice, pageOne(prefix));
                     else
-                        sentMsg.edit("*The reaction menu on this message has expired*", pageTwo(prefix));
+                        sentMsg.edit(Format.expirationNotice, pageTwo(prefix));
                 }
             );
 
