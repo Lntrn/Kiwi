@@ -23,7 +23,7 @@ module.exports = {
             .setTitle(":exclamation: **━━━━━━ ERROR ━━━━━━** :exclamation:")
             .setDescription(`Unrecognized command: **${cmd}**`
                             + `\n\nUse the **\`help\`** for a list of Kiwi's commands`
-                            + `\n\nWas this prompt a mistake?`
+                            + `\n\n\nPrefix not working as intended?`
                             + `\nChange Kiwi's prefix with the **\`prefix\`** command`)
             .addField("\u200b", "\u200b")
             .addField("Like what you see?", `[**${Format.bot.text}**](${Format.bot.invite}) ${Emojis.kiwi.pub}`
