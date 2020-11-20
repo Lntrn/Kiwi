@@ -89,7 +89,7 @@ function pageOne(prefix){
     const embed = new Discord.MessageEmbed()
         .setColor("#FFD983")
         .setTitle(":scroll: **━━━━━ KIWI HELP ━━━━━** :scroll:")
-        .setDescription(`*Your server's prefix is **${prefix}***`
+        .setDescription(`*Your server's prefix: **${prefix}***`
                         + `\n*Universal prefix: ${Config.universalPrefix.v1}*`
                         + `\n\n:small_blue_diamond: **\`${prefix} stats\`**`
                         + `\n*calculates pet talent stats*`
@@ -114,7 +114,7 @@ function pageTwo(prefix){
     const embed = new Discord.MessageEmbed()
         .setColor("#FFD983")
         .setTitle(":scroll: **━━━━━ KIWI HELP ━━━━━** :scroll:")
-        .setDescription(`*Your server's prefix is **${prefix}***`
+        .setDescription(`*Your server's prefix: **${prefix}***`
                         + `\n*Universal prefix: ${Config.universalPrefix.v1}*`
                         + `\n\n:small_blue_diamond: **\`${prefix} formulas\`** **(❗NEW )**`
                         + `\n*view the formulas for the talents Kiwi displays*`
