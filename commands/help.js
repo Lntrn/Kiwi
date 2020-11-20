@@ -90,7 +90,7 @@ function pageOne(prefix){
         .setColor("#FFD983")
         .setTitle(":scroll: **━━━━━ KIWI HELP ━━━━━** :scroll:")
         .setDescription(`*Your server's prefix is **${prefix}***`
-                        + `\n*Universal prefix: ${Config.universalPrefixV1}*`
+                        + `\n*Universal prefix: ${Config.universalPrefix.v1}*`
                         + `\n\n:small_blue_diamond: **\`${prefix} stats\`**`
                         + `\n*calculates pet talent stats*`
                         + `\n\n> ${prefix}stats ${Emojis.str.pub} ${Emojis.int.pub} ${Emojis.agil.pub} ${Emojis.will.pub} ${Emojis.power.pub}`
@@ -115,7 +115,7 @@ function pageTwo(prefix){
         .setColor("#FFD983")
         .setTitle(":scroll: **━━━━━ KIWI HELP ━━━━━** :scroll:")
         .setDescription(`*Your server's prefix is **${prefix}***`
-                        + `\n*Universal prefix: ${Config.universalPrefixV1}*`
+                        + `\n*Universal prefix: ${Config.universalPrefix.v1}*`
                         + `\n\n:small_blue_diamond: **\`${prefix} formulas\`** **(❗NEW )**`
                         + `\n*view the formulas for the talents Kiwi displays*`
                         + `\n\n:small_blue_diamond: **\`${prefix} bug\`**`
