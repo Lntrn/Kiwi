@@ -49,15 +49,11 @@ let iterations = 0;
 bot.on("ready", async () => {
 	console.log(`Logged in as ${bot.user.tag}!`);
 
-	// if not in devmode, start status loop
-	if (!Config.devmode) {
-		// initializing  member count
-		memberCount = Format.memberCount(bot);
-		statusLoop();
-	} else {
-		bot.user.setActivity(`for developments`, { type: "LISTENING" });
-	}
-	
+	// initializing  member count
+	memberCount = Format.memberCount(bot);
+	// start status loop
+	statusLoop();
+
 	// send launch notification
 	try {
 		const owner = await bot.users.fetch(Config.ownerID);
@@ -183,7 +179,7 @@ function statusLoop() {
 		function() {
 			switch (activity) {
 				case "help":
-					bot.user.setActivity(`for ${Config.defaultPrefix} help`, { type: "WATCHING" });
+					bot.user.setActivity(`${Config.defaultPrefix} help`, { type: "LISTENING" });
 					activity = "servers";
 					break;
 				case "users":
@@ -195,11 +191,11 @@ function statusLoop() {
 						iterations++;
 					}
 					
-					bot.user.setActivity(`over ${memberCount} users`, { type: "WATCHING" });
+					bot.user.setActivity(`over ${memberCount.toLocaleString()} users`, { type: "WATCHING" });
 					activity = "help";
 					break;
 				case "servers":
-					bot.user.setActivity(`over ${bot.guilds.cache.size} servers`, { type: "WATCHING" });
+					bot.user.setActivity(`over ${bot.guilds.cache.size.toLocaleString()} servers`, { type: "WATCHING" });
 					activity = "users";
 					break;
 			}
