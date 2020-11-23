@@ -149,6 +149,7 @@ function base() {
     const embed = new Discord.MessageEmbed()
         .setColor("#ECC088")
         .setTitle(`${Emojis.dmg.pub} **━━━ BASE FORMULAS ━━━** ${Emojis.dmg.pub}`)
+        .setDescription(`*${ice}**:** school based talent*`)
         .addField(`${Emojis.dmg.pub} ━━━━ DAMAGE ━━━━ ${Emojis.dmg.pub}`, 
                     `**${ice} Dealer:** [(2${str}+2${will}+${power})3] / 400`
                     + `\n**${ice} Giver:** ${Format.space(8)} (2${str}+2${will}+${power}) / 200`
@@ -189,6 +190,7 @@ function rating() {
     const embed = new Discord.MessageEmbed()
         .setColor("#8648F7")
         .setTitle(`${Emojis.crit.pub} **━━ RATING FORMULAS ━━** ${Emojis.crit.pub}`)
+        .setDescription(`*${myth}**:** school based talent*`)
         .addField(`${Emojis.crit.pub} ━━━━━ CRITICAL ━━━━━ ${Emojis.crit.pub}`, 
                     `**${myth} Assailant:** ${Format.space(11)} (2${agil}+2${will}+${power}) / 40`
                     + `\n**${myth} Striker:** ${Format.space(8)} [(2${agil}+2${will}+${power})3] / 150`
