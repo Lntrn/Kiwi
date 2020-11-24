@@ -97,7 +97,7 @@ function pageOne(prefix){
                         + `\n> **ex.**\n> ${prefix}stats 248 308 260 243 227`
                         + `\n\n:small_blue_diamond: **\`${prefix} invite\`**`
                         + `\n*get an invite to add Kiwi to your server*`
-                        + `\n\n:small_blue_diamond: **\`${prefix} prefix\`** **(❗NEW )**`
+                        + `\n\n:small_blue_diamond: **\`${prefix} prefix\`**`
                         + `\n*change/get Kiwi's prefix in your server*`
                         + `\n*must have **manage server** perm to use*`)
         .addField("\u200b", "page **1** of **2**")
@@ -116,7 +116,7 @@ function pageTwo(prefix){
         .setTitle(":scroll: **━━━━━ KIWI HELP ━━━━━** :scroll:")
         .setDescription(`*Your server's prefix: **${prefix}***`
                         + `\n*Universal prefix: ${Config.universalPrefix.v1}*`
-                        + `\n\n:small_blue_diamond: **\`${prefix} formulas\`** **(❗NEW )**`
+                        + `\n\n:small_blue_diamond: **\`${prefix} formulas\`**`
                         + `\n*view the formulas for the talents Kiwi displays*`
                         + `\n\n:small_blue_diamond: **\`${prefix} bug\`**`
                         + `\n*report a bug with Kiwi*`

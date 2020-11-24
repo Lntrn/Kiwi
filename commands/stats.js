@@ -239,7 +239,7 @@ function menu(str, int, agil, will, power) {
                             + `${Emojis.stunres.pub}, ${Emojis.luck.pub}, ${Emojis.mana.pub}`)
         .addField("\u200b", `${Emojis.round.pub} **━ Round Stats ━** ${Emojis.round.pub}`
                             + `\ndisplay stats like **in-game**\nand catch **fake** (${Emojis.fake.pub}) stats`)
-        .addField("\u200b", update())
+        //.addField("\u200b", update()) // display update
         .addField("\u200b", "\u200b")
         .addField("Like what you see?", `[**${Format.bot.text}**](${Format.bot.invite}) ${Emojis.kiwi.pub}`
                                         + `\n[**${Format.server.text}**](${Format.server.link}) ${Emojis.spiralscholars.pub}`)
