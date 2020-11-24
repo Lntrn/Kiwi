@@ -37,7 +37,9 @@ module.exports = {
             const confirmation = new Discord.MessageEmbed()
                 .setColor("#8899A6")
                 .setTitle(`🛠️ **━━━━━━ PREFIX ━━━━━━** 🛠️`)
-                .setDescription(`Your server's prefix for Kiwi ${Format.space(1)}${Emojis.kiwi.pub} is: **\`${prefix}\`**`)
+                .setDescription(`**Prefixes:**`
+                                + `\n▫️Your server: **\`${prefix}\`**`
+                                + `\n▫️Universal: ${Config.universalPrefix.v1}`)
                 .addField("\u200b", "\u200b")
                 .addField("Like what you see?", `[**${Format.bot.text}**](${Format.bot.invite}) ${Emojis.kiwi.pub}`
                                             + `\n[**${Format.server.text}**](${Format.server.link}) ${Emojis.spiralscholars.pub}`)
