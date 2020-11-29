@@ -1,7 +1,7 @@
 module.exports = {
     footer: {
         text: "© Sap#5703",
-        image: "https://i.imgur.com/c5AskA7.png" // eventually update owner image to modular User.avatarURL()
+        image: "https://i.imgur.com/gI9BVhH.png"
     },
     server: {
         text: "Join Us!",

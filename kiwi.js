@@ -54,11 +54,15 @@ bot.on("ready", async () => {
 	// start status loop
 	statusLoop();
 
-	// send launch notification
 	try {
 		const owner = await bot.users.fetch(Config.ownerID);
+
+		// send launch notification
 		let date = new Date();
 		owner.send("Bot Online! **" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + "**");
+
+		// initialize owner profile image
+		Format.footer.image = owner.avatarURL();
 
 	} catch (err) {
 		console.log("Error sending message! Error: ", err.message);
