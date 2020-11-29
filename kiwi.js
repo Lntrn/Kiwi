@@ -142,6 +142,10 @@ bot.on("message", async (message) => {
 			if (message.author.id === Config.ownerID)
 				bot.devCommands.get("servers").execute(bot, message);
 			break;
+		case "portrait":
+			if (message.author.id === Config.ownerID)
+				bot.devCommands.get("portrait").execute(bot, message);
+			break;
 		// case "cmds":
 		// 	if (message.author.id === Config.ownerID)
 		// 		bot.devCommands.get("cmds").execute(bot, message);
