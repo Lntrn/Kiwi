@@ -24,7 +24,7 @@ module.exports = {
             .setDescription(`Unrecognized command: **${cmd}**`
                             + `\n\nUse the **\`help\`** for a list of Kiwi's commands`
                             + `\n\n\n***Used another bot?***`
-                            + `\nChange Kiwi's prefix with the **\`prefix\`** command`)
+                            + `\n*Change Kiwi's prefix with the **\`prefix\`** command*`)
             .addField("\u200b", "\u200b")
             .addField("Like what you see?", `[**${Format.bot.text}**](${Format.bot.invite}) ${Emojis.kiwi.pub}`
                                         + `\n[**${Format.server.text}**](${Format.server.link}) ${Emojis.spiralscholars.pub}`)
