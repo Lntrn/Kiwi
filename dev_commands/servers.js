@@ -21,30 +21,37 @@ module.exports = {
         let memberCount = Format.memberCount(bot);
 
         try {
-            const sentMsg = await bot.channels.cache.get(Channels.devCmds.id).send(generatePage(bot, servers, memberCount, 1, pageCount));
-            
             let page = 1;
+            let info = "ID";
+
+            const sentMsg = await bot.channels.cache.get(Channels.devCmds.id).send(generatePage(bot, servers, memberCount, page, pageCount, info));
 
             // generate reactions
             sentMsg.react("⬅️");
             sentMsg.react("➡️");
+            sentMsg.react("📊");
+            sentMsg.react("🆔");
 
             // reaction filters
             const leftFilter = (reaction, user) => reaction.emoji.name === "⬅️" && user.id === msg.author.id;
             const rightFilter = (reaction, user) => reaction.emoji.name === "➡️" && user.id === msg.author.id;
+            const membersFilter = (reaction, user) => reaction.emoji.name === "📊" && user.id === msg.author.id;
+            const IDFilter = (reaction, user) => reaction.emoji.name === "🆔" && user.id === msg.author.id;
 
             // collectors (parse for 60 seconds)
             const leftCollector = sentMsg.createReactionCollector(leftFilter, {time: 60000});
             const rightCollector = sentMsg.createReactionCollector(rightFilter, {time: 60000});
+            const membersCollector = sentMsg.createReactionCollector(membersFilter, {time: 60000});
+            const IDCollector = sentMsg.createReactionCollector(IDFilter, {time: 60000});
 
             leftCollector.on("collect", 
                 function() {
                     sentMsg.reactions.cache.get("⬅️").users.remove(msg.author);
-                    resetTimer(leftCollector, rightCollector);
+                    resetTimer(leftCollector, rightCollector, membersCollector, IDCollector);
 
                     if (page !== 1) { 
                         page--;
-                        sentMsg.edit(generatePage(bot, servers, memberCount, page, pageCount));
+                        sentMsg.edit(generatePage(bot, servers, memberCount, page, pageCount, info));
                     } 
                 }
             );
@@ -52,19 +59,39 @@ module.exports = {
             rightCollector.on("collect", 
                 function() {
                     sentMsg.reactions.cache.get("➡️").users.remove(msg.author);
-                    resetTimer(leftCollector, rightCollector);
+                    resetTimer(leftCollector, rightCollector, membersCollector, IDCollector);
 
                     if (page !== pageCount) {
                         page++;      
-                        sentMsg.edit(generatePage(bot, servers, memberCount, page, pageCount));
+                        sentMsg.edit(generatePage(bot, servers, memberCount, page, pageCount, info));
                     } 
                 }
             );
 
-            // edit message when reaction collectors expire
-            rightCollector.on("end", 
+            membersCollector.on("collect", 
                 function() {
-                    sentMsg.edit(Format.expirationNotice, generatePage(bot, servers, memberCount, page, pageCount));
+                    sentMsg.reactions.cache.get("📊").users.remove(msg.author);
+                    resetTimer(leftCollector, rightCollector, membersCollector, IDCollector);
+                    
+                    info = "members";
+                    sentMsg.edit(generatePage(bot, servers, memberCount, page, pageCount, info));
+                }
+            );
+
+            IDCollector.on("collect", 
+                function() {
+                    sentMsg.reactions.cache.get("🆔").users.remove(msg.author);
+                    resetTimer(leftCollector, rightCollector, membersCollector, IDCollector);
+
+                    info = "ID";
+                    sentMsg.edit(generatePage(bot, servers, memberCount, page, pageCount, info));
+                }
+            );
+
+            // edit message when reaction collectors expire
+            IDCollector.on("end", 
+                function() {
+                    sentMsg.edit(Format.expirationNotice, generatePage(bot, servers, memberCount, page, pageCount, info));
                 }
             );
 
@@ -74,18 +101,21 @@ module.exports = {
     }
 }
 
-function resetTimer(left, right) {
+function resetTimer(left, right, members, ID) {
     left.resetTimer({time: 60000});
     right.resetTimer({time: 60000});
+    members.resetTimer({time: 60000});
+    ID.resetTimer({time: 60000});
 }
 
-function generatePage(bot, servers, memberCount, page, pageCount) {
+function generatePage(bot, servers, memberCount, page, pageCount, info) {
     let start = (page - 1) * 20;
+    let infoTitle = info === "ID" ? "ID" : "MEMBERS";
     
     if (start <= servers.length - 1) {
         let serverList = "";
         let dataList = "";
-        let idList = "";
+        let infoList = "";
         let date = new Date();
 
         let i;
@@ -97,7 +127,11 @@ function generatePage(bot, servers, memberCount, page, pageCount) {
                 serverList += " 🆕";
 
             dataList += `\n${joinDate.toDateString()}`;
-            idList += `\n${servers[i].id}`
+            
+            if (info === "ID")
+                infoList += `\n${servers[i].id}`;
+            else
+                infoList += `\n${servers[i].memberCount}`;
         }
 
         let embed = new Discord.MessageEmbed()
@@ -108,7 +142,7 @@ function generatePage(bot, servers, memberCount, page, pageCount) {
                         + `\nIn **${bot.guilds.cache.size}** server(s):`)
             .addField("NAME", `${serverList}`, true)
             .addField("DATE ADDED", `${dataList}`, true)
-            .addField("ID", `${idList}`, true)
+            .addField(infoTitle, `${infoList}`, true)
             .addField("\u200b", `page **${page}** of **${pageCount}**`)
             .addField("\u200b", "\u200b")
             .setFooter(Format.footer.text, Format.footer.image);
