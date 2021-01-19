@@ -17,6 +17,7 @@ module.exports = {
             .setColor("#5DADEC")
             .setTitle(":sob: **━━━━━ SERVER LEFT ━━━━━** :sob:")
             .setDescription(`\n**Server:** ${guild}`
+                            + `\n**ID:** ${guild.id}`
                             + `\n**Date:** ${date.toDateString()}`)
             .setFooter(Format.footer.text, Format.footer.image);
 
