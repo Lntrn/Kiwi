@@ -191,7 +191,7 @@ module.exports = {
             );
 
         } catch (err) {
-            ErrorLog.log(bot, msg, serverID, `blacklisting user ${userID} in database`, err);
+            ErrorLog.log(bot, msg, msg.server.id, `blacklisting user ${userID} in database`, err);
 
         } finally {
             dbClient.close();
@@ -221,7 +221,7 @@ module.exports = {
             );
 
         } catch (err) {
-            ErrorLog.log(bot, msg, serverID, `blacklisting user ${userID} in database`, err);
+            ErrorLog.log(bot, msg, serverID, `blacklisting user ${serverID} in database`, err);
 
         } finally {
             dbClient.close();
@@ -248,9 +248,44 @@ module.exports = {
             );
 
             if (target)
+                return true;
+            else
+                return false;
 
         } catch (err) {
-            ErrorLog.log(bot, msg, serverID, `checking if user ${userID} is in database blacklist`, err);
+            ErrorLog.log(bot, msg, msg.server.id, `checking if user ${userID} is in database blacklist`, err);
+
+        } finally {
+            dbClient.close();
+        }
+    },
+    async checkServerBlacklist(bot, msg) {
+        // create database client
+        const dbClient = new MongoDB(process.env.MONGOURI, { useUnifiedTopology: true });
+        const serverID = msg.server.id;
+
+        try {
+            await dbClient.connect();
+            const db = dbClient.db("KiwiDB");
+            const servers = db.collection("server-blacklist");
+
+            const target = await servers.findOne(
+                { "_server": serverID },
+                (error, result) => {
+                    if (result)
+                        return true;
+                    else
+                        return false;
+                }
+            );
+
+            if (target)
+                return true;
+            else
+                return false;
+
+        } catch (err) {
+            ErrorLog.log(bot, msg, serverID, `checking if user ${serverID} is in database blacklist`, err);
 
         } finally {
             dbClient.close();

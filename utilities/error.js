@@ -64,5 +64,31 @@ module.exports = {
 
         bot.channels.cache.get(Channels.errorLog.id).send(log);
         bot.channels.cache.get(Channels.errorLog.id).send(Roles.dev.pub);
+    },
+    userBlacklisted(bot, msg, reason) {
+        const response = new Discord.MessageEmbed()
+            .setColor("#DD2E44")
+            .setTitle(`🚫${Format.space(1)} **━━━━━━━━ USER BLACKLISTED ━━━━━━━━** ${Format.space(1)}🚫`)
+            .setDescription(`Due to abuse of the bot, **you** have been **blacklisted** from using ${Emojis.kiwi.pub} **Kiwi**`
+                            + `\nYou will no longer be able to access the bot in any server`
+                            + `\n\nReason for ban: \n${reason}`
+                            + `\n\n If you believe this is a mistake, please submit a request to be removed from the blacklist in our [Support Server](${Format.supportLink})`)
+            .addField("\u200b", "\u200b")
+            .setFooter(Format.footer.text, Format.footer.image);
+
+        msg.channel.send(response).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "blacklisted user response", err));
+    },
+    serverBlacklisted(bot, msg, reason) {
+        const response = new Discord.MessageEmbed()
+            .setColor("#DD2E44")
+            .setTitle(`🚫${Format.space(1)} **━━━━━━━━ SERVER BLACKLISTED ━━━━━━━━** ${Format.space(1)}🚫`)
+            .setDescription(`Due to abuse of the bot, **this server** has been **blacklisted** from using ${Emojis.kiwi.pub} **Kiwi**`
+                            + `\nKiwi's commands will no longer work in this server`
+                            + `\n\nReason for ban: \n${reason}`
+                            + `\n\n If you believe this is a mistake, please submit a request to have this server removed from the blacklist in our [Support Server](${Format.supportLink})`)
+            .addField("\u200b", "\u200b")
+            .setFooter(Format.footer.text, Format.footer.image);
+
+        msg.channel.send(response).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "blacklisted user response", err));
     }
 }
