@@ -166,5 +166,94 @@ module.exports = {
         } finally {
             dbClient.close();
         }
+    },
+    async blacklistUser(bot, msg, reason) {
+        // create database client
+        const dbClient = new MongoDB(process.env.MONGOURI, { useUnifiedTopology: true });
+        const userID = msg.author.id;
+
+        try {
+            await dbClient.connect();
+            const db = dbClient.db("KiwiDB");
+            const users = db.collection("user-blacklist");
+
+            await users.findOneAndUpdate(
+                { "_user": userID },
+                {
+                    $push: {
+                        "_log": {
+                            "date": Date(),
+                            "reason": reason
+                        }
+                    }
+                },
+                { upsert: true }
+            );
+
+        } catch (err) {
+            ErrorLog.log(bot, msg, serverID, `blacklisting user ${userID} in database`, err);
+
+        } finally {
+            dbClient.close();
+        }
+    },
+    async blacklistServer(bot, msg, reason) {
+        // create database client
+        const dbClient = new MongoDB(process.env.MONGOURI, { useUnifiedTopology: true });
+        const serverID = msg.server.id;
+
+        try {
+            await dbClient.connect();
+            const db = dbClient.db("KiwiDB");
+            const servers = db.collection("server-blacklist");
+
+            await servers.findOneAndUpdate(
+                { "_server": serverID },
+                {
+                    $push: {
+                        "_log": {
+                            "date": Date(),
+                            "reason": reason
+                        }
+                    }
+                },
+                { upsert: true }
+            );
+
+        } catch (err) {
+            ErrorLog.log(bot, msg, serverID, `blacklisting user ${userID} in database`, err);
+
+        } finally {
+            dbClient.close();
+        }
+    },
+    async checkUserBlacklist(bot, msg) {
+        // create database client
+        const dbClient = new MongoDB(process.env.MONGOURI, { useUnifiedTopology: true });
+        const userID = msg.author.id;
+
+        try {
+            await dbClient.connect();
+            const db = dbClient.db("KiwiDB");
+            const servers = db.collection("user-blacklist");
+
+            const target = await servers.findOne(
+                { "_user": userID },
+                (error, result) => {
+                    if (result)
+                        return true;
+                    else
+                        return false;
+                }
+            );
+
+            if (target)
+
+        } catch (err) {
+            ErrorLog.log(bot, msg, serverID, `checking if user ${userID} is in database blacklist`, err);
+
+        } finally {
+            dbClient.close();
+        }
     }
 }
