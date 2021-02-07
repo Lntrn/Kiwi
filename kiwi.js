@@ -82,6 +82,19 @@ bot.on("message", async (message) => {
 	if (message.author.bot || message.attachments.size !== 0)
 		return;
 
+	// if user/server is blacklisted, provide blacklist repsonse
+	const user = Blacklist.users.find((user) => user._user === message.author.id);
+	const server = Blacklist.server.find((server) => server._server === message.guild.id);
+
+	if (user) {
+		const log = user._log;
+		return Blacklist.userBlacklisted(bot, message, log[log.length - 1].reason);
+		
+	} else if (server) {
+		const log = server._log;
+		return Blacklist.serverBlacklisted(bot, message, log[log.length - 1].reason);
+	}
+
 	const prefix = await Config.prefix(bot, message); // promise rejection handled internally
 	const prefixCheck = message.content.substr(0, prefix.length);
 	const universalPrefixV1Check = message.content.substr(0, Config.universalPrefix.v1.length);

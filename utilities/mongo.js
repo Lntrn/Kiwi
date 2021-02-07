@@ -11,6 +11,8 @@ const Channels = require("../utilities/channels.js");
 const Format = require("../utilities/format.js");
 // require error logger module
 const ErrorLog = require("./error.js");
+// require blacklist module
+const Blacklist = require("./blacklist.js");
 
 module.exports = {
     name: "mongo",
@@ -196,6 +198,9 @@ module.exports = {
         } finally {
             dbClient.close();
         }
+
+        // update users in local blacklist
+        Blacklist.load(true, false);
     },
     async blacklistServer(bot, msg, reason) {
         // create database client
@@ -226,6 +231,9 @@ module.exports = {
         } finally {
             dbClient.close();
         }
+
+        // update servers in local blacklist
+        Blacklist.load(false, true);
     },
     async checkUserBlacklist(bot, msg) {
         // create database client
