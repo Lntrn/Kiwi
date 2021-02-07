@@ -11,6 +11,8 @@ require("dotenv-flow").config();
 const Config = require("./utilities/config.js");
 // require format.js module
 const Format = require("./utilities/format.js");
+// require Blacklist module
+const Blacklist = require("./utilities/blacklist.js");
 
 
 // create new bot
@@ -53,6 +55,8 @@ bot.on("ready", async () => {
 	memberCount = Format.memberCount(bot);
 	// start status loop
 	statusLoop();
+	// load blacklists
+	Blacklist.load(true, true);
 
 	try {
 		const owner = await bot.users.fetch(Config.ownerID);

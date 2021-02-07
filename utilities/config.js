@@ -12,6 +12,7 @@ module.exports = {
     },
     devmodePrefix: "k",
     ownerID: "193427298958049280",
+    supportID: "744856371417186385",
     async prefix(bot, msg) {
         // if in devmode, only respond to devmode prefix
         if (module.exports.devmode)

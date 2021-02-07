@@ -191,7 +191,7 @@ module.exports = {
             );
 
         } catch (err) {
-            ErrorLog.log(bot, msg, msg.server.id, `blacklisting user ${userID} in database`, err);
+            ErrorLog.log(bot, msg, msg.guild.id, `blacklisting user ${userID} in database`, err);
 
         } finally {
             dbClient.close();
@@ -200,7 +200,7 @@ module.exports = {
     async blacklistServer(bot, msg, reason) {
         // create database client
         const dbClient = new MongoDB(process.env.MONGOURI, { useUnifiedTopology: true });
-        const serverID = msg.server.id;
+        const serverID = msg.guild.id;
 
         try {
             await dbClient.connect();
@@ -253,7 +253,7 @@ module.exports = {
                 return false;
 
         } catch (err) {
-            ErrorLog.log(bot, msg, msg.server.id, `checking if user ${userID} is in database blacklist`, err);
+            ErrorLog.log(bot, msg, msg.guild.id, `checking if user ${userID} is in database blacklist`, err);
 
         } finally {
             dbClient.close();
@@ -262,7 +262,7 @@ module.exports = {
     async checkServerBlacklist(bot, msg) {
         // create database client
         const dbClient = new MongoDB(process.env.MONGOURI, { useUnifiedTopology: true });
-        const serverID = msg.server.id;
+        const serverID = msg.guild.id;
 
         try {
             await dbClient.connect();
