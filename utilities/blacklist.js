@@ -83,6 +83,6 @@ module.exports = {
             .addField("\u200b", "\u200b")
             .setFooter(Format.footer.text, Format.footer.image);
 
-        msg.channel.send(response).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "blacklisted user response", err));
+        msg.channel.send(response).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "blacklisted server response", err));
     }
 }
