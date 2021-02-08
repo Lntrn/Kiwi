@@ -49,33 +49,34 @@ let memberCount;
 let iterations = 0;
 
 bot.on("ready", async () => {
-	console.log(`Logged in as ${bot.user.tag}!`);
-
 	// initializing  member count
 	memberCount = Format.memberCount(bot);
 	// start status loop
 	statusLoop();
 
 	try {
+		const owner = await bot.users.fetch(Config.ownerID);
+
 		// load blacklists
 		const success = await Blacklist.load(true, true);
 
-		const owner = await bot.users.fetch(Config.ownerID);
+		// initialize owner profile image
+		Format.footer.image = owner.avatarURL();
 
 		// send launch notification
 		let date = new Date();
 		let status = `**Blacklist loaded:** ${success}`
 					+ `\n**Status Loop Started:** true`
+					+ `\n**Owner Profile Updated:** true`
 					+ `\n**Time:** ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
 
 		owner.send(status);
 
-		// initialize owner profile image
-		Format.footer.image = owner.avatarURL();
-
 	} catch (err) {
 		console.log("Error sending message! Error: ", err.message);
 	}
+
+	console.log(`Logged in as ${bot.user.tag}!`);
 });
 
 bot.on("message", async (message) => {
@@ -90,20 +91,19 @@ bot.on("message", async (message) => {
 	const users = Blacklist["users"];
 	const servers = Blacklist["servers"];
 
-	console.log(users);
-	console.log(servers);
+	// if user/server is blacklisted, shortcircuit blacklist repsonse
+	const userCheck = users.find((user) => user._user === message.author.id);
+	const serverCheck = servers.find((server) => server._server === message.guild.id);
 
-	// if user/server is blacklisted, provide blacklist repsonse
-	const user = users.find((user) => user._user === message.author.id);
-	const server = servers.find((server) => server._server === message.guild.id);
+	if (userCheck) {
+		const ban = userCheck._log[userCheck._log.length - 1];
+		Blacklist.userBlacklisted(bot, message, ban.date, ban.reason);
+		return;
 
-	if (user) {
-		const log = user._log;
-		return Blacklist.userBlacklisted(bot, message, log[log.length - 1].reason);
-
-	} else if (server) {
-		const log = server._log;
-		return Blacklist.serverBlacklisted(bot, message, log[log.length - 1].reason);
+	} else if (serverCheck) {
+		const ban = serverCheck._log[serverCheck._log.length - 1];
+		Blacklist.serverBlacklisted(bot, message, ban.date, ban.reason);
+		return;
 	}
 
 	const prefix = await Config.prefix(bot, message); // promise rejection handled internally

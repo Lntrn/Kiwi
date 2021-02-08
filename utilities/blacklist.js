@@ -52,27 +52,29 @@ module.exports = {
 
         return success;
     },
-    userBlacklisted(bot, msg, reason) {
+    userBlacklisted(bot, msg, date, reason) {
         const response = new Discord.MessageEmbed()
             .setColor("#DD2E44")
-            .setTitle(`🚫${Format.space(1)} **━━━━━━━━ USER BLACKLISTED ━━━━━━━━** ${Format.space(1)}🚫`)
-            .setDescription(`Due to abuse of the bot, **you** have been **blacklisted** from using ${Emojis.kiwi.pub} **Kiwi**`
-                            + `\nYou will no longer be able to access the bot in *any* server`
-                            + `\n\nReason for ban: \n${reason}`
-                            + `\n\n If you believe this is a mistake, please submit a request to be removed from the blacklist in our [Support Server](${Format.supportLink})`)
+            .setTitle(`🚫${Format.space(1)} **━━━━━━━━ USER BANNED ━━━━━━━━** ${Format.space(1)}🚫`)
+            .setDescription(`You have been **banned** from using ${Emojis.kiwi.pub} **Kiwi**`
+                            + `\nYou will no longer be able to use the bot in **any** server`
+                            + `\n\n**Date of ban:** \n${date}`
+                            + `\n\n**Reason for ban:** \n${reason}`
+                            + `\n\n If this is a mistake, please submit a request to be unbanned in our [Support Server](${Format.supportLink})`)
             .addField("\u200b", "\u200b")
             .setFooter(Format.footer.text, Format.footer.image);
 
         msg.channel.send(response).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "blacklisted user response", err));
     },
-    serverBlacklisted(bot, msg, reason) {
+    serverBlacklisted(bot, msg, date, reason) {
         const response = new Discord.MessageEmbed()
             .setColor("#DD2E44")
-            .setTitle(`🚫${Format.space(1)} **━━━━━━━━ SERVER BLACKLISTED ━━━━━━━━** ${Format.space(1)}🚫`)
-            .setDescription(`Due to abuse of the bot, **this server** has been **blacklisted** from using ${Emojis.kiwi.pub} **Kiwi**`
+            .setTitle(`🚫${Format.space(1)} **━━━━━━━━ SERVER BANNED ━━━━━━━━** ${Format.space(1)}🚫`)
+            .setDescription(`This server has been **banned** from using ${Emojis.kiwi.pub} **Kiwi**`
                             + `\nKiwi's commands will no longer work in this server`
-                            + `\n\nReason for ban: \n${reason}`
-                            + `\n\n If you believe this is a mistake, please submit a request to have this server removed from the blacklist in our [Support Server](${Format.supportLink})`)
+                            + `\n\n**Date of ban:** \n${date}`
+                            + `\n\n**Reason for ban:** \n${reason}`
+                            + `\n\n If this is a mistake, please submit a request to have this server unbanned in our [Support Server](${Format.supportLink})`)
             .addField("\u200b", "\u200b")
             .setFooter(Format.footer.text, Format.footer.image);
 
