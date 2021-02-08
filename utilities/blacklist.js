@@ -2,6 +2,8 @@
 const Discord = require("discord.js");
 // require config.js module
 const Config = require("./config.js");
+// require channels.js module
+const Channels = require("../utilities/channels.js");
 // require emojis.js module
 const Emojis = require("../utilities/emojis.js");
 // require error logger module
@@ -84,5 +86,37 @@ module.exports = {
             .setFooter(Format.footer.text, Format.footer.image);
 
         msg.channel.send(response).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "blacklisted server response", err));
+    },
+    userAttempt(bot, msg, date, reason) {
+        date = new Date();
+
+        const log = new Discord.MessageEmbed()
+            .setColor("#DD2E44")
+            .setTitle(`🚫${Format.space(1)} **━━━━ BANNED USER ATTEMPT ━━━━** ${Format.space(1)}🚫`)
+            .setDescription(`**User:** ${msg.author}`
+                            + `\n**Server:** ${bot.guilds.cache.get(msg.guild.id).name}`
+                            + `\n**Channel:** ${msg.channel}`
+                            + `\n**Date:** ${date.toDateString()}`
+                            + `\n\n**Ban Date:** ${date}`
+                            + `\n**Ban Reason:** ${reason}`)
+            .setFooter(Format.footer.text, Format.footer.image);
+
+        bot.channels.cache.get(Channels.cmdLog.id).send(log).catch(err => ErrorLog.log(bot, msg, msg.guild.id, `banned user attempt logging [${msg.author}]`, err));
+    },
+    serverAttempt(bot, msg, date, reason) {
+        date = new Date();
+
+        const log = new Discord.MessageEmbed()
+            .setColor("#DD2E44")
+            .setTitle(`🚫${Format.space(1)} **━━━━ BANNED SERVER ATTEMPT ━━━━** ${Format.space(1)}🚫`)
+            .setDescription(`**User:** ${msg.author}`
+                            + `\n**Server:** ${bot.guilds.cache.get(msg.guild.id).name}`
+                            + `\n**Channel:** ${msg.channel}`
+                            + `\n**Date:** ${date.toDateString()}`
+                            + `\n\n**Ban Date:** ${date}`
+                            + `\n**Ban Reason:** ${reason}`)
+            .setFooter(Format.footer.text, Format.footer.image);
+
+        bot.channels.cache.get(Channels.cmdLog.id).send(log).catch(err => ErrorLog.log(bot, msg, msg.guild.id, `banned server attempt logging [${bot.guilds.cache.get(msg.guild.id).name}]`, err));
     }
 }

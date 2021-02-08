@@ -11,8 +11,6 @@ const Channels = require("../utilities/channels.js");
 const Format = require("../utilities/format.js");
 // require error logger module
 const ErrorLog = require("./error.js");
-// require blacklist module
-const Blacklist = require("./blacklist.js");
 
 module.exports = {
     name: "mongo",

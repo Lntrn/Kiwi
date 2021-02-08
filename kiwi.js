@@ -126,11 +126,13 @@ bot.on("message", async (message) => {
 	if (userCheck) {
 		const ban = userCheck._log[userCheck._log.length - 1];
 		Blacklist.userBlacklisted(bot, message, ban.date, ban.reason);
+		Blacklist.userAttempt(bot, msg, ban.date, ban.reason);
 		return;
 
 	} else if (serverCheck) {
 		const ban = serverCheck._log[serverCheck._log.length - 1];
 		Blacklist.serverBlacklisted(bot, message, ban.date, ban.reason);
+		Blacklist.serverAttempt(bot, msg, ban.date, ban.reason);
 		return;
 	}
 
