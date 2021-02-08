@@ -10,24 +10,27 @@ const Format = require("../utilities/format.js");
 const Channels = require("../utilities/channels.js");
 // require error logger module
 const ErrorLog = require("../utilities/error.js");
+// require MongoDB Driver
+const MongoDB = require("mongodb").MongoClient;
 
 module.exports = {
-    name: "ping",
-    description: "owner command to check bot's ping",
+    name: "banUser",
+    description: "add a user to the blacklist",
     execute(bot, msg, args) {
         // react to command
         msg.react(bot.emojis.cache.get(Emojis.kiwi.id));
 
         const userID = args.shift();
-        const reason = args.join();
+        const reason = args.join(" ");
 
-        blacklistUser(bot, msg, reason);
+        blacklistUser(bot, msg, userID, reason);
 
         const embed = new Discord.MessageEmbed()
             .setColor("#DD2E44")
             .setTitle(`🚫${Format.space(1)} **━━━ USER BLACKLISTED ━━━** ${Format.space(1)}🚫`)
             .setDescription(`**User:** <@${userID}>`
                             + `\n**ID:** ${userID}`
+                            + `\n**Date:** ${Date()}`
                             + `\n**Reason:** ${reason}`)
             .addField("\u200b", "\u200b")
             .setFooter(Format.footer.text, Format.footer.image);
@@ -36,10 +39,9 @@ module.exports = {
     }
 }
 
-async function blacklistUser(bot, msg, reason) {
+async function blacklistUser(bot, msg, userID, reason) {
     // create database client
     const dbClient = new MongoDB(process.env.MONGOURI, { useUnifiedTopology: true });
-    const userID = msg.author.id;
 
     try {
         await dbClient.connect();
@@ -58,6 +60,9 @@ async function blacklistUser(bot, msg, reason) {
             },
             { upsert: true }
         );
+        
+        // update users in local blacklist
+        await Blacklist.load(true, false);
 
     } catch (err) {
         ErrorLog.log(bot, msg, msg.guild.id, `blacklisting user ${userID} in database`, err);
@@ -65,7 +70,4 @@ async function blacklistUser(bot, msg, reason) {
     } finally {
         dbClient.close();
     }
-
-    // update users in local blacklist
-    Blacklist.load(true, false);
 }

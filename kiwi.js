@@ -48,6 +48,9 @@ let activity = "users";
 let memberCount;
 let iterations = 0;
 
+// check if boot complete
+let loaded = false;
+
 bot.on("ready", async () => {
 	// initializing  member count
 	memberCount = Format.memberCount(bot);
@@ -65,10 +68,11 @@ bot.on("ready", async () => {
 
 		// send launch notification
 		let date = new Date();
-		let status = `**Blacklist loaded:** ${success}`
-					+ `\n**Status Loop Started:** true`
-					+ `\n**Owner Profile Updated:** true`
-					+ `\n**Time:** ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+		let status = `:arrows_counterclockwise: **━━━━━ Boot Up Cycle ━━━━━** :arrows_counterclockwise:`
+					+ `\n\nBlacklist loaded: **${success}**`
+					+ `\nStatus Loop Started: **true**`
+					+ `\nOwner Profile Updated: **true**`
+					+ `\nTime: **${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}**`;
 
 		owner.send(status);
 
@@ -77,34 +81,21 @@ bot.on("ready", async () => {
 	}
 
 	console.log(`Logged in as ${bot.user.tag}!`);
+	loaded = true;
 });
 
 bot.on("message", async (message) => {
+	// if bot not yet loaded, ignore
+	if (!loaded)
+		return;
+	
 	// if in devmode, only respond to dev
-	// if (Config.devmode && message.author.id !== Config.ownerID)
-	// 	return;
+	if (Config.devmode && message.author.id !== Config.ownerID)
+		return;
 
 	// if a bot sent the message or if it has attachments, ignore
 	if (message.author.bot || message.attachments.size !== 0)
 		return;
-
-	const users = Blacklist["users"];
-	const servers = Blacklist["servers"];
-
-	// if user/server is blacklisted, shortcircuit blacklist repsonse
-	const userCheck = users.find((user) => user._user === message.author.id);
-	const serverCheck = servers.find((server) => server._server === message.guild.id);
-
-	if (userCheck) {
-		const ban = userCheck._log[userCheck._log.length - 1];
-		Blacklist.userBlacklisted(bot, message, ban.date, ban.reason);
-		return;
-
-	} else if (serverCheck) {
-		const ban = serverCheck._log[serverCheck._log.length - 1];
-		Blacklist.serverBlacklisted(bot, message, ban.date, ban.reason);
-		return;
-	}
 
 	const prefix = await Config.prefix(bot, message); // promise rejection handled internally
 	const prefixCheck = message.content.substr(0, prefix.length);
@@ -128,6 +119,21 @@ bot.on("message", async (message) => {
 
 	// if no prefixes match
 	} else {
+		return;
+	}
+
+	// if user/server is blacklisted, shortcircuit blacklist repsonse
+	const userCheck = Blacklist["users"].find((user) => user._user === message.author.id);
+	const serverCheck = Blacklist["servers"].find((server) => server._server === message.guild.id);
+
+	if (userCheck) {
+		const ban = userCheck._log[userCheck._log.length - 1];
+		Blacklist.userBlacklisted(bot, message, ban.date, ban.reason);
+		return;
+
+	} else if (serverCheck) {
+		const ban = serverCheck._log[serverCheck._log.length - 1];
+		Blacklist.serverBlacklisted(bot, message, ban.date, ban.reason);
 		return;
 	}
 

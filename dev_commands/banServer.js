@@ -10,24 +10,27 @@ const Format = require("../utilities/format.js");
 const Channels = require("../utilities/channels.js");
 // require error logger module
 const ErrorLog = require("../utilities/error.js");
+// require MongoDB Driver
+const MongoDB = require("mongodb").MongoClient;
 
 module.exports = {
-    name: "ping",
-    description: "owner command to check bot's ping",
+    name: "banServer",
+    description: "add a server to the blacklist",
     execute(bot, msg, args) {
         // react to command
         msg.react(bot.emojis.cache.get(Emojis.kiwi.id));
 
         const serverID = args.shift();
-        const reason = args.join();
+        const reason = args.join(" ");
 
-        blacklistServer(bot, msg, reason);
+        blacklistServer(bot, msg, serverID, reason);
 
         const embed = new Discord.MessageEmbed()
             .setColor("#DD2E44")
-            .setTitle(`🚫${Format.space(1)} **━━━ USER BLACKLISTED ━━━** ${Format.space(1)}🚫`)
+            .setTitle(`🚫${Format.space(1)} **━━━ SERVER BLACKLISTED ━━━** ${Format.space(1)}🚫`)
             .setDescription(`**User:** <@${serverID}>`
                             + `\n**ID:** ${serverID}`
+                            + `\n**Date:** ${Date()}`
                             + `\n**Reason:** ${reason}`)
             .addField("\u200b", "\u200b")
             .setFooter(Format.footer.text, Format.footer.image);
@@ -36,10 +39,9 @@ module.exports = {
     }
 }
 
-async function blacklistServer(bot, msg, reason) {
+async function blacklistServer(bot, msg, serverID, reason) {
     // create database client
     const dbClient = new MongoDB(process.env.MONGOURI, { useUnifiedTopology: true });
-    const serverID = msg.guild.id;
 
     try {
         await dbClient.connect();
@@ -59,13 +61,13 @@ async function blacklistServer(bot, msg, reason) {
             { upsert: true }
         );
 
+        // update servers in local blacklist
+        await Blacklist.load(false, true);
+
     } catch (err) {
         ErrorLog.log(bot, msg, serverID, `blacklisting server ${serverID} in database`, err);
 
     } finally {
         dbClient.close();
     }
-
-    // update servers in local blacklist
-    Blacklist.load(false, true);
 }
