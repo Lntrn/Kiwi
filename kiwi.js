@@ -55,15 +55,20 @@ bot.on("ready", async () => {
 	memberCount = Format.memberCount(bot);
 	// start status loop
 	statusLoop();
-	// load blacklists
-	Blacklist.load(true, true);
 
 	try {
+		// load blacklists
+		const success = await Blacklist.load(true, true);
+
 		const owner = await bot.users.fetch(Config.ownerID);
 
 		// send launch notification
 		let date = new Date();
-		owner.send("Bot Online! **" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + "**");
+		let status = `**Blacklist loaded:** ${success}`
+					+ `\n**Status Loop Started:** true`
+					+ `\n**Time:** ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+
+		owner.send(status);
 
 		// initialize owner profile image
 		Format.footer.image = owner.avatarURL();
@@ -75,21 +80,27 @@ bot.on("ready", async () => {
 
 bot.on("message", async (message) => {
 	// if in devmode, only respond to dev
-	if (Config.devmode && message.author.id !== Config.ownerID)
-		return;
+	// if (Config.devmode && message.author.id !== Config.ownerID)
+	// 	return;
 
 	// if a bot sent the message or if it has attachments, ignore
 	if (message.author.bot || message.attachments.size !== 0)
 		return;
 
+	const users = Blacklist["users"];
+	const servers = Blacklist["servers"];
+
+	console.log(users);
+	console.log(servers);
+
 	// if user/server is blacklisted, provide blacklist repsonse
-	const user = Blacklist.users.find((user) => user._user === message.author.id);
-	const server = Blacklist.server.find((server) => server._server === message.guild.id);
+	const user = users.find((user) => user._user === message.author.id);
+	const server = servers.find((server) => server._server === message.guild.id);
 
 	if (user) {
 		const log = user._log;
 		return Blacklist.userBlacklisted(bot, message, log[log.length - 1].reason);
-		
+
 	} else if (server) {
 		const log = server._log;
 		return Blacklist.serverBlacklisted(bot, message, log[log.length - 1].reason);
@@ -162,6 +173,14 @@ bot.on("message", async (message) => {
 		case "portrait":
 			if (message.author.id === Config.ownerID)
 				bot.devCommands.get("portrait").execute(bot, message);
+			break;
+		case "banUser":
+			if (message.author.id === Config.ownerID)
+				bot.devCommands.get("banUser").execute(bot, message, args);
+			break;
+		case "banServer":
+			if (message.author.id === Config.ownerID)
+				bot.devCommands.get("banServer").execute(bot, message, args);
 			break;
 		// case "cmds":
 		// 	if (message.author.id === Config.ownerID)
