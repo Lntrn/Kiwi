@@ -9,10 +9,10 @@ const FS = require("fs");
 require("dotenv-flow").config();
 // require Config module
 const Config = require("./utilities/config.js");
-// require format.js module
-const Format = require("./utilities/format.js");
 // require Blacklist module
 const Blacklist = require("./utilities/blacklist.js");
+// require format.js module
+const Format = require("./utilities/format.js");
 
 
 // create new bot
@@ -48,9 +48,6 @@ let activity = "users";
 let memberCount;
 let iterations = 0;
 
-// check if boot complete
-let loaded = false;
-
 bot.on("ready", async () => {
 	// initializing  member count
 	memberCount = Format.memberCount(bot);
@@ -81,12 +78,12 @@ bot.on("ready", async () => {
 	}
 
 	console.log(`Logged in as ${bot.user.tag}!`);
-	loaded = true;
+	Config.loaded = true;
 });
 
 bot.on("message", async (message) => {
 	// if bot not yet loaded, ignore
-	if (!loaded)
+	if (!Config.loaded)
 		return;
 	
 	// if in devmode, only respond to dev
@@ -187,6 +184,10 @@ bot.on("message", async (message) => {
 		case "banServer":
 			if (message.author.id === Config.ownerID)
 				bot.devCommands.get("banServer").execute(bot, message, args);
+			break;
+		case "banReload":
+			if (message.author.id === Config.ownerID)
+				bot.devCommands.get("banReload").execute(bot, message);
 			break;
 		// case "cmds":
 		// 	if (message.author.id === Config.ownerID)

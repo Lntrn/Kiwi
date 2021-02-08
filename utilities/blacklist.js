@@ -13,6 +13,9 @@ const MongoDB = require("mongodb").MongoClient;
 
 module.exports = {
     async load(userUpdate, serverUpdate) {
+        // set loaded to false while blacklist is being reloaded
+        Config.loaded = false;
+
         const success = true;
 
         // create database client
@@ -50,6 +53,8 @@ module.exports = {
             dbClient.close();
         }
 
+        Config.loaded = true;
+        
         return success;
     },
     userBlacklisted(bot, msg, date, reason) {

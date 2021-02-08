@@ -27,15 +27,15 @@ module.exports = {
 
         const embed = new Discord.MessageEmbed()
             .setColor("#DD2E44")
-            .setTitle(`🚫${Format.space(1)} **━━━ SERVER BLACKLISTED ━━━** ${Format.space(1)}🚫`)
-            .setDescription(`**User:** <@${serverID}>`
+            .setTitle(`🚫${Format.space(1)} **━━━━━ SERVER BLACKLISTED ━━━━━** ${Format.space(1)}🚫`)
+            .setDescription(`**Server:** ${bot.guilds.cache.get(serverID).name}`
                             + `\n**ID:** ${serverID}`
                             + `\n**Date:** ${Date()}`
                             + `\n**Reason:** ${reason}`)
             .addField("\u200b", "\u200b")
             .setFooter(Format.footer.text, Format.footer.image);
 
-        bot.channels.cache.get(Channels.devCmds.id).send(embed).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "ping", err));
+        bot.channels.cache.get(Channels.devCmds.id).send(embed).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "banServer", err));
     }
 }
 
