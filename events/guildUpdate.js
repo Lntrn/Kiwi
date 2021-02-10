@@ -19,7 +19,7 @@ module.exports = {
                 .setTitle(":label: **━━━━━ SERVER NAME CHANGE ━━━━━** :label:")
                 .setDescription(`\n**Old Name:** ${oldGuild.name}`
                                 + `\n**New Name:** ${newGuild.name}`
-                                + `\n**ID:** ${guild.id}`
+                                + `\n**ID:** ${newGuild.id}`
                                 + `\n**Date:** ${date.toDateString()}`)
                 .setFooter(Format.footer.text, Format.footer.image);
 
