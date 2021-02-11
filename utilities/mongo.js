@@ -26,11 +26,12 @@ module.exports = {
                 .setDescription(`**Command Used:** ${cmd}`
                                 + `\n**User:** ${msg.author}`
                                 + `\n**Server:** ${bot.guilds.cache.get(serverID).name}`
+                                + `\n**ID:** ${serverID}`
                                 + `\n**Channel:** ${msg.channel}`
                                 + `\n**Date:** ${date.toDateString()}`)
                 .setFooter(Format.footer.text, Format.footer.image);
 
-            bot.channels.cache.get(Channels.cmdLog.id).send(log).catch(err => ErrorLog.log(bot, msg, msg.guild.id, `cmd logging [${cmd}]`, err));
+            bot.channels.cache.get(Channels.cmdLog.id).send(log).catch(err => ErrorLog.log(bot, msg, serverID, `cmd logging [${cmd}]`, err));
         
             // create database client
             const dbClient = new MongoDB(process.env.MONGOURI, { useUnifiedTopology: true });
