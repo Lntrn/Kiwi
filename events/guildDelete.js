@@ -18,6 +18,7 @@ module.exports = {
             .setTitle(":sob: **━━━━━ SERVER LEFT ━━━━━** :sob:")
             .setDescription(`\n**Server:** ${guild}`
                             + `\n**ID:** ${guild.id}`
+                            + `\n**Members:** ${guild.memberCount}`
                             + `\n**Date:** ${date.toDateString()}`)
             .setFooter(Format.footer.text, Format.footer.image);
 
