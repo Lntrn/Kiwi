@@ -16,70 +16,66 @@ module.exports = {
         // react to command
         msg.react(bot.emojis.cache.get(Emojis.kiwi.id));
 
-        pet = [
-            {
-                "order": -1,
-                "rank": 2,
-                "lower": -1,
-                "upper": -1
-            },
-            {
-                "order": -1,
-                "rank": 3,
-                "lower": -1,
-                "upper": -1
-            },
-            {
-                "order": -1,
-                "rank": 4,
-                "lower": -1,
-                "upper": -1
-            },
-            {
-                "order": -1,
-                "rank": 2,
-                "lower": -1,
-                "upper": -1
-            },
-            {
-                "order": -1,
-                "rank": 1,
-                "lower": -1,
-                "upper": -1
-            },
-            {
-                "order": -1,
-                "rank": 3,
-                "lower": -1,
-                "upper": -1
-            },
-            {
-                "order": -1,
-                "rank": 4,
-                "lower": -1,
-                "upper": -1
-            },
-            {
-                "order": -1,
-                "rank": 3,
-                "lower": -1,
-                "upper": -1
-            },
-            {
-                "order": -1,
-                "rank": 3,
-                "lower": -1,
-                "upper": -1
-            },
-            {
-                "order": -1,
-                "rank": 1,
-                "lower": -1,
-                "upper": -1
-            }
-        ];
+        // create pet array
+        let pet = [];
 
-        generateRanges(pet);
+        for (let i = 0; i < args.length; i++) {
+            let talent = {
+                "order": -1
+            };
+            switch (args[i].toLowerCase()) {
+                case "c":
+                    talent.rank = 0;
+                    pet.push(talent);
+                    break;
+                case "un":
+                    talent.rank = 1;
+                    pet.push(talent);
+                    break;
+                case "r":
+                    talent.rank = 2;
+                    pet.push(talent);
+                    break;
+                case "ur":
+                    talent.rank = 3;
+                    pet.push(talent);
+                    break;
+                case "e":
+                    talent.rank = 4;
+                    pet.push(talent);
+                    break;
+                default:
+                    talent.order = parseInt(args[i]);
+                    talent.rank = Talents.find(ele => ele.order === talent.order).rank;
+                    pet.push(talent);
+            }
+        }
+
+        let results = generateRanges(pet);
+
+        // generate printout
+        let talents = "";
+        let ranges = "";
+        let counts = "";
+        for (let i = 0; i < results.length; i++) {
+            let talent = results[i];
+            talents += `\n#${talent.order} [${talent.rank}]`;
+            ranges += `\n${talent.lower} - ${talent.upper}`;
+            counts += `\n${talent.count}`;
+        }
+
+        const read = new Discord.MessageEmbed()
+            .setColor("#F7D7C4")
+            .setTitle(`📜 **━━━━━━ POOL READ ━━━━━━** 📜`)
+            .addField(`TALENT`, talents, true)
+            .addField(`RANGE`, ranges, true)
+            .addField(`COUNT`, counts, true)
+            .addField("\u200b", "\u200b")
+            .addField("Like what you see?", `[**${Format.bot.text}**](${Format.bot.invite}) ${Emojis.kiwi.pub}`
+                                        + `\n[**${Format.server.text}**](${Format.server.link}) ${Emojis.spiralscholars.pub}`)
+            .setFooter(Format.footer.text, Format.footer.image);
+
+        msg.channel.send(read).catch(err => ErrorLog.log(bot, msg, msg.guild.id, "pool", err));
 
         // log command use
         //Mongo.logCMD(bot, msg, msg.guild.id, "pool");
@@ -101,8 +97,8 @@ function generateRanges(pet) {
         
         // if order already known, update upper and lower
         if (talent.order != -1) {
-            talent.upper = talent.upper;
-            talent.lower = talent.lower;
+            talent.upper = talent.order;
+            talent.lower = talent.order;
 
         // if first talent and order not known
         } else if (i === 0) {
@@ -133,7 +129,7 @@ function generateRanges(pet) {
             // set upper bound
             talent.upper = order;
 
-        } else {
+        } else if (talent.order === -1) {
             let bound = pet[i + 1].upper;
 
             // set upper to last occurence of talent rank before previous talent
@@ -149,9 +145,9 @@ function generateRanges(pet) {
         let talent = pet[i];
 
         let filtered = Talents.filter(ele => ele.rank === talent.rank && ele.order >= talent.lower && ele.order <= talent.upper);
-        let count = filtered.length -1;
+        let count = filtered.length - 1;
         talent.count = count;
     }
 
-    console.log(pet);
+    return pet;
 }
