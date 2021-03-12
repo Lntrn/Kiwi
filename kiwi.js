@@ -153,6 +153,9 @@ bot.on("message", async (message) => {
 		case "help":
 			bot.commands.get("help").execute(bot, message);
 			break;
+		case "lookup":
+			bot.commands.get("lookup").execute(bot, message, args);
+			break;
 		case "invite":
 			bot.commands.get("invite").execute(bot, message);
 			break;
