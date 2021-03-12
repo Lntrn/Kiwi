@@ -147,6 +147,9 @@ bot.on("message", async (message) => {
 		case "stats":
 			bot.commands.get("stats").execute(bot, message, args);
 			break;
+		case "pool":
+			bot.commands.get("pool").execute(bot, message, args);
+			break;
 		case "help":
 			bot.commands.get("help").execute(bot, message);
 			break;

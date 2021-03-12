@@ -8,7 +8,6 @@ const Format = require("../utilities/format.js");
 const Mongo = require("../utilities/mongo.js");
 // require error logger module
 const ErrorLog = require("../utilities/error.js");
-const { health } = require("../utilities/emojis.js");
 
 module.exports = {
     name: "formulas",
