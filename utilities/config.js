@@ -12,6 +12,7 @@ module.exports = {
         v2: "<@743944201682681937>"
     },
     devmodePrefix: "k",
+    developers: ["193427298958049280", "750304052184612865"],
     ownerID: "193427298958049280",
     supportID: "744856371417186385",
     async prefix(bot, msg) {

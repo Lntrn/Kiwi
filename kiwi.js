@@ -87,7 +87,7 @@ bot.on("message", async (message) => {
 		return;
 	
 	// if in devmode, only respond to dev
-	if (Config.devmode && message.author.id !== Config.ownerID)
+	if (Config.devmode && !Config.developers.includes(message.author.id))
 		return;
 
 	// if a bot sent the message or if it has attachments, ignore
@@ -168,31 +168,31 @@ bot.on("message", async (message) => {
 
 		// Dev Commands
 		case "ping":
-			if (message.author.id === Config.ownerID)
+			if (Config.developers.includes(message.author.id))
 				bot.devCommands.get("ping").execute(bot, message);
 			break;
 		case "servers":
-			if (message.author.id === Config.ownerID)
+			if (Config.developers.includes(message.author.id))
 				bot.devCommands.get("servers").execute(bot, message);
 			break;
 		case "portrait":
-			if (message.author.id === Config.ownerID)
+			if (Config.developers.includes(message.author.id))
 				bot.devCommands.get("portrait").execute(bot, message);
 			break;
 		case "banUser":
-			if (message.author.id === Config.ownerID)
+			if (Config.developers.includes(message.author.id))
 				bot.devCommands.get("banUser").execute(bot, message, args);
 			break;
 		case "banServer":
-			if (message.author.id === Config.ownerID)
+			if (Config.developers.includes(message.author.id))
 				bot.devCommands.get("banServer").execute(bot, message, args);
 			break;
 		case "banReload":
-			if (message.author.id === Config.ownerID)
+			if (Config.developers.includes(message.author.id))
 				bot.devCommands.get("banReload").execute(bot, message);
 			break;
 		// case "cmds":
-		// 	if (message.author.id === Config.ownerID)
+		// 	if (Config.developers.includes(message.author.id))
 		// 		bot.devCommands.get("cmds").execute(bot, message);
 		// 	break;
 
