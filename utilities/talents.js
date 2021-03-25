@@ -1,4 +1,9 @@
-module.exports = [
+module.exports = {
+  flags: [
+    // to be filled later
+  ],
+  schools: ["storm", "fire", "ice", "balance", "life", "death", "myth", "sun", "star", "moon"],
+  database: [
     {
       "order": 0,
       "name": "Furnace",
@@ -7055,4 +7060,5 @@ module.exports = [
       "school": "balance",
       "flags": ""
     }
-]
+  ]
+};

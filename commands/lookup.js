@@ -16,6 +16,9 @@ module.exports = {
         // react to command
         msg.react(bot.emojis.cache.get(Emojis.kiwi.id));
 
+        // gather filters (split on ",")
+        let full = args.join(" ");
+
         // provided order
 
         // provided name

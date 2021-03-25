@@ -46,7 +46,7 @@ module.exports = {
                     break;
                 default:
                     talent.order = parseInt(args[i]);
-                    talent.rank = Talents.find(ele => ele.order === talent.order).rank;
+                    talent.rank = Talents.database.find(ele => ele.order === talent.order).rank;
                     pet.push(talent);
             }
         }
@@ -103,7 +103,7 @@ function generateRanges(pet) {
         // if first talent and order not known
         } else if (i === 0) {
             // get first occurence of rank in DB
-            let order = Talents.find(ele => ele.rank === talent.rank).order;
+            let order = Talents.database.find(ele => ele.rank === talent.rank).order;
             // set lower bound
             talent.lower = order;
 
@@ -111,7 +111,7 @@ function generateRanges(pet) {
             let bound = pet[i - 1].lower;
 
             // set lower to earlier occurence of talent rank after previous talent
-            let order = Talents.find(ele => ele.rank === talent.rank && ele.order > bound).order;
+            let order = Talents.database.find(ele => ele.rank === talent.rank && ele.order > bound).order;
             // set lower bound
             talent.lower = order;
         }
@@ -120,11 +120,16 @@ function generateRanges(pet) {
     // upper bound generation
     for (let i = pet.length - 1; i >= 0; i--) {
         let talent = pet[i];
-        
+
+        // if order already known, update upper and lower
+        if (talent.order != -1) {
+            talent.upper = talent.order;
+            talent.lower = talent.order;
+
         // if last talent
-        if (i === pet.length - 1) {
+        } else if (i === pet.length - 1) {
             // get first occurence of rank in DB
-            let filtered = Talents.filter(ele => ele.rank === talent.rank);
+            let filtered = Talents.database.filter(ele => ele.rank === talent.rank);
             let order = filtered[filtered.length - 1].order;
             // set upper bound
             talent.upper = order;
@@ -133,7 +138,7 @@ function generateRanges(pet) {
             let bound = pet[i + 1].upper;
 
             // set upper to last occurence of talent rank before previous talent
-            let filtered = Talents.filter(ele => ele.rank === talent.rank && ele.order < bound);
+            let filtered = Talents.database.filter(ele => ele.rank === talent.rank && ele.order < bound);
             let order = filtered[filtered.length - 1].order;
             // set upper bound
             talent.upper = order;
@@ -144,7 +149,7 @@ function generateRanges(pet) {
     for (let i  = 0; i < pet.length; i++) {
         let talent = pet[i];
 
-        let filtered = Talents.filter(ele => ele.rank === talent.rank && ele.order >= talent.lower && ele.order <= talent.upper);
+        let filtered = Talents.database.filter(ele => ele.rank === talent.rank && ele.order >= talent.lower && ele.order <= talent.upper);
         let count = filtered.length - 1;
         talent.count = count;
     }
