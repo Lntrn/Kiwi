@@ -29,7 +29,7 @@ module.exports = {
             // Removing spaces at the start and end of each talent
             let trimmed = arg.trim();
 
-            // Start rank search
+            // Start school search
 
             if (Talents.schools.some(school => school === trimmed.toLowerCase())) {
                 for (talent of Talents.database) {
@@ -98,7 +98,7 @@ module.exports = {
                 message.author.send(desc, { split: true }).then(message.react(Emojis.greenCheck.id)).catch((error) => message.channel.send(`Turn on your dms ${message.author}`));
             }
 
-            // End rank search
+            // End school search
             // Start name search
 
 		    // Replacing dashes and undersoces with spaces
