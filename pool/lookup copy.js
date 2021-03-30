@@ -21,14 +21,27 @@ module.exports = {
         for (a = 0; a < argsArray.length; a++) {
             let arg = argsArray[a];
             let trimmed = arg.trim();
+            if (Talents.schools.some(school => school === trimmed.toLowerCase())) {
+                findSchool(trimmed, foundSchools);
+            }
             findNames(trimmed, foundNames);
-            findSchool(trimmed, foundSchools);
         }
         console.log(foundSchools)
         let nameSearch = [];
+        let schoolSearch = [];
         prepareToSend(foundNames, nameSearch);
+        prepareToSend(foundSchools, schoolSearch);
         //console.log(nameSearch)
+        let desc = schoolSearch.join("\n");
 
+        // create the embed
+        let schoolEmbed = new Discord.MessageEmbed()
+            .setColor("#F7D7C4")
+            .setTitle(`📜 **━━━━━━ SCHOOL SEARCH ━━━━━━** 📜`)
+            .setDescription(desc)
+        //message.author.send(schoolEmbed)
+        message.author.send(`📜 **━━━━━━ __SCHOOL SEARCH__ ━━━━━━** 📜`)
+        message.author.send(desc, { split: true }).then(message.react(Emojis.greenCheck.id)).catch((error) => message.channel.send(`Turn on your dms ${message.author}`));
 
         // End name search
 
@@ -77,12 +90,10 @@ function findNames(trimmed, foundNames) {
 }
 
 function findSchool(trimmed, foundSchools) {
-    if (Talents.schools.some(school => school === trimmed.toLowerCase())) {
-        for (talent of Talents.database) {
-            if (talent.school === trimmed.toLowerCase()) {
-                foundSchools.push(talent);
-                //argsArray.splice(a, 1);
-            }
+    for (talent of Talents.database) {
+        if (talent.school === trimmed.toLowerCase()) {
+            foundSchools.push(talent);
+            //argsArray.splice(a, 1);
         }
     }
 }
